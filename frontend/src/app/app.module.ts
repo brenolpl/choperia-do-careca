@@ -8,10 +8,23 @@ import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
 import {ProdutosModule} from "./components/produtos/produtos.module";
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import {UsuariosModule} from "./components/usuarios/usuarios.module";
+import {
+  DevExtremeModule,
+  DxButtonModule,
+  DxDataGridModule,
+  DxFormModule,
+  DxResponsiveBoxModule,
+  DxTextBoxModule
+} from "devextreme-angular";
+import { FormUsuariosComponent } from './components/usuarios/form-usuarios/form-usuarios.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UsuariosComponent,
+    FormUsuariosComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +38,14 @@ import {ProdutosModule} from "./components/produtos/produtos.module";
     LoginFormModule,
     UnauthenticatedContentModule,
     AppRoutingModule,
-    ProdutosModule
+    ProdutosModule,
+    UsuariosModule,
+    DxDataGridModule,
+    DxButtonModule,
+    DxTextBoxModule,
+    DxResponsiveBoxModule,
+    DxFormModule,
+    DevExtremeModule
   ],
   providers: [
     AuthService,

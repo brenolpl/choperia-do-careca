@@ -1,0 +1,24 @@
+h5, h2 {
+    font-size: 1.35em;
+    margin-top: 0.8em;
+    margin-bottom: 1em;
+    font-weight: 400;
+
+    font-family: "Roboto", "RobotoFallback", "Noto Kufi Arabic", Helvetica, Arial, sans-serif;
+}
+
+.actions-table{
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.actions-table ::ng-deep .dx-button {
+    border-radius: 0px !important;
+    margin: 0.1em !important;
+    color: green !important;
+}
+
+.actions-table ::ng-deep .dx-button:hover{
+    color: rgb(1, 72, 1) !important;
+    background-color: rgb(225, 238, 225) !important;
+}

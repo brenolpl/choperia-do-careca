@@ -2622,7 +2622,7 @@
 }
 .dx-button.dx-button-default {
   border-radius: 4px;
-  background-color: #ff5722;
+  background-color: #337ab7;
   color: #fff;
   -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.24);
   box-shadow: 0 1px 3px rgba(0,0,0,.24);
@@ -2631,17 +2631,17 @@
   color: #fff;
 }
 .dx-button.dx-button-default.dx-state-hover {
-  background-color: #f63b00;
+  background-color: #26639a;
   -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.24);
   box-shadow: 0 1px 3px rgba(0,0,0,.24);
 }
 .dx-button.dx-button-default.dx-state-focused {
-  background-color: #f63b00;
+  background-color: #26639a;
   -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.32);
   box-shadow: 0 1px 3px rgba(0,0,0,.32);
 }
 .dx-button.dx-button-default.dx-state-active {
-  background-color: #be2d00;
+  background-color: #26639a;
   -webkit-box-shadow: 0 4px 6px rgba(0,0,0,.32);
   box-shadow: 0 4px 6px rgba(0,0,0,.32);
 }

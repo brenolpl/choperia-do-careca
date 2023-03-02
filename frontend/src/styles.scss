@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+// css para formulario
+::ng-deep .dx-first-col {
+  padding: 0.5em !important;
+}
+
+.dx-texteditor-container{
+  height: 3em;
+}
+
+.dx-texteditor-input {
+  height: 2.5em;
+  border-radius: 0px;
+  border: 1px solid #c7c7c7 !important;
+}
+
+.dx-state-focused {
+  outline: none;
+}
+
+.dx-field-item-required-mark {
+  color: red;
+}
+
+.dx-texteditor.dx-editor-filled {
+  border-radius: 0px;
+  border-bottom: none;
+}
+
+.dx-state-focused:not(.dx-invalid):before{
+  border-bottom: 2px solid green !important;
+}
+
+.dx-texteditor.dx-editor-filled::after {
+  border-bottom: none !important;
+}
+
+h2{
+  font-weight: bold;
+}

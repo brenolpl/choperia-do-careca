@@ -5,9 +5,14 @@ export const navigation = [
     icon: 'home'
   },
   {
-    text: 'Usuários',
-    path: 'usuarios',
-    icon: 'folder',
+    text: 'Funcionários',
+    path: 'funcionarios',
+    icon: 'user',
+  },
+  {
+    text: 'Clientes',
+    path: 'clientes',
+    icon: 'user',
   },
   {
     text: 'Estoque cozinha',

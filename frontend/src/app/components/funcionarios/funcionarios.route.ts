@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AuthGuardService} from "../../shared/services";
-import {UsuariosComponent} from "./usuarios.component";
-import {FormUsuariosComponent} from "./form-usuarios/form-usuarios.component";
+import {FuncionariosComponent} from "./funcionarios.component";
+import {FormFuncionariosComponent} from "./form-funcionarios/form-funcionarios.component";
 
 const routes: Routes = [
   {
-    path: 'usuarios',
-    component: UsuariosComponent,
+    path: 'funcionarios',
+    component: FuncionariosComponent,
     canActivate: [ AuthGuardService ]
   },
   {
-    path: 'usuarios/novo',
-    component: FormUsuariosComponent,
+    path: 'funcionarios/novo',
+    component: FormFuncionariosComponent,
     canActivate: [ AuthGuardService ]
   },
 ];
@@ -22,4 +22,4 @@ const routes: Routes = [
   providers: [AuthGuardService],
   exports: [RouterModule]
 })
-export class UsuariosRoute { }
+export class FuncionariosRoute { }

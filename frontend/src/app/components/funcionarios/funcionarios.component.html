@@ -1,5 +1,5 @@
 <div class="content-block dx-card responsive-paddings">
-  <h2>Usuarios</h2>
+  <h2>Funcionários</h2>
 
 
   <div class="actions-table">
@@ -18,6 +18,9 @@
   <dx-data-grid [dataSource]="[]" keyExpr="id">
 
     <dxi-column dataField="Nome"></dxi-column>
+    <dxi-column dataField="Cpf"></dxi-column>
+    <dxi-column dataField="Telefone"></dxi-column>
+    <dxi-column dataField="E-mail"></dxi-column>
 
     <dxi-column type="buttons" caption="Ações">
       <dxi-button icon="edit" hint="Editar" [onClick]="editar"></dxi-button>

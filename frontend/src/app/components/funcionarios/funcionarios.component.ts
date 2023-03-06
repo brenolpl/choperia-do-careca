@@ -5,13 +5,12 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-usuarios',
-  templateUrl: './usuarios.component.html',
+  templateUrl: './funcionarios.component.html',
   styleUrls: [
-    './usuarios.component.scss',
-    './table-list.component.css'
+    '../../layouts/table-list/table-list.component.css'
   ]
 })
-export class UsuariosComponent implements OnInit {
+export class FuncionariosComponent implements OnInit {
   @ViewChild(DxDataGridComponent, {static: false}) dataGrid!: DxDataGridComponent;
 
   constructor(private router: Router, private route: ActivatedRoute) { }

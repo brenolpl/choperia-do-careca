@@ -4,10 +4,10 @@ import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-form-usuarios',
-  templateUrl: './form-usuarios.component.html',
-  styleUrls: ['./form-usuarios.component.scss']
+  templateUrl: './form-funcionarios.component.html',
+  styleUrls: ['../../../layouts/formularios/formularios.component.scss']
 })
-export class FormUsuariosComponent implements OnInit {
+export class FormFuncionariosComponent implements OnInit {
 
   labelLocation = 'left';
 

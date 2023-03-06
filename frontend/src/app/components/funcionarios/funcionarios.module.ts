@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {UsuariosRoute} from "./usuarios.route";
+import {FuncionariosRoute} from "./funcionarios.route";
 
 @NgModule({
   declarations: [],
   imports: [
-    UsuariosRoute,
+    FuncionariosRoute,
     CommonModule
   ]
 })
-export class UsuariosModule { }
+export class FuncionariosModule { }

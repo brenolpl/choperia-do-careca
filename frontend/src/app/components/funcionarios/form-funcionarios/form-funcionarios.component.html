@@ -5,7 +5,7 @@
 
   <dxi-item location="before">
     <div [classList]="'label-toolbar'">
-      Cadastrar Usuário
+      Cadastrar Funcionário
     </div>
   </dxi-item>
 
@@ -26,6 +26,12 @@
     <dx-form #formulario [formData]="{}" [labelLocation]="labelLocation">
 
       <dxi-item  [dataField]="'Nome'"></dxi-item>
+
+      <dxi-item  [dataField]="'Cpf'"></dxi-item>
+
+      <dxi-item  [dataField]="'Telefone'"></dxi-item>
+
+      <dxi-item  [dataField]="'Email'" [editorOptions]="{ stylingMode: 'filled', mode: 'email' }"></dxi-item>
 
       <dxi-item  [dataField]="'Biometria'">
         <dx-button [text]="'Registrar leitura biométrica'" type="default"></dx-button>

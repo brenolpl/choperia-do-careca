@@ -1,57 +1,70 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { SideNavOuterToolbarModule, SideNavInnerToolbarModule, SingleCardModule } from './layouts';
-import { FooterModule, ResetPasswordFormModule, CreateAccountFormModule, ChangePasswordFormModule, LoginFormModule } from './shared/components';
-import { AuthService, ScreenService, AppInfoService } from './shared/services';
-import { UnauthenticatedContentModule } from './unauthenticated-content';
-import { AppRoutingModule } from './app-routing.module';
-import {ProdutosModule} from "./components/produtos/produtos.module";
-import { UsuariosComponent } from './components/usuarios/usuarios.component';
-import {UsuariosModule} from "./components/usuarios/usuarios.module";
+import {AppComponent} from './app.component';
+import {SideNavInnerToolbarModule, SideNavOuterToolbarModule, SingleCardModule} from './layouts';
 import {
-  DevExtremeModule,
-  DxButtonModule,
-  DxDataGridModule,
-  DxFormModule,
-  DxResponsiveBoxModule,
-  DxTextBoxModule
+    ChangePasswordFormModule,
+    CreateAccountFormModule,
+    FooterModule,
+    LoginFormModule,
+    ResetPasswordFormModule
+} from './shared/components';
+import {AppInfoService, AuthService, ScreenService} from './shared/services';
+import {UnauthenticatedContentModule} from './unauthenticated-content';
+import {AppRoutingModule} from './app-routing.module';
+import {ProdutosModule} from "./components/produtos/produtos.module";
+import {FuncionariosComponent} from './components/funcionarios/funcionarios.component';
+import {FuncionariosModule} from "./components/funcionarios/funcionarios.module";
+import {
+    DevExtremeModule,
+    DxButtonModule,
+    DxDataGridModule,
+    DxFormModule,
+    DxResponsiveBoxModule,
+    DxTextBoxModule
 } from "devextreme-angular";
-import { FormUsuariosComponent } from './components/usuarios/form-usuarios/form-usuarios.component';
+import {FormFuncionariosComponent} from './components/funcionarios/form-funcionarios/form-funcionarios.component';
+import {ClientesComponent} from './components/clientes/clientes.component';
+import {ClientesModule} from "./components/clientes/clientes.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    UsuariosComponent,
-    FormUsuariosComponent
-  ],
-  imports: [
-    BrowserModule,
-    SideNavOuterToolbarModule,
-    SideNavInnerToolbarModule,
-    SingleCardModule,
-    FooterModule,
-    ResetPasswordFormModule,
-    CreateAccountFormModule,
-    ChangePasswordFormModule,
-    LoginFormModule,
-    UnauthenticatedContentModule,
-    AppRoutingModule,
-    ProdutosModule,
-    UsuariosModule,
-    DxDataGridModule,
-    DxButtonModule,
-    DxTextBoxModule,
-    DxResponsiveBoxModule,
-    DxFormModule,
-    DevExtremeModule
-  ],
-  providers: [
-    AuthService,
-    ScreenService,
-    AppInfoService
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        FuncionariosComponent,
+        FormFuncionariosComponent,
+        ClientesComponent
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        SideNavOuterToolbarModule,
+        SideNavInnerToolbarModule,
+        SingleCardModule,
+        FooterModule,
+        ResetPasswordFormModule,
+        CreateAccountFormModule,
+        ChangePasswordFormModule,
+        LoginFormModule,
+        UnauthenticatedContentModule,
+        AppRoutingModule,
+        ProdutosModule,
+        FuncionariosModule,
+        ClientesModule,
+        DxDataGridModule,
+        DxButtonModule,
+        DxTextBoxModule,
+        DxResponsiveBoxModule,
+        DxFormModule,
+        DevExtremeModule
+    ],
+    providers: [
+        AuthService,
+        ScreenService,
+        AppInfoService
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

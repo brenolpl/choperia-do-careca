@@ -35,9 +35,6 @@ public class AssociacaoClienteCartaoRFID implements Serializable {
     @Column(updatable = false)
     private LocalDateTime dataSaida;
 
-    @ManyToMany
-    private Set<Produto> produtosConsumidos;
-
 
     public Integer getId() {
         return id;
@@ -77,13 +74,5 @@ public class AssociacaoClienteCartaoRFID implements Serializable {
 
     public void setDataSaida(LocalDateTime dataSaida) {
         this.dataSaida = dataSaida;
-    }
-
-    public Set<Produto> getProdutosConsumidos() {
-        return produtosConsumidos;
-    }
-
-    public void setProdutosConsumidos(Set<Produto> produtosConsumidos) {
-        this.produtosConsumidos = produtosConsumidos;
     }
 }

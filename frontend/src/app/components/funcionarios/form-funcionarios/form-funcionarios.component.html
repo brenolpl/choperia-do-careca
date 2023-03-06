@@ -5,7 +5,7 @@
 
   <dxi-item location="before">
     <div [classList]="'label-toolbar'">
-      Cadastrar Funcionário
+      Funcionário
     </div>
   </dxi-item>
 
@@ -15,7 +15,7 @@
   </dxi-item>
 
   <dxi-item location="after">
-    <dx-button [classList]="'botoes-toolbar'" icon="trash" type="danger" text="Excluir"
+    <dx-button [visible]="entidade" [classList]="'botoes-toolbar'" icon="trash" type="danger" text="Excluir"
                (onClick)="excluir()"></dx-button>
   </dxi-item>
 

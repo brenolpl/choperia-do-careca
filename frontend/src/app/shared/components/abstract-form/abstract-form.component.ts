@@ -2,12 +2,13 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {DxDataGridComponent, DxFormComponent} from "devextreme-angular";
 import {ActivatedRoute, Router} from "@angular/router";
 import {confirm} from "devextreme/ui/dialog";
-import {ApiService} from "../../shared/services/api.service";
+import {ApiService} from "../../services/api.service";
 import notify from "devextreme/ui/notify";
 import {Location} from "@angular/common";
 
 @Component({
     template: '',
+    styleUrls: ['./abstract-form.component.scss']
 })
 export abstract class AbstractFormComponent implements OnInit {
     @ViewChild('formulario', {static: false}) formulario!: DxFormComponent;

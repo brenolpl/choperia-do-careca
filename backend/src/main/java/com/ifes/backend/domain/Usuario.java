@@ -20,6 +20,9 @@ public class Usuario implements Serializable {
     @Column(nullable = false, unique = true)
     private String biometria;
 
+    public Usuario() {
+    }
+
     public Integer getId() {
         return id;
     }

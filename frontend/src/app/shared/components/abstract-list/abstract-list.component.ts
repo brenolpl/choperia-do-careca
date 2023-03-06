@@ -2,11 +2,12 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {DxDataGridComponent} from "devextreme-angular";
 import {ActivatedRoute, Router} from "@angular/router";
 import {confirm} from "devextreme/ui/dialog";
-import {ApiService} from "../../shared/services/api.service";
+import {ApiService} from "../../services/api.service";
 import notify from "devextreme/ui/notify";
 
 @Component({
     template: '',
+    styleUrls: ['./abstract-list.component.css']
 })
 export abstract class AbstractListComponent implements OnInit {
     @ViewChild(DxDataGridComponent, {static: false}) dataGrid!: DxDataGridComponent;

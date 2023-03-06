@@ -4,12 +4,12 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {confirm} from "devextreme/ui/dialog";
 import {ApiService} from "../../shared/services/api.service";
 import notify from "devextreme/ui/notify";
-import {AbstractListComponent} from "../../shared/components/abstract-list.component";
+import {AbstractListComponent} from "../../shared/components/abstract-list/abstract-list.component";
 
 @Component({
     selector: 'app-clientes',
     templateUrl: './clientes.component.html',
-    styleUrls: ['../../layouts/table-list/table-list.component.css']
+    styleUrls: ['../../shared/components/abstract-list/abstract-list.component.css']
 })
 export class ClientesComponent extends AbstractListComponent{
     protected getRota(): string {

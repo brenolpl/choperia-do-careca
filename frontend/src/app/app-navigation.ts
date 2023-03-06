@@ -6,7 +6,7 @@ export const navigation = [
   },
   {
     text: 'Funcionários',
-    path: 'funcionarios',
+    path: 'usuarios',
     icon: 'user',
   },
   {

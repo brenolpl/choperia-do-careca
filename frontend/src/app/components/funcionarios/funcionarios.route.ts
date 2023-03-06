@@ -6,17 +6,17 @@ import {FormFuncionariosComponent} from "./form-funcionarios/form-funcionarios.c
 
 const routes: Routes = [
     {
-        path: 'funcionarios',
+        path: 'usuarios',
         component: FuncionariosComponent,
         canActivate: [AuthGuardService]
     },
     {
-        path: 'funcionarios/novo',
+        path: 'usuarios/novo',
         component: FormFuncionariosComponent,
         canActivate: [AuthGuardService]
     },
     {
-        path: 'funcionarios/:id',
+        path: 'usuarios/:id',
         component: FormFuncionariosComponent,
         canActivate: [AuthGuardService]
     },

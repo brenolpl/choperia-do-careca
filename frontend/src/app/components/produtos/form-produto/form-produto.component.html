@@ -1,0 +1,39 @@
+<dx-toolbar [classList]="'toolbar'">
+    <dxi-item location="before">
+        <dx-button [classList]="'botoes-toolbar'" icon="back" (onClick)="back()"></dx-button>
+    </dxi-item>
+
+    <dxi-item location="before">
+        <div [classList]="'label-toolbar'">
+            Produto
+        </div>
+    </dxi-item>
+
+    <dxi-item location="after">
+        <dx-button [classList]="'botoes-toolbar'" icon="save" type="success" text="Salvar"
+                   (onClick)="salvar()"></dx-button>
+    </dxi-item>
+
+    <dxi-item location="after">
+        <dx-button [visible]="entidade" [classList]="'botoes-toolbar'" icon="trash" type="danger" text="Excluir"
+                   (onClick)="excluir()"></dx-button>
+    </dxi-item>
+
+</dx-toolbar>
+
+<div class="content-block dx-card responsive-paddings">
+    <ng-container>
+        <dx-form #formulario [formData]="entidade" [labelLocation]="labelLocation">
+
+            <dxi-item [dataField]="'codigoBarras'" [text]="'Código de Barras'"></dxi-item>
+
+            <dxi-item [dataField]="'nome'"></dxi-item>
+
+            <dxi-item [dataField]="'precoCompra'" [text]="'Preço de compra'"></dxi-item>
+
+        </dx-form>
+
+
+    </ng-container>
+</div>
+

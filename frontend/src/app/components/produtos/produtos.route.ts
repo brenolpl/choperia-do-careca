@@ -1,19 +1,31 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {ProdutosComponent} from "./produtos.component";
 import {AuthGuardService} from "../../shared/services";
+import {FormProdutoComponent} from "./form-produto/form-produto.component";
 
 const routes: Routes = [
-  {
-    path: 'produtos',
-    component: ProdutosComponent,
-    canActivate: [ AuthGuardService ]
-  },
+    {
+        path: 'produtos',
+        component: ProdutosComponent,
+        canActivate: [AuthGuardService]
+    },
+    {
+        path: 'produtos/novo',
+        component: FormProdutoComponent,
+        canActivate: [ AuthGuardService ]
+    },
+    {
+        path: 'produtos/:id',
+        component: FormProdutoComponent,
+        canActivate: [ AuthGuardService ]
+    },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  providers: [AuthGuardService],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    providers: [AuthGuardService],
+    exports: [RouterModule]
 })
-export class ProdutosRoute { }
+export class ProdutosRoute {
+}

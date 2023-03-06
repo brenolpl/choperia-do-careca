@@ -1,0 +1,8 @@
+O dígito verificador é dado pela multiplicação do primeiro ao penúltimo número
+(número antes do número identificador) da seguinte forma:
+    primeiro número multiplica por 1
+    segundo número multiplica por 3
+Segue dessa forma até o penúltimo.
+Após todas as multiplicações, é subtraído pelo próximo número da soma múltiplo de 10
+ou seja, se a soma der 97, o próximo número multiplo de 10 é 100, logo, o dígito verificador
+é 100-97, que é 3.

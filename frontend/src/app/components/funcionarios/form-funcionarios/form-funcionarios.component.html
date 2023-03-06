@@ -23,19 +23,19 @@
 
 <div class="content-block dx-card responsive-paddings">
   <ng-container>
-    <dx-form #formulario [formData]="{}" [labelLocation]="labelLocation">
+    <dx-form #formulario [formData]="entidade" [labelLocation]="labelLocation">
 
-      <dxi-item  [dataField]="'Nome'"></dxi-item>
+      <dxi-item  [dataField]="'login'"></dxi-item>
 
-      <dxi-item  [dataField]="'Cpf'"></dxi-item>
+      <dxi-item  [dataField]="'biometria'"></dxi-item>
 
-      <dxi-item  [dataField]="'Telefone'"></dxi-item>
+<!--      <dxi-item  [dataField]="'Telefone'"></dxi-item>-->
 
-      <dxi-item  [dataField]="'Email'" [editorOptions]="{ stylingMode: 'filled', mode: 'email' }"></dxi-item>
+<!--      <dxi-item  [dataField]="'Email'" [editorOptions]="{ stylingMode: 'filled', mode: 'email' }"></dxi-item>-->
 
-      <dxi-item  [dataField]="'Biometria'">
-        <dx-button [text]="'Registrar leitura biométrica'" type="default"></dx-button>
-      </dxi-item>
+<!--      <dxi-item  [dataField]="'Biometria'">-->
+<!--        <dx-button [text]="'Registrar leitura biométrica'" type="default"></dx-button>-->
+<!--      </dxi-item>-->
     </dx-form>
 
 

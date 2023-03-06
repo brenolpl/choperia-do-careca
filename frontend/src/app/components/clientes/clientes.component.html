@@ -15,12 +15,12 @@
       </div>
     </div>
 
-    <dx-data-grid [dataSource]="[]" keyExpr="id">
+    <dx-data-grid [dataSource]="entidades" keyExpr="id">
 
-      <dxi-column dataField="Nome"></dxi-column>
-      <dxi-column dataField="Cpf"></dxi-column>
-      <dxi-column dataField="Telefone"></dxi-column>
-      <dxi-column dataField="E-mail"></dxi-column>
+      <dxi-column dataField="nome"></dxi-column>
+      <dxi-column dataField="cpf"></dxi-column>
+      <dxi-column dataField="telefone"></dxi-column>
+      <dxi-column dataField="email"></dxi-column>
 
       <dxi-column type="buttons" caption="Ações">
         <dxi-button icon="edit" hint="Editar" [onClick]="editar"></dxi-button>

@@ -23,15 +23,15 @@
 
 <div class="content-block dx-card responsive-paddings">
   <ng-container>
-    <dx-form #formulario [formData]="{}" [labelLocation]="labelLocation">
+    <dx-form #formulario [formData]="entidade" [labelLocation]="labelLocation">
 
-      <dxi-item  [dataField]="'Nome'"></dxi-item>
+      <dxi-item  [dataField]="'nome'"></dxi-item>
 
-      <dxi-item  [dataField]="'Cpf'"></dxi-item>
+      <dxi-item  [dataField]="'cpf'"></dxi-item>
 
-      <dxi-item  [dataField]="'Telefone'"></dxi-item>
+      <dxi-item  [dataField]="'telefone'"></dxi-item>
 
-      <dxi-item  [dataField]="'Email'" [editorOptions]="{ stylingMode: 'filled', mode: 'email' }"></dxi-item>
+      <dxi-item  [dataField]="'email'" [text]="'E-mail'" [editorOptions]="{ stylingMode: 'filled', mode: 'email' }"></dxi-item>
 
     </dx-form>
 

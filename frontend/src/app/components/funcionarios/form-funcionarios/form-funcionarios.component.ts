@@ -1,40 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import {confirm} from 'devextreme/ui/dialog';
-import {Location} from '@angular/common';
+import {Component} from '@angular/core';
+import {AbstractFormComponent} from "../../../shared/components/abstract-form.component";
 
 @Component({
-  selector: 'app-form-usuarios',
-  templateUrl: './form-funcionarios.component.html',
-  styleUrls: ['../../../layouts/formularios/formularios.component.scss']
+    selector: 'app-form-usuarios',
+    templateUrl: './form-funcionarios.component.html',
+    styleUrls: ['../../../layouts/formularios/formularios.component.scss']
 })
-export class FormFuncionariosComponent implements OnInit {
-
-  labelLocation = 'left';
-
-  constructor(
-    private location: Location,
-  ) {
-    if (window.innerWidth <= 580) {
-      this.labelLocation = 'top';
+export class FormFuncionariosComponent extends AbstractFormComponent {
+    protected getRota(): string {
+        return 'usuarios';
     }
-  }
-
-  ngOnInit(): void {
-  }
-
-  public back() {
-    this.location.back();
-  }
-
-  salvar = () => {
-
-  }
-
-  public excluir() {
-    confirm('Tem certeza que deseja excluir? Não será possível desfazer a alteração.', 'Confirmar exclusão').then((confirmExcluir) => {
-      if (confirmExcluir) {
-
-      }
-    });
-  }
 }

@@ -33,4 +33,8 @@ export class ApiService {
     put(url: string, id: string, entity: any ) {
         return this.http.put(`${this.API}/${url}/${id}`, entity);
     }
+
+    patch(url: string, id: string, entity: any ) {
+        return this.http.patch(`${this.API}/${url}/${id}`, entity);
+    }
 }

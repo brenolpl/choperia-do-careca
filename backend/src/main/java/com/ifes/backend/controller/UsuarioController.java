@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/usuario")
+@RequestMapping("api/usuarios")
 public class UsuarioController extends BaseController<Usuario, IUsuarioRepository>{
 
     public UsuarioController(IUsuarioRepository repo) {

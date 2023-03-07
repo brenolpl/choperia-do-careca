@@ -1,9 +1,11 @@
 package com.ifes.backend.controller;
 
 import com.ifes.backend.application.GerarCodigoBarras;
+import com.ifes.backend.application.GerarImagemCodigoBarrasProdutoExistente;
 import com.ifes.backend.domain.Produto;
 import com.ifes.backend.persistence.IProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,5 +30,10 @@ public class ProdutoController extends BaseController<Produto, IProdutoRepositor
     @PostMapping("gerarCodigoBarras")
     public void gerarCodigoBarras(@RequestBody Set<Produto> produtos) {
         new GerarCodigoBarras(new ArrayList<>(produtos), repository, entityManager).execute();
+    }
+
+    @PostMapping("gerarICBProdutoExistente/{id}")
+    public void gerarImagemCodigoBarrasProdutoExistente(@PathVariable Integer id) {
+        new GerarImagemCodigoBarrasProdutoExistente(id, repository).execute();
     }
 }

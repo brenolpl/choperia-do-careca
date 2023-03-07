@@ -16,8 +16,8 @@ public class Produto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column()
-    private String codigoBarras;
+    @Column(length = 3)
+    private Integer codigoBarras; //max = 999
 
     @Column(nullable = false)
     private String nome;
@@ -33,11 +33,11 @@ public class Produto implements Serializable {
         this.id = id;
     }
 
-    public String getCodigoBarras() {
+    public Integer getCodigoBarras() {
         return codigoBarras;
     }
 
-    public void setCodigoBarras(String codigoBarras) {
+    public void setCodigoBarras(Integer codigoBarras) {
         this.codigoBarras = codigoBarras;
     }
 

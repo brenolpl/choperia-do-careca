@@ -1,5 +1,4 @@
 import {Component, ViewChild} from '@angular/core';
-import {AbstractListComponent} from "../../../shared/components/abstract-list/abstract-list.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../../../shared/services/api.service";
 import {Location} from "@angular/common";
@@ -72,31 +71,56 @@ export class ImpressaoCodigoBarrasComponent {
         this.criarTelaImpressao(arrayCodigosBarras);
     }
 
-    criarTelaImpressao(codigosImprimir: string[]){
-        const mywindow = window.open('', 'PRINT', 'height=800,width=800');
+    criarTelaImpressao(codigosImprimir: string[]) {
+        const mywindow = window.open('', '_blank');
 
 
         mywindow?.document.write('<html><head><title>' + "Imprimir codigos"  + '</title>');
-        mywindow?.document.write('</head><body style="display: inline; margin: 0 !important;"></body></html>');
+        mywindow?.document.write('</head><body style="margin: 0; display: grid"></div> </body></html>');
 
+        let i = 1;
+        let inserirDiv = false;
+        let div = this.createDiv();
         codigosImprimir.forEach(codigo => {
+            inserirDiv = false;
             const img = new Image();
             img.src = codigo;
-            img.style.width = '3.3cm';
-            img.style.height = '2.3cm';
+            img.style.width = '3.2cm';
+            img.style.height = '1.8cm';
             img.style.padding = '2px';
-            mywindow?.document.body.appendChild(img);
-        })
+            img.style.marginLeft = '0.15cm';
+            img.style.marginTop = '0.1cm';
+            div.appendChild(img);
+            if(i % 3 == 0) {
+                inserirDiv = true;
+                mywindow?.document.body.appendChild(div);
+                div = this.createDiv();
+            }
+            i++;
+        });
 
+        if(!inserirDiv) {
+            mywindow?.document.body.appendChild(div);
+        }
 
-        mywindow?.document.close();
-        mywindow?.focus();
+        setTimeout(() => {
+            mywindow?.document.close();
+            mywindow?.focus();
 
-        mywindow?.print();
-        mywindow?.close();
+            mywindow?.print();
+            mywindow?.close();
+        }, 200);
     }
 
     changeQuantidade($event: any, row: any) {
         row.data.quantidadeImprimir = Number($event.component._changedValue);
+    }
+
+    private createDiv(): HTMLElement {
+        let div = document.createElement('div');
+        div.style.marginLeft = '1cm';
+        div.style.display = 'inline';
+        div.style.maxWidth = '10.5cm';
+        return div;
     }
 }

@@ -73,18 +73,18 @@ export class ImpressaoCodigoBarrasComponent {
     }
 
     criarTelaImpressao(codigosImprimir: string[]){
-        const mywindow = window.open('', 'PRINT', 'height=400,width=600');
+        const mywindow = window.open('', 'PRINT', 'height=800,width=800');
 
 
         mywindow?.document.write('<html><head><title>' + "Imprimir codigos"  + '</title>');
-        mywindow?.document.write('</head><body style="display: inline; margin-left: 2 !important;"></body></html>');
+        mywindow?.document.write('</head><body style="display: inline; margin: 0 !important;"></body></html>');
 
         codigosImprimir.forEach(codigo => {
             const img = new Image();
             img.src = codigo;
-            img.width = 200;
-            img.height = 100;
-            img.style.padding = '1em';
+            img.style.width = '3.3cm';
+            img.style.height = '2.3cm';
+            img.style.padding = '2px';
             mywindow?.document.body.appendChild(img);
         })
 

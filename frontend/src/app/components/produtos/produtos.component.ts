@@ -10,4 +10,8 @@ export class ProdutosComponent extends AbstractListComponent {
     protected getRota(): string {
         return 'produtos';
     }
+
+    navigateImprimirCodigo(){
+        this.router.navigate(['imprimir-codigo'], {relativeTo: this.route});
+    }
 }

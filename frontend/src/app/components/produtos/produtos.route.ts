@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {ProdutosComponent} from "./produtos.component";
 import {AuthGuardService} from "../../shared/services";
 import {FormProdutoComponent} from "./form-produto/form-produto.component";
+import {ImpressaoCodigoBarrasComponent} from "./impressao-codigo-barras/impressao-codigo-barras.component";
 
 const routes: Routes = [
     {
@@ -13,6 +14,11 @@ const routes: Routes = [
     {
         path: 'produtos/novo',
         component: FormProdutoComponent,
+        canActivate: [ AuthGuardService ]
+    },
+    {
+        path: 'produtos/imprimir-codigo',
+        component: ImpressaoCodigoBarrasComponent,
         canActivate: [ AuthGuardService ]
     },
     {

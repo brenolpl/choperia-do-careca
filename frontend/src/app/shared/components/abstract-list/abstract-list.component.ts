@@ -13,7 +13,7 @@ export abstract class AbstractListComponent implements OnInit {
     @ViewChild(DxDataGridComponent, {static: false}) dataGrid!: DxDataGridComponent;
     entidades: any = [];
 
-    constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService) {
+    constructor(protected router: Router, protected route: ActivatedRoute, protected apiService: ApiService) {
     }
 
     ngOnInit(): void {

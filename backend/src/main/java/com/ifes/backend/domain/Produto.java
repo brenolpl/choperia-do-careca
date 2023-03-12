@@ -17,7 +17,7 @@ public class Produto implements Serializable {
     private Integer id;
 
     @Column(length = 3)
-    private Integer codigoBarras; //max = 999
+    private String codigoBarras; //max = 999
 
     @Column(nullable = false)
     private String nome;
@@ -33,11 +33,11 @@ public class Produto implements Serializable {
         this.id = id;
     }
 
-    public Integer getCodigoBarras() {
+    public String getCodigoBarras() {
         return codigoBarras;
     }
 
-    public void setCodigoBarras(Integer codigoBarras) {
+    public void setCodigoBarras(String codigoBarras) {
         this.codigoBarras = codigoBarras;
     }
 

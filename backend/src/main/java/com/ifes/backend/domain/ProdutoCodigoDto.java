@@ -4,7 +4,7 @@ public class ProdutoCodigoDto {
 
     Integer id;
     String nome;
-    Integer codigoBarras;
+    String codigoBarras;
     String codigoBarrasImg;
 
     public ProdutoCodigoDto() {
@@ -18,7 +18,7 @@ public class ProdutoCodigoDto {
         this.nome = nome;
     }
 
-    public Integer getCodigoBarras() {
+    public String getCodigoBarras() {
         return codigoBarras;
     }
 
@@ -30,7 +30,7 @@ public class ProdutoCodigoDto {
         this.id = id;
     }
 
-    public void setCodigoBarras(Integer codigoBarras) {
+    public void setCodigoBarras(String codigoBarras) {
         this.codigoBarras = codigoBarras;
     }
 

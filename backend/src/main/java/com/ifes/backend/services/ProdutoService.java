@@ -5,10 +5,8 @@ import com.ifes.backend.application.GerarCodigoBarras;
 import com.ifes.backend.domain.Produto;
 import com.ifes.backend.domain.ProdutoCodigoDto;
 import com.ifes.backend.persistence.IProdutoRepository;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,24 +21,15 @@ import java.util.List;
 public class ProdutoService {
 
     private IProdutoRepository produtoRepository;
-    private EntityManager entityManager;
-
-    private ResourceLoader resourceLoader;
 
 
-    public ProdutoService(IProdutoRepository produtoRepository, EntityManager entityManager, ResourceLoader resourceLoader) {
+    public ProdutoService(IProdutoRepository produtoRepository) {
         this.produtoRepository = produtoRepository;
-        this.entityManager = entityManager;
-        this.resourceLoader = resourceLoader;
     }
 
     public Produto cadastrarProduto(Produto produto) {
         produto = produtoRepository.save(produto);
-        if(produto.getCodigoBarras() == null){
-            ArrayList<Produto> produtos = new ArrayList<>();
-            produtos.add(produto);
-            new GerarCodigoBarras(new ArrayList<>(produtos), produtoRepository, entityManager).execute();
-        }
+        new GerarCodigoBarras(produto, produtoRepository).execute();
 
         return produto;
     }

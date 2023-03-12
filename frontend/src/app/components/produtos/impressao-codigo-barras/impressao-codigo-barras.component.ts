@@ -30,7 +30,7 @@ export class ImpressaoCodigoBarrasComponent {
 
 
     protected getRota(): string {
-        return 'produtos';
+        return 'produtos/codigos';
     }
 
     private listarEntidades() {
@@ -41,7 +41,9 @@ export class ImpressaoCodigoBarrasComponent {
                     produtos.push({
                         nome: produto.nome,
                         id: produto.id,
-                        quantidadeImprimir: 0
+                        quantidadeImprimir: 0,
+                        codigoBarras: produto.codigoBarras,
+                        codigoBarrasImg: produto.codigoBarrasImg
                     })
                 })
                 this.entidades = produtos;
@@ -58,7 +60,40 @@ export class ImpressaoCodigoBarrasComponent {
     }
 
     imprimir() {
-        console.log(this.dataGrid.instance.getSelectedRowsData())
+        const selecionados = this.dataGrid.instance.getSelectedRowsData();
+        const arrayCodigosBarras: string[] = [];
+
+        selecionados.forEach(produto => {
+            for(let i = 0; i < produto.quantidadeImprimir; i++){
+                arrayCodigosBarras.push(produto.codigoBarrasImg);
+            }
+        })
+
+        this.criarTelaImpressao(arrayCodigosBarras);
+    }
+
+    criarTelaImpressao(codigosImprimir: string[]){
+        const mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+
+        mywindow?.document.write('<html><head><title>' + "Imprimir codigos"  + '</title>');
+        mywindow?.document.write('</head><body style="display: inline; margin-left: 2 !important;"></body></html>');
+
+        codigosImprimir.forEach(codigo => {
+            const img = new Image();
+            img.src = codigo;
+            img.width = 200;
+            img.height = 100;
+            img.style.padding = '1em';
+            mywindow?.document.body.appendChild(img);
+        })
+
+
+        mywindow?.document.close();
+        mywindow?.focus();
+
+        mywindow?.print();
+        mywindow?.close();
     }
 
     changeQuantidade($event: any, row: any) {

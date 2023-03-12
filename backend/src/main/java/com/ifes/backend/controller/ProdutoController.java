@@ -3,8 +3,10 @@ package com.ifes.backend.controller;
 import com.ifes.backend.application.GerarCodigoBarras;
 import com.ifes.backend.application.GerarImagemCodigoBarrasProdutoExistente;
 import com.ifes.backend.domain.Produto;
+import com.ifes.backend.domain.ProdutoCodigoDto;
 import com.ifes.backend.persistence.IProdutoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ifes.backend.services.ProdutoService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,10 +23,18 @@ import java.util.Set;
 public class ProdutoController extends BaseController<Produto, IProdutoRepository>{
 
     private EntityManager entityManager;
+    private ProdutoService produtoService;
 
-    public ProdutoController(IProdutoRepository repository, EntityManager entityManager) {
+    public ProdutoController(IProdutoRepository repository, EntityManager entityManager, ProdutoService produtoService) {
         super(Produto.class, repository);
         this.entityManager = entityManager;
+        this.produtoService = produtoService;
+    }
+
+    @Override
+    @PostMapping()
+    public Produto create(@RequestBody Produto produto) {
+        return this.produtoService.cadastrarProduto(produto);
     }
 
     @PostMapping("gerarCodigoBarras")
@@ -35,5 +45,10 @@ public class ProdutoController extends BaseController<Produto, IProdutoRepositor
     @PostMapping("gerarICBProdutoExistente/{id}")
     public void gerarImagemCodigoBarrasProdutoExistente(@PathVariable Integer id) {
         new GerarImagemCodigoBarrasProdutoExistente(id, repository).execute();
+    }
+
+    @GetMapping("codigos")
+    public List<ProdutoCodigoDto> getProdutosComCodigoBarras(){
+        return this.produtoService.getProdutosECodigos();
     }
 }

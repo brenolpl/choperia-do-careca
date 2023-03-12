@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 import org.krysalis.barcode4j.impl.upcean.EAN13Bean;
 import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -20,7 +18,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,7 +50,7 @@ public class GerarCodigoBarras implements Serializable {
                             out, "image/png", 203, BufferedImage.TYPE_BYTE_BINARY, false, 0);
 
                     //Generate the barcode
-                    barcodeGenerator.generateBarcode(canvas, "789202203" + this.calcularUltimoCodigo(p));
+                    barcodeGenerator.generateBarcode(canvas, gerarCodigoBarras(p));
 
                     //Signal end of generation
                     canvas.finish();
@@ -73,6 +70,10 @@ public class GerarCodigoBarras implements Serializable {
             }
         }
 
+    }
+
+    private String gerarCodigoBarras(Produto p){
+        return "789202203" + this.calcularUltimoCodigo(p);
     }
 
     private String calcularUltimoCodigo(Produto p) {

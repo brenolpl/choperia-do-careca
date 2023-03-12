@@ -16,8 +16,8 @@ public class Produto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 3)
-    private String codigoBarras; //max = 999
+    @Column(nullable = false)
+    private String codigoBarras;
 
     @Column(nullable = false)
     private String nome;

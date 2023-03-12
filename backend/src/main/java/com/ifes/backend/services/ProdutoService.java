@@ -28,10 +28,8 @@ public class ProdutoService {
     }
 
     public Produto cadastrarProduto(Produto produto) {
-        produto = produtoRepository.save(produto);
-        new GerarCodigoBarras(produto, produtoRepository).execute();
-
-        return produto;
+        produto = new GerarCodigoBarras(produto, produtoRepository).execute();
+        return produtoRepository.save(produto);
     }
 
     public List<ProdutoCodigoDto> getProdutosECodigos() {

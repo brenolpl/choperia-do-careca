@@ -1,9 +1,11 @@
 O tamanho do papel configurado foi de:
 
-Largura: 30.00mm
-Altura: 20.0mm
-Esquerda: 0.5mm
-Direita: 1mm
+Largura: 115.0mm
+Altura: 23.0mm
+Esquerda: 1.3mm
+Direita: 1.3mm
+Orientação: Retrato
+
 
 O acesso da configuração foi feito em: Botão direito no arquivo -> imprimir -> opções -> propriedades da impressora -> novo papel de etiquetas.
 Para que o papel seja impresso corretamente, a opção "Ajustar imagem ao quadro" deverá ser desabilitada.

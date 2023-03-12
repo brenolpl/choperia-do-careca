@@ -27,20 +27,13 @@ public class GerarCodigoBarras implements Serializable {
         this.repository = repository;
     }
 
-    public void execute() throws RuntimeException {
-        Optional<Produto> produtoOpt = repository.findById(this.produto.getId());
-
-        if (produtoOpt.isPresent()) {
-            this.produto = produtoOpt.get();
-
-            if (produto.getCodigoBarras() == null) {
-                produto.setCodigoBarras(this.gerarCodigoBarras());
-                produto = repository.save(produto);
-                repository.flush();
-            }
-
-            this.gerarImagemCodigoBarras();
+    public Produto execute() throws RuntimeException {
+        if (produto.getCodigoBarras() == null) {
+            produto.setCodigoBarras(this.gerarCodigoBarras());
         }
+        this.gerarImagemCodigoBarras();
+
+        return produto;
     }
 
     private void gerarImagemCodigoBarras() {

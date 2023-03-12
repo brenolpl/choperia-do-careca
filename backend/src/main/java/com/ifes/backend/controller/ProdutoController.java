@@ -5,6 +5,7 @@ import com.ifes.backend.domain.ProdutoCodigoDto;
 import com.ifes.backend.persistence.IProdutoRepository;
 import com.ifes.backend.services.ProdutoService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,11 @@ public class ProdutoController extends BaseController<Produto, IProdutoRepositor
         return this.produtoService.cadastrarProduto(produto);
     }
 
+    @Override
+    @PatchMapping("{id}")
+    public Produto update(@RequestBody Produto produto) {
+        return this.produtoService.atualizarProduto(produto);
+    }
 
     @GetMapping("codigos")
     public List<ProdutoCodigoDto> getProdutosComCodigoBarras(){

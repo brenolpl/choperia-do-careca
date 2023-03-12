@@ -47,7 +47,11 @@ export abstract class AbstractFormComponent implements OnInit {
         );
     }
 
-    salvar = () => {
+    onSalvar = () => {
+        this.salvar();
+    }
+
+    protected salvar(){
         const formValidator = this.formulario.instance.validate();
         const formData = this.formulario.instance.option('formData');
 

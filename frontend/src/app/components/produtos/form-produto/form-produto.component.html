@@ -11,7 +11,7 @@
 
     <dxi-item location="after">
         <dx-button [classList]="'botoes-toolbar'" icon="save" type="success" text="Salvar"
-                   (onClick)="salvar()"></dx-button>
+                   (onClick)="onSalvar()"></dx-button>
     </dxi-item>
 
     <dxi-item location="after">
@@ -25,12 +25,12 @@
     <ng-container>
         <dx-form #formulario [formData]="entidade" [labelLocation]="labelLocation">
 
-            <dxi-item [dataField]="'codigoBarras'" [text]="'Código de Barras'"></dxi-item>
+            <dxi-item [dataField]="'codigoBarras'" [editorOptions]="{ maxLength: 13 }" [text]="'Código de Barras'">
+            </dxi-item>
 
             <dxi-item [dataField]="'nome'"></dxi-item>
 
-            <dxi-item [dataField]="'precoCompra'" [text]="'Preço de compra'"></dxi-item>
-
+            <dxi-item [dataField]="'precoCompra'" [editorType]="'dxNumberBox'" [text]="'Preço de compra'"></dxi-item>
         </dx-form>
 
 

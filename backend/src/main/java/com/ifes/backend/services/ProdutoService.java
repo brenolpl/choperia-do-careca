@@ -65,4 +65,8 @@ public class ProdutoService {
         return "data:image/png;base64," + base64;
     }
 
+    public Produto atualizarProduto(Produto produto) {
+        produto = new GerarCodigoBarras(produto, produtoRepository).execute();
+        return produtoRepository.save(produto);
+    }
 }

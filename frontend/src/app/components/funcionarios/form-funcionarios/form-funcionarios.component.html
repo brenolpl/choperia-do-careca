@@ -1,44 +1,48 @@
 <dx-toolbar [classList]="'toolbar'">
-  <dxi-item location="before">
-    <dx-button [classList]="'botoes-toolbar'" icon="back" (onClick)="back()"></dx-button>
-  </dxi-item>
+    <dxi-item location="before">
+        <dx-button [classList]="'botoes-toolbar'" icon="back" (onClick)="back()"></dx-button>
+    </dxi-item>
 
-  <dxi-item location="before">
-    <div [classList]="'label-toolbar'">
-      Funcionário
-    </div>
-  </dxi-item>
+    <dxi-item location="before">
+        <div [classList]="'label-toolbar'">
+            Funcionário
+        </div>
+    </dxi-item>
 
-  <dxi-item location="after">
-    <dx-button [classList]="'botoes-toolbar'" icon="save" type="success" text="Salvar"
-               (onClick)="salvar()"></dx-button>
-  </dxi-item>
+    <dxi-item location="after">
+        <dx-button [classList]="'botoes-toolbar'" icon="save" type="success" text="Salvar"
+                   (onClick)="onSalvar()"></dx-button>
+    </dxi-item>
 
-  <dxi-item location="after">
-    <dx-button [visible]="entidade" [classList]="'botoes-toolbar'" icon="trash" type="danger" text="Excluir"
-               (onClick)="excluir()"></dx-button>
-  </dxi-item>
+    <dxi-item location="after">
+        <dx-button [visible]="entidade" [classList]="'botoes-toolbar'" icon="trash" type="danger" text="Excluir"
+                   (onClick)="excluir()"></dx-button>
+    </dxi-item>
 
 </dx-toolbar>
 
 <div class="content-block dx-card responsive-paddings">
-  <ng-container>
-    <dx-form #formulario [formData]="entidade" [labelLocation]="labelLocation">
+    <ng-container>
+        <dx-form #formulario [formData]="entidade" [labelLocation]="labelLocation">
 
-      <dxi-item  [dataField]="'login'"></dxi-item>
+            <dxi-item [dataField]="'login'"></dxi-item>
 
-      <dxi-item  [dataField]="'biometria'"></dxi-item>
+            <dxi-item [dataField]="'biometria'"></dxi-item>
 
-<!--      <dxi-item  [dataField]="'Telefone'"></dxi-item>-->
+            <dxi-item
+                dataField="tipo"
+                editorType="dxSelectBox"
+                [editorOptions]="{ items: [
+                    'administrador',
+                    'cozinheiro',
+                    'fiscalEntrada',
+                    'caixa',
+                    'fiscalSelfService',
+                    'fiscalEstoque'
+                ] }"
+            ></dxi-item>
 
-<!--      <dxi-item  [dataField]="'Email'" [editorOptions]="{ stylingMode: 'filled', mode: 'email' }"></dxi-item>-->
-
-<!--      <dxi-item  [dataField]="'Biometria'">-->
-<!--        <dx-button [text]="'Registrar leitura biométrica'" type="default"></dx-button>-->
-<!--      </dxi-item>-->
-    </dx-form>
-
-
-  </ng-container>
+        </dx-form>
+    </ng-container>
 </div>
 

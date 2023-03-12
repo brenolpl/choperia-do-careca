@@ -28,7 +28,7 @@ public class GerarCodigoBarras implements Serializable {
     }
 
     public Produto execute() throws RuntimeException {
-        if (produto.getCodigoBarras() == null) {
+        if (produto.getCodigoBarras() == null || produto.getCodigoBarras().isEmpty()) {
             produto.setCodigoBarras(this.gerarCodigoBarras());
         }
         this.gerarImagemCodigoBarras();
@@ -68,10 +68,12 @@ public class GerarCodigoBarras implements Serializable {
             numeroFim = formataNumeroFim(numeroAleatorio);
             String codigoBarras = "789202203" + numeroFim;
 
-            Optional<Produto> produtoOpt = this.repository.findProdutoByCodigoBarras(codigoBarras);
+            String codigoBarrasCompleto = codigoBarras + gerarDigitoVerificador(codigoBarras + "0").toString();
+
+            Optional<Produto> produtoOpt = this.repository.findProdutoByCodigoBarras(codigoBarrasCompleto);
 
             if(!produtoOpt.isPresent()){
-                return codigoBarras;
+                return codigoBarrasCompleto;
             }
 
             numeroAleatorio ++;
@@ -85,5 +87,28 @@ public class GerarCodigoBarras implements Serializable {
         return (numeroFim.length() == 2) ? "0" + numeroFim : (
                 (numeroFim.length() == 1) ? "00" + numeroFim : numeroFim
         );
+    }
+
+    private Integer gerarDigitoVerificador(String codigoBarras) {
+        int somaPares = 0;
+        int somaImpares = 0;
+
+        for (int i = 0; i < codigoBarras.length() - 1; i++) {
+            int digito = Character.getNumericValue(codigoBarras.charAt(i));
+            if (i % 2 == 0) {
+                somaPares += digito;
+            } else {
+                somaImpares += digito;
+            }
+        }
+
+        int total = (somaPares * 3) + somaImpares;
+        int resto = total % 10;
+        Integer digitoVerificador = 10 - resto;
+        if (digitoVerificador == 10) {
+            digitoVerificador = 0;
+        }
+
+        return digitoVerificador;
     }
 }

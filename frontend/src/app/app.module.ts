@@ -28,6 +28,7 @@ import {FormFuncionariosComponent} from './components/funcionarios/form-funciona
 import {ClientesComponent} from './components/clientes/clientes.component';
 import {ClientesModule} from "./components/clientes/clientes.module";
 import {HttpClientModule} from "@angular/common/http";
+import {HomeModule} from "./components/home/home.module";
 
 @NgModule({
     declarations: [
@@ -48,10 +49,14 @@ import {HttpClientModule} from "@angular/common/http";
         ChangePasswordFormModule,
         LoginFormModule,
         UnauthenticatedContentModule,
-        AppRoutingModule,
         ProdutosModule,
         FuncionariosModule,
         ClientesModule,
+        HomeModule,
+
+        // precisa estar depois dos outros modulos de rotas senao nao redireciona corretamente para home caso a rota nao exista
+        AppRoutingModule,
+
         DxDataGridModule,
         DxButtonModule,
         DxTextBoxModule,

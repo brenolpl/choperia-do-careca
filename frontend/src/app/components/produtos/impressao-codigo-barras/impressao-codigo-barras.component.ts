@@ -72,8 +72,7 @@ export class ImpressaoCodigoBarrasComponent {
     }
 
     criarTelaImpressao(codigosImprimir: string[]) {
-        const mywindow = window.open('', '_blank');
-
+        const mywindow = window.open('', 'PRINT', 'height=800,width=800');
 
         mywindow?.document.write('<html><head><title>' + "Imprimir codigos"  + '</title>');
         mywindow?.document.write('</head><body style="margin: 0; display: grid"></div> </body></html>');

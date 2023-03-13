@@ -90,25 +90,16 @@ public class GerarCodigoBarras implements Serializable {
     }
 
     private Integer gerarDigitoVerificador(String codigoBarras) {
-        int somaPares = 0;
-        int somaImpares = 0;
+        int calculated;
+        String ean;
+        String checkSum = "131313131313";
+        int sum = 0;
 
-        for (int i = 0; i < codigoBarras.length() - 1; i++) {
-            int digito = Character.getNumericValue(codigoBarras.charAt(i));
-            if (i % 2 == 0) {
-                somaPares += digito;
-            } else {
-                somaImpares += digito;
-            }
+        ean = codigoBarras.substring(0, codigoBarras.length() - 1);
+        for (int i = 0; i <= ean.length() - 1; i++) {
+            sum += (Integer.parseInt("" + ean.charAt(i))) * (Integer.parseInt("" + checkSum.charAt(i)));
         }
-
-        int total = (somaPares * 3) + somaImpares;
-        int resto = total % 10;
-        Integer digitoVerificador = 10 - resto;
-        if (digitoVerificador == 10) {
-            digitoVerificador = 0;
-        }
-
-        return digitoVerificador;
+        calculated = 10 - (sum % 10);
+        return calculated;
     }
 }

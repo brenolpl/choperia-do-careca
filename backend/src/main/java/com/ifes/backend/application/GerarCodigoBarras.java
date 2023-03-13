@@ -43,7 +43,7 @@ public class GerarCodigoBarras implements Serializable {
             OutputStream out = new FileOutputStream(outputFile);
 
             BitmapCanvasProvider canvas = new BitmapCanvasProvider(
-                    out, "image/png", 120,
+                    out, "image/png", 400,
                     BufferedImage.TYPE_BYTE_BINARY, false, 0);
 
             //Generate the barcode

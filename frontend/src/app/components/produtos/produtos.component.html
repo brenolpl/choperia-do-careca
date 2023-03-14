@@ -12,7 +12,8 @@
                 <dx-button stylingMode="outlined" type="success" icon="plus" hint="Adicionar produto"
                            (onClick)="onClickNovo()">
                 </dx-button>
-                <dx-button stylingMode="outlined" type="success" icon="detailslayout" hint="Adicionar Estoque">
+                <dx-button stylingMode="outlined" type="success" icon="detailslayout" hint="Adicionar Estoque"
+                           (onClick)="navigateInserirEstoque()">
                 </dx-button>
                 <dx-button stylingMode="outlined" type="success" icon="print" hint="Imprimir codigo de barras"
                            (onClick)="navigateImprimirCodigo()">
@@ -25,6 +26,7 @@
             <dxi-column dataField="nome"></dxi-column>
             <dxi-column dataField="precoCompra"></dxi-column>
             <dxi-column dataField="codigoBarras"></dxi-column>
+            <dxi-column dataField="quantidadeEstoque"></dxi-column>
 
             <dxi-column type="buttons" caption="Ações">
                 <dxi-button icon="edit" hint="Editar" [onClick]="editar"></dxi-button>

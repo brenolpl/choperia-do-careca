@@ -4,6 +4,7 @@ import {ProdutosComponent} from "./produtos.component";
 import {AuthGuardService} from "../../shared/services";
 import {FormProdutoComponent} from "./form-produto/form-produto.component";
 import {ImpressaoCodigoBarrasComponent} from "./impressao-codigo-barras/impressao-codigo-barras.component";
+import {InserirProdutoEstoqueComponent} from "./inserir-produto-estoque/inserir-produto-estoque.component";
 
 const routes: Routes = [
     {
@@ -19,6 +20,11 @@ const routes: Routes = [
     {
         path: 'produtos/imprimir-codigo',
         component: ImpressaoCodigoBarrasComponent,
+        canActivate: [ AuthGuardService ]
+    },
+    {
+        path: 'produtos/inserir-estoque',
+        component: InserirProdutoEstoqueComponent,
         canActivate: [ AuthGuardService ]
     },
     {

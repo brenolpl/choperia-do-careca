@@ -14,4 +14,8 @@ export class ProdutosComponent extends AbstractListComponent {
     navigateImprimirCodigo(){
         this.router.navigate(['imprimir-codigo'], {relativeTo: this.route});
     }
+
+    navigateInserirEstoque(){
+        this.router.navigate(['inserir-estoque'], {relativeTo: this.route});
+    }
 }

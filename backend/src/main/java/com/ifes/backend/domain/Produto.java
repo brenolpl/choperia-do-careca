@@ -25,6 +25,21 @@ public class Produto implements Serializable {
     @Column(nullable = false)
     private BigDecimal precoCompra;
 
+    @Column(nullable = false)
+    private Integer quantidadeEstoque;
+
+    public Produto() {
+        this.quantidadeEstoque = 0;
+    }
+
+    public Integer getQuantidadeEstoque() {
+        return quantidadeEstoque;
+    }
+
+    public void setQuantidadeEstoque(Integer quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
+    }
+
     public Integer getId() {
         return id;
     }

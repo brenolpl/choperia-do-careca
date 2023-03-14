@@ -12,13 +12,15 @@ import {
 } from "devextreme-angular";
 import {FormProdutoComponent} from "./form-produto/form-produto.component";
 import {ImpressaoCodigoBarrasComponent} from "./impressao-codigo-barras/impressao-codigo-barras.component";
+import {InserirProdutoEstoqueComponent} from "./inserir-produto-estoque/inserir-produto-estoque.component";
 
 
 @NgModule({
     declarations: [
         ProdutosComponent,
         FormProdutoComponent,
-        ImpressaoCodigoBarrasComponent
+        ImpressaoCodigoBarrasComponent,
+        InserirProdutoEstoqueComponent
     ],
     imports: [
         CommonModule,

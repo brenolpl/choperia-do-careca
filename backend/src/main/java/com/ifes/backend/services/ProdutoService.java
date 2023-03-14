@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -28,6 +29,7 @@ public class ProdutoService {
     }
 
     public Produto cadastrarProduto(Produto produto) {
+        produto.setQuantidadeEstoque(0);
         produto = new GerarCodigoBarras(produto, produtoRepository).execute();
         return produtoRepository.save(produto);
     }
@@ -68,5 +70,26 @@ public class ProdutoService {
     public Produto atualizarProduto(Produto produto) {
         produto = new GerarCodigoBarras(produto, produtoRepository).execute();
         return produtoRepository.save(produto);
+    }
+
+    public Produto getProdutoByCodigoBarras(String codigo) {
+        Optional<Produto> produtoOptional = produtoRepository.findProdutoByCodigoBarras(codigo);
+        if(produtoOptional.isPresent()){
+            return produtoOptional.get();
+        } else {
+            throw new RuntimeException("Não existe esse produto com esse código de barras");
+        }
+    }
+
+    public void adicionarEstoque(List<Produto> produtos) {
+        for(Produto produtoSalvar : produtos){
+            Optional<Produto> produtoOptional = produtoRepository.findById(produtoSalvar.getId());
+            if(produtoOptional.isPresent()){
+                Produto produto = produtoOptional.get();
+                Integer totalEstoque = produto.getQuantidadeEstoque() + produtoSalvar.getQuantidadeEstoque();
+                produto.setQuantidadeEstoque(totalEstoque);
+                produtoRepository.save(produto);
+            }
+        }
     }
 }

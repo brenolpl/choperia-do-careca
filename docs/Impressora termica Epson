@@ -1,0 +1,28 @@
+Modelo da Impressora: Epson TM-T20x
+(não importa o que o professor diga, esse é o modelo)
+
+Site para baixar drive:
+https://epson.com.br/Suporte/Ponto-de-venda/Impressoras-de-recibos/Epson-TM-T20x/s/SPT_C31CH26031
+
+Baixar os 2 drivers e o utilitario no link acima ou na pasta artefatos.
+- Driver para funcionar o USB: TMUSB_DeviceDriver_v8
+- Assistente para reconhecer a impressora e a conexão usb: TM-T20xUtility100.exe
+- Driver selecionar a impressora e salvar nas configurações do computador: APD_601_T20x_WM.zip
+
+1. Instale os 3 acima.
+
+2. O primeiro passo apos instalar é usar  o epson utility para se conectar a impressora.
+    Enquanto não conseguir se conectar a impressora não irá funcoinar.
+    Talvez seja necessário desconectar e conectar o cabo USB até reconhecer.
+    Quando funcionar, irá abrir uma tela com todas as configurações da impressora. Ali você conseguirá realizar o teste de impressão,
+    mas não significa que a impressora está configurada. Essa tela também mostra em qual porta a impressora está conectada,
+    porem pode ser que nas configurações do computador você tenha que especificar outra porta.
+
+3. Depois que reconheceu, use o APD_6 para salvar a impressora nas configurações. Irá exibir uma tela, selecione o modelo correto,
+    selecione porta USB e salve. Teste a impressão.
+    Caso o teste de impressão não funcione, va nas configurações, impressoras e scaners, selecione a impressora EPSON TM-T20X
+    propriedades da impressora, aba portas, altere porta, volte para aba geral e teste a impressão. Repita esse processo alterando
+    porta por porta até funcionar.
+    Quando a impressão funcionar, a impressora estará configurada e pronta para uso.
+
+

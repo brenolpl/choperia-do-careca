@@ -67,7 +67,7 @@ export class InserirProdutoEstoqueComponent {
     salvar() {
         this.apiService.post('produtos/adicionar-estoque', this.produtosSelecionados).subscribe(
             response => {
-                notify("Produtos adicionados ao estoque com sucesso!");
+                notify("Produtos adicionados ao estoque com sucesso!", "success");
                 this.back();
             }
         )

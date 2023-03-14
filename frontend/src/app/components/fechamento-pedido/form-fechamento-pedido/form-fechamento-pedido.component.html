@@ -5,38 +5,49 @@
 
     <dxi-item location="before">
         <div [classList]="'label-toolbar'">
-            Cliente
+            Fechamento de pedido
         </div>
     </dxi-item>
 
     <dxi-item location="after">
-        <dx-button [classList]="'botoes-toolbar'" icon="save" type="success" text="Salvar"
+        <dx-button [classList]="'botoes-toolbar'" icon="save" type="success" text="Confirmar pagamento"
                    (onClick)="onSalvar()"></dx-button>
-    </dxi-item>
-
-    <dxi-item location="after">
-        <dx-button [visible]="entidade" [classList]="'botoes-toolbar'" icon="trash" type="danger" text="Excluir"
-                   (onClick)="excluir()"></dx-button>
     </dxi-item>
 
 </dx-toolbar>
 
 <div class="content-block dx-card responsive-paddings">
-    <ng-container>
-        <dx-form #formulario [formData]="entidade" [labelLocation]="labelLocation">
+    <div class="row">
+        <div class="col-lg-6">
+            <dx-text-box [(value)]="cartaoCliente" (onEnterKey)="enterCartaoCliente()" label="Cartão cliente"></dx-text-box>
 
-            <dxi-item [dataField]="'nome'"></dxi-item>
-
-            <dxi-item [dataField]="'cpf'"></dxi-item>
-
-            <dxi-item [dataField]="'telefone'"></dxi-item>
-
-            <dxi-item [dataField]="'email'" [text]="'E-mail'"
-                      [editorOptions]="{ stylingMode: 'filled', mode: 'email' }"></dxi-item>
-
-        </dx-form>
+            <dx-data-grid [dataSource]="clientes">
+                <dxi-column dataField="nome"></dxi-column>
+            </dx-data-grid>
+        </div>
 
 
-    </ng-container>
+        <div class="col-lg-6">
+            <h5>Itens Consumidos:</h5>
+
+            <dx-data-grid [dataSource]="itensConsumidos">
+                <dxi-column dataField="nome"></dxi-column>
+            </dx-data-grid>
+        </div>
+
+        <div class="mt-5 col-lg-6">
+            <div class="row">
+                <div class="col-lg-4">
+                    <dx-number-box format="R$ #.##0,##" [readOnly]="true" [(value)]="totalPagar" label="Total a pagar"></dx-number-box>
+                </div>
+                <div class="col-lg-4">
+                    <dx-number-box format="R$ #.##0,##" [(value)]="recebido" (onChange)="changeValorRecebido()" label="Valor recebido"></dx-number-box>
+                </div>
+                <div class="col-lg-4">
+                    <dx-number-box format="R$ #.##0,##" [readOnly]="true" [(value)]="troco" label="Troco"></dx-number-box>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 

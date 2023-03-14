@@ -11,7 +11,7 @@ const routes: Routes = [
         canActivate: [AuthGuardService]
     },
     {
-        path: 'fechamento-pedido/cadastrar',
+        path: 'fechamento-pedido/novo',
         component: FormFechamentoPedidoComponent,
         canActivate: [AuthGuardService]
     },

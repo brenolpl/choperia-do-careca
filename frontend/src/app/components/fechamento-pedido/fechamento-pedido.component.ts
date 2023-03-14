@@ -8,6 +8,6 @@ import {AbstractListComponent} from "../../shared/components/abstract-list/abstr
 })
 export class FechamentoPedidoComponent extends AbstractListComponent{
     protected getRota(): string {
-        return 'clientes';
+        return 'fechamento-pedidos';
     }
 }

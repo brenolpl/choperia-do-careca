@@ -19,6 +19,7 @@ import {ClientesModule} from "./components/clientes/clientes.module";
 import {HttpClientModule} from "@angular/common/http";
 import {HomeModule} from "./components/home/home.module";
 import {FechamentoPedidoModule} from "./components/fechamento-pedido/fechamento-pedido.module";
+import {ChopeModule} from "./components/chopes/chope.module";
 
 @NgModule({
     declarations: [
@@ -41,9 +42,11 @@ import {FechamentoPedidoModule} from "./components/fechamento-pedido/fechamento-
         ClientesModule,
         HomeModule,
         FechamentoPedidoModule,
+        ChopeModule,
 
         // precisa estar depois dos outros modulos de rotas senao nao redireciona corretamente para home caso a rota nao exista
         AppRoutingModule,
+
     ],
     providers: [
         AuthService,

@@ -77,7 +77,7 @@ public class ProdutoService {
         if(produtoOptional.isPresent()){
             return produtoOptional.get();
         } else {
-            throw new RuntimeException("Não existe esse produto com esse código de barras");
+            throw new RuntimeException("Não existe um produto com esse código de barras");
         }
     }
 

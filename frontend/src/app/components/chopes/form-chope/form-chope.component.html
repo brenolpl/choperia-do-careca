@@ -5,7 +5,7 @@
 
     <dxi-item location="before">
         <div [classList]="'label-toolbar'">
-            Produto
+            Chope
         </div>
     </dxi-item>
 
@@ -25,7 +25,7 @@
     <ng-container>
         <dx-form #formulario [formData]="entidade" [labelLocation]="labelLocation">
 
-            <dxi-item [dataField]="'codigoBarras'" [editorOptions]="{ maxLength: 13 }" [label]="{text: 'Código de Barras'}">
+            <dxi-item [dataField]="'codigoRFID'" [editorOptions]="{ maxLength: 13 }" [text]="'Código de Barras'">
             </dxi-item>
 
             <dxi-item [dataField]="'nome'"></dxi-item>
@@ -34,7 +34,14 @@
                 [dataField]="'precoCompra'"
                 [editorOptions]="{format: {type: 'currency', currency: 'BRL', precision: 2}}"
                 [editorType]="'dxNumberBox'"
-                [label]="{text: 'Preço de Compra'}">
+                [label]="{text: 'Preço de Compra Barril'}">
+            </dxi-item>
+
+            <dxi-item
+                [dataField]="'precoVenda'"
+                [editorOptions]="{format: {type: 'currency', currency: 'BRL', precision: 2}}"
+                [editorType]="'dxNumberBox'"
+                [label]="{text: 'Preço de Venda Copo'}">
             </dxi-item>
         </dx-form>
 

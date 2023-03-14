@@ -42,6 +42,7 @@ export const navigation = [
     {
         text: 'Estoque de chope',
         icon: 'coffee',
+        path: 'chopes'
     },
     {
         text: 'Saída',

@@ -25,7 +25,7 @@ public class Chope implements Serializable {
     private String nome;
 
     @Column(name = "quantidade_estoque", nullable = false)
-    private Integer quantidadeEstoque;
+    private Double quantidadeEstoque;
 
     @Column(name = "preco_compra", nullable = false)
     private BigDecimal precoCompra;
@@ -53,11 +53,11 @@ public class Chope implements Serializable {
         this.nome = nome;
     }
 
-    public Integer getQuantidadeEstoque() {
+    public Double getQuantidadeEstoque() {
         return quantidadeEstoque;
     }
 
-    public void setQuantidadeEstoque(Integer quantidadeEstoque) {
+    public void setQuantidadeEstoque(Double quantidadeEstoque) {
         this.quantidadeEstoque = quantidadeEstoque;
     }
 

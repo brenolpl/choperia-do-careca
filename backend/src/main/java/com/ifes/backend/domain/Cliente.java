@@ -6,27 +6,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 
+@Table(name = "cliente")
 @Entity
 public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(nullable = false, length = 11, unique = true)
+    @Column(name = "cpf", nullable = false, length = 11, unique = true)
     private String cpf;
 
     //com DD ex: 27999999999
-    @Column(nullable = false, length = 11)
+    @Column(name = "telefone", nullable = false, length = 11)
     private String telefone;
 
-    @Column
+    @Column(name = "email")
     private String email;
 
     public Integer getId() {

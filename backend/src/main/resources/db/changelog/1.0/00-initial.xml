@@ -1,0 +1,102 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <changeSet id="1" author="breno">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="cliente"/></not>
+        </preConditions>
+        <createTable tableName="cliente">
+            <column name="id" type="int" autoIncrement="true"><constraints primaryKey="true" primaryKeyName="PK_CLIENTE" nullable="false"/></column>
+            <column name="nome" type="varchar(255)"><constraints nullable="false"/> </column>
+            <column name="cpf" type="char(11)"><constraints nullable="false" unique="true" uniqueConstraintName="CLIENTE_CPF_UNIQUE"/></column>
+            <column name="telefone" type="char(11)"><constraints nullable="false"/> </column>
+            <column name="email" type="varchar(255)"></column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="2" author="breno">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="produto"></tableExists></not>
+        </preConditions>
+        <createTable tableName="produto">
+            <column name="id" type="int" autoIncrement="true"><constraints primaryKey="true" primaryKeyName="PK_PRODUTO" nullable="false"/></column>
+            <column name="codigo_barras" type="varchar(255)"><constraints nullable="false" unique="true" uniqueConstraintName="PRODUTO_CODIGO_BARRAS_UNIQUE"/> </column>
+            <column name="nome" type="varchar(255)"><constraints nullable="false"></constraints></column>
+            <column name="preco_compra" type="decimal"><constraints nullable="false"/> </column>
+            <column name="quantidade_estoque" type="int"><constraints nullable="false"/> </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="breno">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="tipo_usuario"></tableExists></not>
+        </preConditions>
+        <createTable tableName="tipo_usuario">
+            <column name="id" type="int" autoIncrement="true"><constraints primaryKey="true" primaryKeyName="PK_TIPO_USUARIO" nullable="false"/> </column>
+            <column name="nome" type="varchar(100)"><constraints nullable="false"/> </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="breno">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="usuario"/></not>
+        </preConditions>
+        <createTable tableName="usuario">
+            <column name="id" type="int" autoIncrement="true"><constraints primaryKey="true" primaryKeyName="PK_USUARIO" nullable="false"></constraints> </column>
+            <column name="login" type="varchar(200)"><constraints nullable="false" unique="true" uniqueConstraintName="USUARIO_LOGIN_UNIQUE"/> </column>
+            <column name="biometria" type="varchar(255)"><constraints nullable="false" unique="true" uniqueConstraintName="USUARIO_BIOMETRIA_UNIQUE"/> </column>
+            <column name="tipo_usuario" type="int"><constraints foreignKeyName="FK_USUARIO_TIPO_USUARIO" referencedColumnNames="id" referencedTableName="tipo_usuario" nullable="false"/></column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="5" author="breno">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="cartao_rfid"/></not>
+        </preConditions>
+        <createTable tableName="cartao_rfid">
+            <column name="codigo" type="char(24)"><constraints primaryKey="true" primaryKeyName="PK_CARTAO_RFID" nullable="false"/> </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="6" author="breno">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="associacao_cliente_cartao_rfid"></tableExists></not>
+        </preConditions>
+        <createTable tableName="associacao_cliente_cartao_rfid">
+            <column name="id" type="int" autoIncrement="true"><constraints primaryKey="true" primaryKeyName="PK_ASSOCIACAO_CLIENTE_CARTAO_RFID" nullable="false"/> </column>
+            <column name="cartao_rfid_codigo" type="char(24)"><constraints nullable="false" referencedTableName="cartao_rfid" referencedColumnNames="codigo" foreignKeyName="FK_ASSOCIACAO_CLIENTE_CARTAO_RFID_CARTAO_RFID"/> </column>
+            <column name="cliente_id" type="int"><constraints nullable="false" foreignKeyName="FK_ASSOCIACAO_CLIENTE_CARTAO_RFID_CLIENTE_ID" referencedColumnNames="id" referencedTableName="cliente"/> </column>
+            <column name="data_entrada" type="datetime"><constraints nullable="false"/></column>
+            <column name="data_saida" type="datetime"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="7" author="breno">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="chope"></tableExists></not>
+        </preConditions>
+        <createTable tableName="chope">
+            <column name="id" type="int" autoIncrement="true"><constraints primaryKey="true" primaryKeyName="PK_CHOPE" nullable="false"/> </column>
+            <column name="nome" type="varchar(255)"><constraints nullable="false"/></column>
+            <column name="quantidade_estoque" type="decimal"></column>
+            <column name="preco_compra" type="decimal"><constraints nullable="false"/> </column>
+            <column name="preco_venda" type="decimal"><constraints nullable="false"/> </column>
+            <column name="cartao_rfid" type="char(24)"><constraints foreignKeyName="FK_CHOPE_CARTAO_RFID" referencedTableName="CARTAO_RFID" referencedColumnNames="CODIGO" nullable="false" /></column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="8" author="breno">
+        <preConditions>
+            <not><tableExists tableName="itens_consumidos"></tableExists></not>
+        </preConditions>
+        <createTable tableName="itens_consumidos">
+            <column name="id" type="int" autoIncrement="true"><constraints primaryKey="true" primaryKeyName="pk_itens_consumidos" nullable="false"/></column>
+            <column name="associacao_cliente_cartao_rfid_id" type="int"><constraints nullable="false" referencedColumnNames="id" referencedTableName="associacao_cliente_cartao_rfid" foreignKeyName="fk_itens_consumidos_associacao_cliente_cartao_rfid_id"/></column>
+            <column name="chope_id" type="int"><constraints referencedTableName="chope" referencedColumnNames="id" foreignKeyName="fk_itens_consumidos_chope_id"/> </column>
+            <column name="quantidade" type="int"><constraints nullable="false"/></column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

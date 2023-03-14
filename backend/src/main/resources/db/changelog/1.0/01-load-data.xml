@@ -1,0 +1,33 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1" author="breno">
+        <comment>Carregar dados iniciais para a tipagem de usuários</comment>
+        <insert tableName="tipo_usuario">
+            <column name="id" value="99"/>
+            <column name="nome" value="Administrador"/>
+        </insert>
+        <insert tableName="tipo_usuario">
+            <column name="id" value="100"/>
+            <column name="nome" value="Cozinheiro"/>
+        </insert>
+        <insert tableName="tipo_usuario">
+            <column name="id" value="101"/>
+            <column name="nome" value="Fiscal de Entrada"/>
+        </insert>
+        <insert tableName="tipo_usuario">
+            <column name="id" value="102"/>
+            <column name="nome" value="Caixa"/>
+        </insert>
+        <insert tableName="tipo_usuario">
+            <column name="id" value="103"/>
+            <column name="nome" value="Fiscal de Self-Service"/>
+        </insert>
+        <insert tableName="tipo_usuario">
+            <column name="id" value="104"/>
+            <column name="nome" value="Fiscal de Estoque"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

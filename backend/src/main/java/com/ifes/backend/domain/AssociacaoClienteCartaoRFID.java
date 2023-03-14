@@ -10,31 +10,37 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+@Table(name = "associacao_cliente_cartao_rfid")
 @Entity
 public class AssociacaoClienteCartaoRFID implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "cartao_rfid_codigo", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY,  optional = false)
     private CartaoRFID cartaoRFID;
 
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "cliente_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Cliente cliente;
 
-    @Column(nullable = false, updatable = false)
+    @Column(name = "data_entrada", nullable = false, updatable = false)
     private LocalDateTime dataEntrada;
 
-    @Column(updatable = false)
+    @Column(name = "data_saida", updatable = false)
     private LocalDateTime dataSaida;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "associacaoClienteCartaoRFID")
+    private Set<ItensConsumidos> itensConsumidos;
 
     public Integer getId() {
         return id;
@@ -74,5 +80,13 @@ public class AssociacaoClienteCartaoRFID implements Serializable {
 
     public void setDataSaida(LocalDateTime dataSaida) {
         this.dataSaida = dataSaida;
+    }
+
+    public Set<ItensConsumidos> getItensConsumidos() {
+        return itensConsumidos;
+    }
+
+    public void setItensConsumidos(Set<ItensConsumidos> itensConsumidos) {
+        this.itensConsumidos = itensConsumidos;
     }
 }

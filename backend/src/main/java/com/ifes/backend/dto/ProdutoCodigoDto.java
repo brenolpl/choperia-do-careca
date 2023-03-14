@@ -1,13 +1,19 @@
-package com.ifes.backend.domain;
+package com.ifes.backend.dto;
+
+import lombok.Data;
 
 public class ProdutoCodigoDto {
+    private Integer id;
+    private String nome;
+    private String codigoBarras;
+    private String codigoBarrasImg;
 
-    Integer id;
-    String nome;
-    String codigoBarras;
-    String codigoBarrasImg;
+    public Integer getId() {
+        return id;
+    }
 
-    public ProdutoCodigoDto() {
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -20,14 +26,6 @@ public class ProdutoCodigoDto {
 
     public String getCodigoBarras() {
         return codigoBarras;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public void setCodigoBarras(String codigoBarras) {

@@ -32,6 +32,9 @@
 
             <dx-data-grid [dataSource]="itensConsumidos">
                 <dxi-column dataField="nome"></dxi-column>
+                <dxi-column dataField="preco" format="R$ #.##0,##"></dxi-column>
+                <dxi-column dataField="quantidade"></dxi-column>
+                <dxi-column dataField="total" format="R$ #.##0,##"></dxi-column>
             </dx-data-grid>
         </div>
 

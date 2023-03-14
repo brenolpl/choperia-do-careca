@@ -1,24 +1,28 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormClienteComponent } from './form-cliente/form-cliente.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormClienteComponent} from './form-cliente/form-cliente.component';
 import {ClientesRoute} from "./clientes.route";
-import {DxButtonModule, DxFormModule, DxToolbarModule} from "devextreme-angular";
+import {DxButtonModule, DxDataGridModule, DxFormModule, DxTextBoxModule, DxToolbarModule} from "devextreme-angular";
 import {DxiItemModule, DxoFormItemModule} from "devextreme-angular/ui/nested";
-
+import {ClientesComponent} from "./clientes.component";
 
 
 @NgModule({
-  declarations: [
-    FormClienteComponent
-  ],
-  imports: [
-    ClientesRoute,
-    CommonModule,
-    DxToolbarModule,
-    DxButtonModule,
-    DxiItemModule,
-    DxFormModule,
-    DxoFormItemModule
-  ]
+    declarations: [
+        ClientesComponent,
+        FormClienteComponent
+    ],
+    imports: [
+        ClientesRoute,
+        CommonModule,
+        DxToolbarModule,
+        DxButtonModule,
+        DxiItemModule,
+        DxFormModule,
+        DxoFormItemModule,
+        DxTextBoxModule,
+        DxDataGridModule,
+    ]
 })
-export class ClientesModule { }
+export class ClientesModule {
+}

@@ -33,6 +33,7 @@ export const navigation = [
     {
         text: 'Fechamento de pedido',
         icon: 'cart',
+        path: 'fechamento-pedido'
     },
     {
         text: 'Vincular cartão',

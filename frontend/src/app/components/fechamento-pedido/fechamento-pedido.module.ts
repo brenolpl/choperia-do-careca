@@ -1,0 +1,30 @@
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FechamentoPedidoRoute} from "./fechamento-pedido.route";
+import {DxButtonModule, DxDataGridModule, DxFormModule, DxTextBoxModule, DxToolbarModule} from "devextreme-angular";
+import {DxiButtonModule, DxiColumnModule, DxiItemModule, DxoFormItemModule} from "devextreme-angular/ui/nested";
+import {FormFechamentoPedidoComponent} from "./form-fechamento-pedido/form-fechamento-pedido.component";
+import {FechamentoPedidoComponent} from "./fechamento-pedido.component";
+
+
+@NgModule({
+    declarations: [
+        FormFechamentoPedidoComponent,
+        FechamentoPedidoComponent
+    ],
+    imports: [
+        FechamentoPedidoRoute,
+        CommonModule,
+        DxTextBoxModule,
+        DxDataGridModule,
+        DxToolbarModule,
+        DxButtonModule,
+        DxiColumnModule,
+        DxiButtonModule,
+        DxiItemModule,
+        DxFormModule,
+        DxoFormItemModule
+    ]
+})
+export class FechamentoPedidoModule {
+}

@@ -1,0 +1,31 @@
+<div class="content-block dx-card responsive-paddings">
+    <h2>Clientes</h2>
+
+
+    <div class="actions-table">
+
+        <div class="row">
+            <div class="col-sm-8 col-md-6">
+                <dx-text-box></dx-text-box>
+            </div>
+            <div class="col-4">
+                <dx-button stylingMode="outlined" type="success" icon="plus" hint="Adicionar"
+                           (onClick)="onClickNovo()">
+                </dx-button>
+            </div>
+        </div>
+
+        <dx-data-grid [dataSource]="entidades" keyExpr="id">
+
+            <dxi-column dataField="nome"></dxi-column>
+            <dxi-column dataField="cpf"></dxi-column>
+            <dxi-column dataField="telefone"></dxi-column>
+            <dxi-column dataField="email"></dxi-column>
+
+            <dxi-column type="buttons" caption="Ações">
+                <dxi-button icon="edit" hint="Editar" [onClick]="editar"></dxi-button>
+                <dxi-button icon="trash" hint="Excluir" [onClick]="excluir"></dxi-button>
+            </dxi-column>
+        </dx-data-grid>
+    </div>
+</div>

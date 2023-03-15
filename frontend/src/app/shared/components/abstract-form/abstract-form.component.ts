@@ -12,7 +12,7 @@ import {Location} from "@angular/common";
 })
 export abstract class AbstractFormComponent implements OnInit {
     @ViewChild('formulario', {static: false}) formulario!: DxFormComponent;
-    entidade: any = null;
+    entidade: any = {};
 
     labelLocation = 'left';
     routeSubscription: any;
@@ -67,7 +67,7 @@ export abstract class AbstractFormComponent implements OnInit {
         this.isLoadPanelVisible = true;
 
         if (formValidator) {
-            if (this.entidade) {
+            if (this.entidade.id || this.entidade.codigo) {
                 this.apiService.patch(this.getRota(), formData['id'], formData).subscribe(
                     (response: any) => {
                         this.isLoadPanelVisible = false;
@@ -75,6 +75,7 @@ export abstract class AbstractFormComponent implements OnInit {
                     }, () => this.erroSalvarAlterar()
                 );
             } else {
+                console.log(this.getRota());
                 this.apiService.post(this.getRota(), formData).subscribe(
                     (response: any) => {
                         this.isLoadPanelVisible = false;

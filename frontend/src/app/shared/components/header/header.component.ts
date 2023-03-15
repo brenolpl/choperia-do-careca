@@ -7,6 +7,8 @@ import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
 import { Router } from '@angular/router';
+import {RfidService} from "../../services/rfid.service";
+import notify from "devextreme/ui/notify";
 @Component({
   selector: 'app-header',
   templateUrl: 'header.component.html',
@@ -38,9 +40,20 @@ export class HeaderComponent implements OnInit {
     onClick: () => {
       this.authService.logOut();
     }
-  }];
+  },
+  {
+      text: 'Conectar leitor RFID',
+      icon: 'link',
+      onClick: () => {
+          if(!this.rfidService.isInitialized) this.rfidService.initReader();
+          else {
+              notify('Leitor já inicializado!', 'warning', 2000);
+          }
+      }
+  }
+  ];
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private rfidService: RfidService) { }
 
   ngOnInit() {
     this.authService.getUser().then((e) => this.user = e.data);

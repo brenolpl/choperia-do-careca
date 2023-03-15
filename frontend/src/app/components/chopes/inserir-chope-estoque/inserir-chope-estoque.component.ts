@@ -1,9 +1,10 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../../../shared/services/api.service";
 import {Location} from "@angular/common";
 import {DxDataGridComponent} from "devextreme-angular";
 import notify from "devextreme/ui/notify";
+import {RfidService} from "../../../shared/services/rfid.service";
 
 interface Chope {
     id: number,
@@ -19,7 +20,7 @@ interface Chope {
         '../../../shared/components/abstract-form/abstract-form.component.scss'
     ]
 })
-export class InserirChopeEstoqueComponent {
+export class InserirChopeEstoqueComponent implements OnInit {
     @ViewChild(DxDataGridComponent, {static: false}) dataGrid!: DxDataGridComponent;
     codigoRFID: string = "";
     chopesSelecionados: Chope[] = [];
@@ -28,8 +29,15 @@ export class InserirChopeEstoqueComponent {
         private router: Router,
         private route: ActivatedRoute,
         private apiService: ApiService,
-        private location: Location
+        private location: Location,
+        private rfidService: RfidService
     ) {}
+
+    ngOnInit() {
+        this.rfidService.rfid.subscribe(rfid => {
+            this.codigoRFID = rfid
+        });
+    }
 
     back() {
         this.location.back();

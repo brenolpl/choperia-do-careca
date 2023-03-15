@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/produtos")
-public class ProdutoController extends BaseController<Produto, IProdutoRepository>{
+public class ProdutoController extends BaseController<Produto, IProdutoRepository, Integer>{
 
     private EntityManager entityManager;
     private ProdutoService produtoService;

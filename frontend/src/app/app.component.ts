@@ -2,6 +2,7 @@ import { Component, HostBinding } from '@angular/core';
 import { loadMessages, locale } from 'devextreme/localization';
 import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import ptMessages from 'devextreme/localization/messages/pt.json';
+import {RfidService} from "./shared/services/rfid.service";
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent  {
     constructor(
         private authService: AuthService,
         private screen: ScreenService,
-        public appInfo: AppInfoService
+        public appInfo: AppInfoService,
+        public rfidService: RfidService
     ) {
         loadMessages(ptMessages);
 

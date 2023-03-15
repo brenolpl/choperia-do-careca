@@ -25,7 +25,7 @@
     <ng-container>
         <dx-form #formulario [formData]="entidade" [labelLocation]="labelLocation">
 
-            <dxi-item [dataField]="'codigoRFID'" [editorOptions]="{ maxLength: 13 }" [text]="'Código de Barras'">
+            <dxi-item [dataField]="'cartaoRFID.codigo'" [editorOptions]="{ maxLength: 24 }" [text]="'Código RFID'">
             </dxi-item>
 
             <dxi-item [dataField]="'nome'"></dxi-item>

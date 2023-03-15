@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/chopes")
-public class ChopeController extends BaseController<Chope, IChopeRepository>{
+public class ChopeController extends BaseController<Chope, IChopeRepository, Integer>{
 
     private ChopeService chopeService;
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public abstract class BaseController<SOURCE, REPOSITORY extends JpaRepository<SOURCE, Integer>> {
+public abstract class BaseController<SOURCE, REPOSITORY extends JpaRepository<SOURCE, ID>, ID> {
 
     protected Class<SOURCE> entityClass;
     protected REPOSITORY repository;
@@ -28,7 +28,7 @@ public abstract class BaseController<SOURCE, REPOSITORY extends JpaRepository<SO
     }
 
     @GetMapping("{id}")
-    public SOURCE get(@PathVariable Integer id) {
+    public SOURCE get(@PathVariable ID id) {
         return repository.findById(id).get();
     }
 
@@ -43,7 +43,7 @@ public abstract class BaseController<SOURCE, REPOSITORY extends JpaRepository<SO
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Integer id) {
+    public void delete(@PathVariable ID id) {
         repository.deleteById(id);
     }
 }

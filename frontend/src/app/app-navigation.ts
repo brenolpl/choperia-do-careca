@@ -52,4 +52,9 @@ export const navigation = [
         text: 'Relatórios',
         icon: 'textdocument',
     },
+    {
+        text: 'Cartao RFID',
+        icon: 'card',
+        path: 'cartao-rfid'
+    }
 ];

@@ -1,5 +1,6 @@
 <ng-container *ngIf="isAuthenticated(); else unauthenticated">
   <app-side-nav-outer-toolbar title="{{appInfo.title}}">
+      <div class="dx-icon-usb"></div>
     <router-outlet></router-outlet>
   </app-side-nav-outer-toolbar>
 </ng-container>

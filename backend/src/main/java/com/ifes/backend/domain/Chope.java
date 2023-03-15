@@ -34,8 +34,12 @@ public class Chope implements Serializable {
     private BigDecimal precoVenda;
 
     @JoinColumn(name = "cartao_rfid", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private CartaoRFID cartaoRFID;
+
+    public Chope() {
+        this.quantidadeEstoque = 0D;
+    }
 
     public Integer getId() {
         return id;

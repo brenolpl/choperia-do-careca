@@ -40,3 +40,9 @@
 h2{
   font-weight: bold;
 }
+
+::ng-deep .dx-icon-usb {
+    background-image: url('./assets/icons/usb.png');
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+}

@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/usuarios")
-public class UsuarioController extends BaseController<Usuario, IUsuarioRepository>{
+public class UsuarioController extends BaseController<Usuario, IUsuarioRepository, Integer>{
 
     ITipoUsuarioRepository tipoUsuarioRepository;
 

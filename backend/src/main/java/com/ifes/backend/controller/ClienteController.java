@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/clientes")
-public class ClienteController extends BaseController<Cliente, IClienteRepository> {
+public class ClienteController extends BaseController<Cliente, IClienteRepository, Integer> {
 
     public ClienteController(IClienteRepository repository) {
         super(Cliente.class, repository);

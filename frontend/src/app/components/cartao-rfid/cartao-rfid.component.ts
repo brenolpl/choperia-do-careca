@@ -2,16 +2,12 @@ import {Component} from '@angular/core';
 import {AbstractListComponent} from "../../shared/components/abstract-list/abstract-list.component";
 
 @Component({
-    selector: 'app-chope',
-    templateUrl: './chope.component.html',
+    selector: 'app-cartao-rfid',
+    templateUrl: './cartao-rfid.component.html',
     styleUrls: ['../../shared/components/abstract-list/abstract-list.component.css']
 })
-export class ChopeComponent extends AbstractListComponent {
+export class CartaoRfidComponent extends AbstractListComponent{
     protected getRota(): string {
-        return 'chopes';
-    }
-
-    navigateInserirEstoque(){
-        this.router.navigate(['inserir-estoque'], {relativeTo: this.route});
+        return 'cartao-rfid';
     }
 }

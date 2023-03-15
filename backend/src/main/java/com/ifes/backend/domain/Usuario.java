@@ -1,5 +1,7 @@
 package com.ifes.backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,6 +28,7 @@ public class Usuario implements Serializable {
 
     @JoinColumn(name = "tipo_usuario", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JsonIgnoreProperties(value = "usuariosAssociados", allowSetters = true)
     private TipoUsuario tipoUsuario;
 
     public Usuario() {

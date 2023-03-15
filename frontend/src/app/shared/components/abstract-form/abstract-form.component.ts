@@ -16,6 +16,7 @@ export abstract class AbstractFormComponent implements OnInit {
 
     labelLocation = 'left';
     routeSubscription: any;
+    isLoadPanelVisible: any = false;
 
     constructor(
         protected location: Location,
@@ -39,7 +40,7 @@ export abstract class AbstractFormComponent implements OnInit {
         this.location.back();
     }
 
-    private detalharEntidade(id: string) {
+    protected detalharEntidade(id: string) {
         this.apiService.detail(this.getRota(), id).subscribe(
             response => {
                 this.entidade = response;
@@ -47,30 +48,49 @@ export abstract class AbstractFormComponent implements OnInit {
         );
     }
 
-    onSalvar = () => {
-        this.salvar();
+    onSalvar = (button: any) => {
+        this.salvar(button);
     }
 
-    protected salvar(){
-        const formValidator = this.formulario.instance.validate();
-        const formData = this.formulario.instance.option('formData');
+    protected getEntidade(){
+        return this.formulario.instance.option('formData');
+    }
 
-        if (formValidator.isValid) {
+    protected validateFormulario(){
+        return this.formulario.instance.validate().isValid;
+    }
+
+    protected salvar(button: any){
+        const formValidator = this.validateFormulario();
+        const formData = this.getEntidade();
+
+        this.isLoadPanelVisible = true;
+
+        if (formValidator) {
             if (this.entidade) {
                 this.apiService.patch(this.getRota(), formData['id'], formData).subscribe(
                     (response: any) => {
+                        this.isLoadPanelVisible = false;
                         notify('Alterado com sucesso!', 'success', 2000);
-                    }
+                    }, () => this.erroSalvarAlterar()
                 );
             } else {
                 this.apiService.post(this.getRota(), formData).subscribe(
                     (response: any) => {
+                        this.isLoadPanelVisible = false;
                         notify('Criado com sucesso!', 'success', 2000);
                         this.navigateEdit(response['id']);
-                    }
+                    }, () => this.erroSalvarAlterar()
                 );
             }
+        } else {
+            this.isLoadPanelVisible = false;
         }
+    }
+
+    public erroSalvarAlterar(){
+        this.isLoadPanelVisible = false;
+        notify('Ocorreu um erro ao salvar', 'error');
     }
 
     public excluir() {

@@ -9,7 +9,13 @@ import {
     DxTextBoxModule,
     DxToolbarModule
 } from "devextreme-angular";
-import {DxiButtonModule, DxiColumnModule, DxiItemModule, DxoFormItemModule} from "devextreme-angular/ui/nested";
+import {
+    DxiButtonModule,
+    DxiColumnModule,
+    DxiItemModule,
+    DxiToolbarItemModule,
+    DxoFormItemModule
+} from "devextreme-angular/ui/nested";
 import {FormFechamentoPedidoComponent} from "./form-fechamento-pedido/form-fechamento-pedido.component";
 import {FechamentoPedidoComponent} from "./fechamento-pedido.component";
 
@@ -31,7 +37,8 @@ import {FechamentoPedidoComponent} from "./fechamento-pedido.component";
         DxiItemModule,
         DxFormModule,
         DxoFormItemModule,
-        DxNumberBoxModule
+        DxNumberBoxModule,
+        DxiToolbarItemModule
     ]
 })
 export class FechamentoPedidoModule {

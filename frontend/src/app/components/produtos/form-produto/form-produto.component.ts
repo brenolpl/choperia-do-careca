@@ -11,20 +11,22 @@ export class FormProdutoComponent extends AbstractFormComponent {
         return 'produtos';
     }
 
+    override validateFormulario(){
+        const isValid = super.validateFormulario();
+        if(!isValid) return false;
 
-    override salvar = () => {
         const formData = this.formulario.instance.option('formData');
-
         if (formData.codigoBarras && formData.codigoBarras.length < 13) {
             notify('Se for informar código de barras, o mesmo precisa conter 13 digitos, caso contrário não informe o código e deixe que o sistema gere para você.', 'error', 4000);
-            return;
+            return false;
         } else if (formData.codigoBarras) {
-            if (!this.validarCodigoBarras(formData.codigoBarras)) return;
+            if (!this.isCodigoBarrasValido(formData.codigoBarras)) return false;
+            return true;
         }
-        super.salvar();
+        return true;
     }
 
-    validarCodigoBarras(codigo: any): boolean {
+    isCodigoBarrasValido(codigo: any): boolean {
         let factor = 3;
         let sum = 0;
 

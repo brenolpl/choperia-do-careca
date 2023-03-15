@@ -1,3 +1,8 @@
+<dx-load-panel
+    [hideOnOutsideClick]="false"
+    [(visible)]="isLoadPanelVisible">
+</dx-load-panel>
+
 <dx-toolbar [classList]="'toolbar'">
     <dxi-item location="before">
         <dx-button [classList]="'botoes-toolbar'" icon="back" (onClick)="back()"></dx-button>
@@ -11,7 +16,7 @@
 
     <dxi-item location="after">
         <dx-button [classList]="'botoes-toolbar'" icon="save" type="success" text="Salvar"
-                   (onClick)="onSalvar()"></dx-button>
+                   (onClick)="onSalvar($event)"></dx-button>
     </dxi-item>
 
     <dxi-item location="after">
@@ -25,22 +30,26 @@
     <ng-container>
         <dx-form #formulario [formData]="entidade" [labelLocation]="labelLocation">
 
-            <dxi-item [dataField]="'login'"></dxi-item>
+            <dxi-item [dataField]="'login'">
+                <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-item>
 
-            <dxi-item [dataField]="'biometria'"></dxi-item>
+            <dxi-item [dataField]="'biometria'">
+                <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-item>
 
             <dxi-item
-                dataField="tipo"
-                editorType="dxSelectBox"
-                [editorOptions]="{ items: [
-                    'administrador',
-                    'cozinheiro',
-                    'fiscalEntrada',
-                    'caixa',
-                    'fiscalSelfService',
-                    'fiscalEstoque'
-                ] }"
-            ></dxi-item>
+                dataField="tipoUsuario"
+                editorType="dxSelectBox">
+                <dx-select-box
+                    #selectTipos
+                    [dataSource]="tipoUsuarios"
+                    valueExpr="id"
+                    displayExpr="nome"
+                    [(value)]="tipoSelecionado">
+                </dx-select-box>
+                <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-item>
 
         </dx-form>
     </ng-container>

@@ -5,7 +5,7 @@ import {ProdutosRoute} from "./produtos.route";
 import {
     DxButtonModule,
     DxDataGridModule,
-    DxFormModule,
+    DxFormModule, DxLoadPanelModule,
     DxNumberBoxModule,
     DxTextBoxModule,
     DxToolbarModule
@@ -30,7 +30,8 @@ import {InserirProdutoEstoqueComponent} from "./inserir-produto-estoque/inserir-
         DxDataGridModule,
         DxToolbarModule,
         DxFormModule,
-        DxNumberBoxModule
+        DxNumberBoxModule,
+        DxLoadPanelModule
     ],
     exports: []
 })

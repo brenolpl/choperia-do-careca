@@ -20,6 +20,7 @@ public class TipoUsuario implements Serializable {
     @Column(name = "nome", nullable = false)
     private String nome;
 
+
     @OneToMany(mappedBy = "tipoUsuario", fetch = FetchType.LAZY)
     private Set<Usuario> usuariosAssociados;
 

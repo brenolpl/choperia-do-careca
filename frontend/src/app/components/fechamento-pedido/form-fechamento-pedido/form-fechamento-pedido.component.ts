@@ -85,12 +85,15 @@ export class FormFechamentoPedidoComponent implements OnInit {
         this.troco = this.recebido - this.totalPagar;
     }
 
-    onSalvar() {
-        this.confirmarPagamento();
+    onSalvar(button: any) {
+        this.confirmarPagamento(button);
     }
 
-    confirmarPagamento() {
+    confirmarPagamento(button: any) {
+
         // confirmar no backend
+
+
 
         this.imprimirComprovante();
     }

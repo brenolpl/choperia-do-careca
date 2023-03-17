@@ -15,4 +15,10 @@ public enum TipoUsuarioEnum {
         this.id = id;
         this.nome = nome;
     }
+
+    public enum StatusPratoEnum {
+        ACABANDO,
+        EM_PRODUCAO,
+        PRONTO
+    }
 }

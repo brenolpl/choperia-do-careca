@@ -1,9 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {DxDataGridComponent} from "devextreme-angular";
-import {ActivatedRoute, Router} from "@angular/router";
-import {confirm} from "devextreme/ui/dialog";
-import {ApiService} from "../../shared/services/api.service";
-import notify from "devextreme/ui/notify";
+import {Component} from '@angular/core';
 import {AbstractListComponent} from "../../shared/components/abstract-list/abstract-list.component";
 
 @Component({

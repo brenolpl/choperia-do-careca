@@ -75,7 +75,6 @@ export abstract class AbstractFormComponent implements OnInit {
                     }, () => this.erroSalvarAlterar()
                 );
             } else {
-                console.log(this.getRota());
                 this.apiService.post(this.getRota(), formData).subscribe(
                     (response: any) => {
                         this.isLoadPanelVisible = false;
@@ -115,4 +114,8 @@ export abstract class AbstractFormComponent implements OnInit {
     }
 
     protected abstract getRota(): string;
+
+    public excluirVisible(): boolean{
+        return this.entidade.id != null || this.entidade.codigo != null;
+    }
 }

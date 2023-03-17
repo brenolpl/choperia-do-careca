@@ -41,7 +41,7 @@ export abstract class AbstractListComponent implements OnInit {
         });
     }
 
-    private listarEntidades() {
+    protected listarEntidades() {
         this.apiService.get(this.getRota()).subscribe(
             response => {
                 this.entidades = response as any[];

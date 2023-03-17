@@ -20,7 +20,7 @@
     </dxi-item>
 
     <dxi-item location="after">
-        <dx-button [visible]="entidade" [classList]="'botoes-toolbar'" icon="trash" type="danger" text="Excluir"
+        <dx-button [visible]="excluirVisible()" [classList]="'botoes-toolbar'" icon="trash" type="danger" text="Excluir"
                    (onClick)="excluir()"></dx-button>
     </dxi-item>
 

@@ -29,20 +29,9 @@ export const navigation: NavigationMenu[] = [
         path: 'preco-self-service'
     },
     {
-        text: 'Estoque cozinha',
+        text: 'Pratos Self Service',
         icon: 'food',
-    },
-    {
-        text: 'Pratos faltantes',
-        icon: 'food',
-    },
-    {
-        text: 'Estoque self-service',
-        icon: 'food',
-    },
-    {
-        text: 'Pesagem de prato',
-        icon: 'food',
+        path: 'pratos'
     },
     {
         text: 'Fechamento de pedido',
@@ -50,25 +39,37 @@ export const navigation: NavigationMenu[] = [
         path: 'fechamento-pedido'
     },
     {
-        text: 'Vincular cartão',
-        icon: 'card',
-    },
-    {
         text: 'Estoque de chope',
         icon: 'coffee',
         path: 'chopes'
     },
     {
-        text: 'Saída',
-        icon: 'runner',
-    },
-    {
-        text: 'Relatórios',
-        icon: 'textdocument',
-    },
-    {
         text: 'Cartao RFID',
         icon: 'card',
         path: 'cartao-rfid'
-    }
+    },
+    // {
+    //     text: 'Estoque cozinha',
+    //     icon: 'food',
+    // },
+    // {
+    //     text: 'Reposição Self Service',
+    //     icon: 'food',
+    // },
+    // {
+    //     text: 'Pesagem de prato',
+    //     icon: 'food',
+    // },
+    // {
+    //     text: 'Vincular cartão',
+    //     icon: 'card',
+    // },
+    // {
+    //     text: 'Saída',
+    //     icon: 'runner',
+    // },
+    // {
+    //     text: 'Relatórios',
+    //     icon: 'textdocument',
+    // },
 ];

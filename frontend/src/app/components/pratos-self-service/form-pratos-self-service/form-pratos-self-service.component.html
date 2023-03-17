@@ -9,7 +9,7 @@
 
   <dxi-item location="before">
     <div [classList]="'label-toolbar'">
-      Cliente
+      Prato servido
     </div>
   </dxi-item>
 
@@ -32,18 +32,7 @@
       <dxi-item  [dataField]="'nome'">
           <dxi-validation-rule type="required"></dxi-validation-rule>
       </dxi-item>
-
-      <dxi-item  [dataField]="'cpf'">
-          <dxi-validation-rule type="required"></dxi-validation-rule>
-      </dxi-item>
-
-      <dxi-item  [dataField]="'telefone'"></dxi-item>
-
-      <dxi-item  [dataField]="'email'" [text]="'E-mail'" [editorOptions]="{ stylingMode: 'filled', mode: 'email' }"></dxi-item>
-
     </dx-form>
-
-
   </ng-container>
 </div>
 

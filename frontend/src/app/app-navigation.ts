@@ -53,10 +53,11 @@ export const navigation: NavigationMenu[] = [
         icon: 'card',
         path: 'cartao-rfid'
     },
-    // {
-    //     text: 'Estoque cozinha',
-    //     icon: 'food',
-    // },
+    {
+        text: 'Estoque cozinha',
+        icon: 'box',
+        path: 'estoque-cozinha'
+    },
     // {
     //     text: 'Reposição Self Service',
     //     icon: 'food',

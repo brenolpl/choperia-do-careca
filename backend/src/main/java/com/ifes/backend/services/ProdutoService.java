@@ -4,6 +4,7 @@ package com.ifes.backend.services;
 import com.ifes.backend.application.GerarCodigoBarras;
 import com.ifes.backend.domain.Produto;
 import com.ifes.backend.dto.ProdutoCodigoDto;
+import com.ifes.backend.dto.ProdutoRemoverDto;
 import com.ifes.backend.persistence.IProdutoRepository;
 import org.springframework.stereotype.Service;
 
@@ -87,6 +88,19 @@ public class ProdutoService {
             if(produtoOptional.isPresent()){
                 Produto produto = produtoOptional.get();
                 Integer totalEstoque = produto.getQuantidadeEstoque() + produtoSalvar.getQuantidadeEstoque();
+                produto.setQuantidadeEstoque(totalEstoque);
+                produtoRepository.save(produto);
+            }
+        }
+    }
+
+    public void removerEstoque(List<ProdutoRemoverDto> produtos) {
+        for(ProdutoRemoverDto produtoRemover : produtos){
+            Optional<Produto> produtoOptional = produtoRepository.findById(produtoRemover.getId());
+            if(produtoOptional.isPresent()){
+                Produto produto = produtoOptional.get();
+                Integer totalEstoque = produto.getQuantidadeEstoque() - produtoRemover.getQuantidadeRemover();
+                if(totalEstoque < 0) throw new RuntimeException("Não é possível remover mais itens do que existem no estoque");
                 produto.setQuantidadeEstoque(totalEstoque);
                 produtoRepository.save(produto);
             }

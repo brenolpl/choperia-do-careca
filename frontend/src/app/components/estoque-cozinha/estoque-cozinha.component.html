@@ -1,17 +1,13 @@
 <dx-toolbar [classList]="'toolbar'">
     <dxi-item location="before">
-        <dx-button [classList]="'botoes-toolbar'" icon="back" (onClick)="back()"></dx-button>
-    </dxi-item>
-
-    <dxi-item location="before">
         <div [classList]="'label-toolbar'">
-            Inserir Produtos no Estoque
+            Retirar Produtos do Estoque
         </div>
     </dxi-item>
 
     <dxi-item location="after">
-        <dx-button [classList]="'botoes-toolbar'" icon="save"
-                   type="success" text="Salvar"
+        <dx-button [classList]="'botoes-toolbar'" icon="minus"
+                   type="success" text="Remover Itens do Estoque"
                    (onClick)="salvar()"></dx-button>
     </dxi-item>
 </dx-toolbar>
@@ -25,7 +21,8 @@
     <div class="actions-table">
         <dx-data-grid [dataSource]="produtosSelecionados" keyExpr="id">
             <dxi-column dataField="nome"></dxi-column>
-            <dxi-column dataField="quantidadeEstoque" caption="Quantidade"></dxi-column>
+            <dxi-column dataField="quantidadeEstoque"></dxi-column>
+            <dxi-column dataField="quantidadeRemover"></dxi-column>
         </dx-data-grid>
     </div>
 </div>

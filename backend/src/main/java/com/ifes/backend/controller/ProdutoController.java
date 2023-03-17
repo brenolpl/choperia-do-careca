@@ -2,6 +2,7 @@ package com.ifes.backend.controller;
 
 import com.ifes.backend.domain.Produto;
 import com.ifes.backend.dto.ProdutoCodigoDto;
+import com.ifes.backend.dto.ProdutoRemoverDto;
 import com.ifes.backend.persistence.IProdutoRepository;
 import com.ifes.backend.services.ProdutoService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,5 +54,10 @@ public class ProdutoController extends BaseController<Produto, IProdutoRepositor
     @PostMapping("adicionar-estoque")
     public void adicionarEstoque(@RequestBody List<Produto> produtos){
         this.produtoService.adicionarEstoque(produtos);
+    }
+
+    @PostMapping("remover-estoque")
+    public void removerEstoque(@RequestBody List<ProdutoRemoverDto> produtos){
+        this.produtoService.removerEstoque(produtos);
     }
 }

@@ -39,9 +39,9 @@ export const navigation: NavigationMenu[] = [
         path: 'reposicao-self-service'
     },
     {
-        text: 'Fechamento de pedido',
+        text: 'Fechamento de Conta',
         icon: 'cart',
-        path: 'fechamento-pedido'
+        path: 'fechamento-conta'
     },
     {
         text: 'Estoque de chope',

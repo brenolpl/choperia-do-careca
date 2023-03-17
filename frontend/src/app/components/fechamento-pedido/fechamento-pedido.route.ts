@@ -6,12 +6,12 @@ import {FormFechamentoPedidoComponent} from "./form-fechamento-pedido/form-fecha
 
 const routes: Routes = [
     {
-        path: 'fechamento-pedido',
+        path: 'fechamento-conta',
         component: FechamentoPedidoComponent,
         canActivate: [AuthGuardService]
     },
     {
-        path: 'fechamento-pedido/novo',
+        path: 'fechamento-conta/novo',
         component: FormFechamentoPedidoComponent,
         canActivate: [AuthGuardService]
     },

@@ -10,4 +10,8 @@ export class ClientesComponent extends AbstractListComponent{
     protected getRota(): string {
         return 'clientes';
     }
+
+    showCpfFormated(evt: any){
+        return evt.cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
+    }
 }

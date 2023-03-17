@@ -18,7 +18,7 @@
         <dx-data-grid [dataSource]="entidades" keyExpr="id">
 
             <dxi-column dataField="nome"></dxi-column>
-            <dxi-column dataField="cpf"></dxi-column>
+            <dxi-column dataField="cpf" [calculateCellValue]="showCpfFormated"></dxi-column>
             <dxi-column dataField="telefone"></dxi-column>
             <dxi-column dataField="email"></dxi-column>
 

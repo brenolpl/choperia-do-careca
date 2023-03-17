@@ -10,10 +10,10 @@ export interface Prato {
 
 @Component({
     selector: 'app-clientes',
-    templateUrl: './pratos-self-service.component.html',
+    templateUrl: './reposicao-self-service.component.html',
     styleUrls: ['../../shared/components/abstract-list/abstract-list.component.css']
 })
-export class PratosSelfServiceComponent extends AbstractListComponent{
+export class ReposicaoSelfServiceComponent extends AbstractListComponent{
     protected getRota(): string {
         return 'pratos';
     }
@@ -22,11 +22,13 @@ export class PratosSelfServiceComponent extends AbstractListComponent{
         const prato: Prato = evt.row.data;
 
         if(prato.statusPrato == 'PRONTO'){
-            prato.statusPrato = 'EM_PRODUCAO';
+            prato.statusPrato = 'ACABANDO';
         } else if (prato.statusPrato == 'ACABANDO'){
-            prato.statusPrato = 'EM_PRODUCAO';
+            notify('Você já pediu reposição desse item!', 'warning');
+            return;
         } else if (prato.statusPrato == 'EM_PRODUCAO'){
-            prato.statusPrato = 'PRONTO';
+            notify('Prato já está em produção!', 'warning');
+            return;
         }
 
         this.alterarStatusPratoRequisicao(prato);

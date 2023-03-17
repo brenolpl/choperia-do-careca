@@ -34,6 +34,11 @@ export const navigation: NavigationMenu[] = [
         path: 'pratos'
     },
     {
+        text: 'Reposição Self Service',
+        icon: 'food',
+        path: 'reposicao-self-service'
+    },
+    {
         text: 'Fechamento de pedido',
         icon: 'cart',
         path: 'fechamento-pedido'

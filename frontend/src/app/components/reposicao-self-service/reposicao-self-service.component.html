@@ -1,0 +1,35 @@
+<div class="content-block dx-card responsive-paddings">
+    <h2>Pedir Reposição de prato</h2>
+
+
+    <div class="actions-table">
+
+        <div class="row">
+            <div class="col-sm-8 col-md-6">
+                <dx-text-box></dx-text-box>
+            </div>
+        </div>
+
+        <dx-data-grid [dataSource]="entidades" keyExpr="id">
+
+            <dxi-column dataField="nome"></dxi-column>
+            <dxi-column dataField="statusPrato" cellTemplate="badgeStatus"></dxi-column>
+
+            <div *dxTemplate="let d of 'badgeStatus'">
+                <span *ngIf="d.value == 'PRONTO'" class="badge bg-success">
+                    {{d.value}}
+                </span>
+                <span *ngIf="d.value == 'EM_PRODUCAO'" class="badge bg-warning">
+                    EM PRODUÇÃO
+                </span>
+                <span *ngIf="d.value == 'ACABANDO'" class="badge bg-danger">
+                    {{d.value}}
+                </span>
+            </div>
+
+            <dxi-column type="buttons" caption="Ações">
+                <dxi-button icon="refresh" hint="Pedir Reposição do prato" [onClick]="alterarStatusPrato"></dxi-button>
+            </dxi-column>
+        </dx-data-grid>
+    </div>
+</div>

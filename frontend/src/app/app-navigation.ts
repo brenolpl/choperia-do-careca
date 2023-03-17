@@ -1,4 +1,13 @@
-export const navigation = [
+import {TipoUsuarioEnum} from "./shared/modelos/usuario";
+
+export interface NavigationMenu {
+    text: string,
+    icon: string,
+    path?: string
+    permissao?: TipoUsuarioEnum[]
+}
+
+export const navigation: NavigationMenu[] = [
     {
         text: 'Produtos',
         path: 'produtos',
@@ -13,6 +22,11 @@ export const navigation = [
         text: 'Clientes',
         path: 'clientes',
         icon: 'user',
+    },
+    {
+        text: 'Preço Self Service',
+        icon: 'money',
+        path: 'preco-self-service'
     },
     {
         text: 'Estoque cozinha',

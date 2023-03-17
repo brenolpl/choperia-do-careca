@@ -1,0 +1,23 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1" author="joao.natali">
+        <comment>Criar tabela inicial de self service</comment>
+
+        <createTable tableName="self_service">
+            <column name="id" type="int" autoIncrement="true"><constraints primaryKey="true" primaryKeyName="PK_SELF_SERVICE" nullable="false"/></column>
+            <column name="preco" type="decimal"><constraints nullable="false"/> </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="joao.natali">
+        <comment>Criar item self service inicial</comment>
+
+        <insert tableName="self_service">
+            <column name="id" value="100"/>
+            <column name="preco" value="0.0"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

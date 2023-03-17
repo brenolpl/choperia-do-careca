@@ -21,6 +21,7 @@ import {HomeModule} from "./components/home/home.module";
 import {FechamentoPedidoModule} from "./components/fechamento-pedido/fechamento-pedido.module";
 import {ChopeModule} from "./components/chopes/chope.module";
 import {CartaoRfidModule} from "./components/cartao-rfid/cartao-rfid.module";
+import {PrecoSelfServiceModule} from "./components/preco-self-service/preco-self-service.module";
 
 @NgModule({
     declarations: [
@@ -45,6 +46,7 @@ import {CartaoRfidModule} from "./components/cartao-rfid/cartao-rfid.module";
         FechamentoPedidoModule,
         ChopeModule,
         CartaoRfidModule,
+        PrecoSelfServiceModule,
 
         // precisa estar depois dos outros modulos de rotas senao nao redireciona corretamente para home caso a rota nao exista
         AppRoutingModule,

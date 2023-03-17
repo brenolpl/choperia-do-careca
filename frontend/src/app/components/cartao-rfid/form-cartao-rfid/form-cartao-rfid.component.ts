@@ -8,7 +8,8 @@ import notify from "devextreme/ui/notify";
 
 @Component({
     selector: 'app-form-cartao-rfid',
-    templateUrl: './form-cartao-rfid.component.html'
+    templateUrl: './form-cartao-rfid.component.html',
+    styleUrls: ['../../../shared/components/abstract-form/abstract-form.component.scss']
 })
 export class FormCartaoRfidComponent implements OnInit {
     codigosRfid: any[] = [];

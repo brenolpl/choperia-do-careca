@@ -36,6 +36,7 @@ export class InserirChopeEstoqueComponent implements OnInit {
     ngOnInit() {
         this.rfidService.rfid.subscribe(rfid => {
             this.codigoRFID = rfid
+            this.adicionarProduto();
         });
     }
 
@@ -43,13 +44,19 @@ export class InserirChopeEstoqueComponent implements OnInit {
         this.location.back();
     }
 
-    async getProdutoByCodigoBarras(codigo: string){
-        return this.apiService.detail('chopes/codigo-rfid', codigo).toPromise();
+    async getChopeByRfid(codigo: string){
+        if(codigo) {
+            return this.apiService.detail('chopes/codigo-rfid', codigo).toPromise().catch(error => {
+                notify(error?.error.message, 'error', 2000)
+            });
+        }
+
+        return new Promise(() => null);
     }
 
     adicionarProduto = async () => {
 
-        const chope: Chope = await this.getProdutoByCodigoBarras(this.codigoRFID) as Chope;
+        const chope: Chope = await this.getChopeByRfid(this.codigoRFID) as Chope;
 
         if(chope){
             const chopeSelecionado = this.chopesSelecionados.find(p => p.codigoBarras == chope.codigoBarras);

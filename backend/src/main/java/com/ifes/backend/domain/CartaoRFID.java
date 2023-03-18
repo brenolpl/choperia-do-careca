@@ -19,6 +19,12 @@ public class CartaoRFID implements Serializable {
     @OneToMany(mappedBy = "cartaoRFID")
     private List<AssociacaoClienteCartaoRFID> associacoes;
 
+    public CartaoRFID(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public CartaoRFID() {}
+
     public String getCodigo() {
         return codigo;
     }

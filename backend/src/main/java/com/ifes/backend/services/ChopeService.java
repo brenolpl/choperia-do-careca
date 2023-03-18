@@ -1,5 +1,6 @@
 package com.ifes.backend.services;
 
+import com.ifes.backend.domain.CartaoRFID;
 import com.ifes.backend.domain.Chope;
 import com.ifes.backend.persistence.IChopeRepository;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class ChopeService {
 
 
     public Chope getChopeByCodigoRFID(String codigo) {
-        Optional<Chope> chopeOptional = chopeRepository.findChopeByCartaoRFID(codigo);
+        Optional<Chope> chopeOptional = chopeRepository.findChopeByCartaoRFID(new CartaoRFID(codigo));
         if(chopeOptional.isPresent()){
             return chopeOptional.get();
         } else {

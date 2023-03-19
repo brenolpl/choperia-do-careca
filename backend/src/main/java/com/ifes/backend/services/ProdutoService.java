@@ -2,9 +2,12 @@ package com.ifes.backend.services;
 
 
 import com.ifes.backend.application.GerarCodigoBarras;
+import com.ifes.backend.domain.EstoqueProduto;
 import com.ifes.backend.domain.Produto;
 import com.ifes.backend.dto.ProdutoCodigoDto;
+import com.ifes.backend.dto.ProdutoInserirDto;
 import com.ifes.backend.dto.ProdutoRemoverDto;
+import com.ifes.backend.persistence.IEstoqueProdutoRepository;
 import com.ifes.backend.persistence.IProdutoRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -24,13 +28,14 @@ public class ProdutoService {
 
     private IProdutoRepository produtoRepository;
 
+    private IEstoqueProdutoRepository estoqueProdutoRepository;
 
-    public ProdutoService(IProdutoRepository produtoRepository) {
+    public ProdutoService(IProdutoRepository produtoRepository, IEstoqueProdutoRepository estoqueProdutoRepository) {
         this.produtoRepository = produtoRepository;
+        this.estoqueProdutoRepository = estoqueProdutoRepository;
     }
 
     public Produto cadastrarProduto(Produto produto) {
-        produto.setQuantidadeEstoque(0);
         produto = new GerarCodigoBarras(produto, produtoRepository).execute();
         return produtoRepository.save(produto);
     }
@@ -82,14 +87,19 @@ public class ProdutoService {
         }
     }
 
-    public void adicionarEstoque(List<Produto> produtos) {
-        for(Produto produtoSalvar : produtos){
+    public void adicionarEstoque(List<ProdutoInserirDto> produtos) {
+        for(ProdutoInserirDto produtoSalvar : produtos){
             Optional<Produto> produtoOptional = produtoRepository.findById(produtoSalvar.getId());
             if(produtoOptional.isPresent()){
+
                 Produto produto = produtoOptional.get();
-                Integer totalEstoque = produto.getQuantidadeEstoque() + produtoSalvar.getQuantidadeEstoque();
-                produto.setQuantidadeEstoque(totalEstoque);
-                produtoRepository.save(produto);
+
+                for(int i = 0; i < produtoSalvar.getQuantidadeInserir(); i++){
+                    EstoqueProduto estoqueProduto = new EstoqueProduto();
+                    estoqueProduto.setProduto(produto);
+                    estoqueProduto.setPrecoCompra(produto.getPrecoCompra());
+                    estoqueProdutoRepository.save(estoqueProduto);
+                }
             }
         }
     }
@@ -99,10 +109,16 @@ public class ProdutoService {
             Optional<Produto> produtoOptional = produtoRepository.findById(produtoRemover.getId());
             if(produtoOptional.isPresent()){
                 Produto produto = produtoOptional.get();
-                Integer totalEstoque = produto.getQuantidadeEstoque() - produtoRemover.getQuantidadeRemover();
-                if(totalEstoque < 0) throw new RuntimeException("Não é possível remover mais itens do que existem no estoque");
-                produto.setQuantidadeEstoque(totalEstoque);
-                produtoRepository.save(produto);
+
+                for(int i = 0; i < produtoRemover.getQuantidadeRemover(); i++){
+                    List<EstoqueProduto> estoqueProdutos = estoqueProdutoRepository.findByProdutoAndDataSaidaEquals(produto, null);
+
+                    if(!estoqueProdutos.isEmpty()){
+                        EstoqueProduto estoqueProduto = estoqueProdutos.get(0);
+                        estoqueProduto.setDataSaida(LocalDateTime.now());
+                        estoqueProdutoRepository.save(estoqueProduto);
+                    }
+                }
             }
         }
     }

@@ -28,8 +28,6 @@ public class ItensConsumidos implements Serializable {
     @JoinColumn(name = "chope_id")
     private Chope chope;
 
-    @Column(name = "quantidade", nullable = false)
-    private Integer quantidade;
 
     public Integer getId() {
         return id;
@@ -53,13 +51,5 @@ public class ItensConsumidos implements Serializable {
 
     public void setChope(Chope chope) {
         this.chope = chope;
-    }
-
-    public Integer getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
     }
 }

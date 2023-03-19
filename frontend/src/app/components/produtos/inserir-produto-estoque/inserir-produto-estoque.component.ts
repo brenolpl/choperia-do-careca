@@ -9,7 +9,7 @@ interface Produto {
     id: number,
     nome: string,
     codigoBarras: string,
-    quantidadeEstoque: number
+    quantidadeInserir: number
 }
 
 @Component({
@@ -53,11 +53,11 @@ export class InserirProdutoEstoqueComponent {
                 this.produtosSelecionados.push({
                     id: produto.id,
                     nome: produto.nome,
-                    quantidadeEstoque: 1,
+                    quantidadeInserir: 1,
                     codigoBarras: produto.codigoBarras
                 })
             } else {
-                produtoSelecionado.quantidadeEstoque ++;
+                produtoSelecionado.quantidadeInserir ++;
             }
         }
 

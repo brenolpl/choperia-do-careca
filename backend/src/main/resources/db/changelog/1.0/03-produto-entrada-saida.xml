@@ -1,0 +1,21 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1" author="joao.natali">
+        <comment>Criar tabela estoque de produto</comment>
+
+        <createTable tableName="estoque_produto">
+            <column name="id" type="int" autoIncrement="true"><constraints primaryKey="true" primaryKeyName="PK_ESTOQUE_PRODUTO" nullable="false"/></column>
+            <column name="produto_id" type="int"><constraints foreignKeyName="FK_ESTOQUE_PRODUTO_PRODUTO" referencedColumnNames="id" referencedTableName="produto" nullable="false"/></column>
+            <column name="data_entrada" type="datetime"><constraints nullable="false"/></column>
+            <column name="data_saida" type="datetime"/>
+            <column name="preco_compra" type="decimal"><constraints nullable="false"/> </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="joao.natali">
+        <dropColumn tableName="produto" columnName="quantidade_estoque"></dropColumn>
+    </changeSet>
+
+</databaseChangeLog>

@@ -2,6 +2,7 @@ package com.ifes.backend.controller;
 
 import com.ifes.backend.domain.Produto;
 import com.ifes.backend.dto.ProdutoCodigoDto;
+import com.ifes.backend.dto.ProdutoInserirDto;
 import com.ifes.backend.dto.ProdutoRemoverDto;
 import com.ifes.backend.persistence.IProdutoRepository;
 import com.ifes.backend.services.ProdutoService;
@@ -52,7 +53,7 @@ public class ProdutoController extends BaseController<Produto, IProdutoRepositor
     }
 
     @PostMapping("adicionar-estoque")
-    public void adicionarEstoque(@RequestBody List<Produto> produtos){
+    public void adicionarEstoque(@RequestBody List<ProdutoInserirDto> produtos){
         this.produtoService.adicionarEstoque(produtos);
     }
 

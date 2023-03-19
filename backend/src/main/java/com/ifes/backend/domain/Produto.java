@@ -1,14 +1,18 @@
 package com.ifes.backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Table(name = "produto")
 @Entity
@@ -28,20 +32,11 @@ public class Produto implements Serializable {
     @Column(name = "preco_compra", nullable = false)
     private BigDecimal precoCompra;
 
-    @Column(name = "quantidade_estoque", nullable = false)
-    private Integer quantidadeEstoque;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "produto")
+    @JsonManagedReference
+    private Set<EstoqueProduto> estoqueProdutos;
 
-    public Produto() {
-        this.quantidadeEstoque = 0;
-    }
-
-    public Integer getQuantidadeEstoque() {
-        return quantidadeEstoque;
-    }
-
-    public void setQuantidadeEstoque(Integer quantidadeEstoque) {
-        this.quantidadeEstoque = quantidadeEstoque;
-    }
+    public Produto() {}
 
     public Integer getId() {
         return id;
@@ -73,5 +68,17 @@ public class Produto implements Serializable {
 
     public void setPrecoCompra(BigDecimal precoCompra) {
         this.precoCompra = precoCompra;
+    }
+
+    public Set<EstoqueProduto> getEstoqueProdutos() {
+        return estoqueProdutos;
+    }
+
+    public void setEstoqueProdutos(Set<EstoqueProduto> estoqueProdutos) {
+        this.estoqueProdutos = estoqueProdutos;
+    }
+
+    public Long getQuantidadeEstoque(){
+        return this.estoqueProdutos.stream().filter(p -> p.getDataSaida() == null).count();
     }
 }

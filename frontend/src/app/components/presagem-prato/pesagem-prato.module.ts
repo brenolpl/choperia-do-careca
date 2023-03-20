@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {PrecoSelfServiceRoute} from "./preco-self-service.route";
-import {PrecoSelfServiceComponent} from "./preco-self-service.component";
+import {PesagemPratoRoute} from "./pesagem-prato.route";
+import {PesagemPratoComponent} from "./pesagem-prato.component";
 import {
     DxButtonModule,
     DxLoadPanelModule,
@@ -12,10 +12,10 @@ import {
 
 @NgModule({
   declarations: [
-      PrecoSelfServiceComponent
+      PesagemPratoComponent
   ],
     imports: [
-        PrecoSelfServiceRoute,
+        PesagemPratoRoute,
         CommonModule,
         DxLoadPanelModule,
         DxToolbarModule,
@@ -23,4 +23,4 @@ import {
         DxNumberBoxModule
     ]
 })
-export class PrecoSelfServiceModule { }
+export class PesagemPratoModule { }

@@ -1,0 +1,52 @@
+<dx-load-panel
+    [hideOnOutsideClick]="false"
+    [(visible)]="isLoadPanelVisible">
+</dx-load-panel>
+
+<dx-toolbar [classList]="'toolbar'">
+    <dxi-item location="before">
+        <div [classList]="'label-toolbar'">
+            Pesagem de prato
+        </div>
+    </dxi-item>
+
+    <dxi-item location="after">
+        <dx-button [disabled]="!showAdicionarCartaoCliente()" [classList]="'botoes-toolbar'" icon="save" type="success" text="Adicionar no Cartão"
+                   (onClick)="salvar()"></dx-button>
+    </dxi-item>
+</dx-toolbar>
+
+<div class="content-block dx-card responsive-paddings">
+    <ng-container>
+        <div class="row">
+
+            <div class="col-md-6">
+                <label>Cartão do cliente</label>
+                <dx-number-box [(value)]="cartaoCliente"></dx-number-box>
+
+                <label>Nome do cliente</label>
+                <dx-number-box [readOnly]="true" [(value)]="nomeCliente"></dx-number-box>
+            </div>
+
+
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Preço Self-Service Kg</label>
+                        <dx-number-box [readOnly]="true" format="R$ #.##0,##" [(value)]="precoSelfService"></dx-number-box>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Peso do prato:</label>
+                        <dx-number-box [readOnly]="true" format="#.##0,## Kg" [(value)]="pesoPrato"></dx-number-box>
+                    </div>
+                </div>
+
+                <label>Total a pagar</label>
+                <dx-number-box [readOnly]="true" format="R$ #.##0,##" [(value)]="totalPagar"></dx-number-box>
+            </div>
+        </div>
+
+    </ng-container>
+</div>
+

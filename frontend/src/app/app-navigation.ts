@@ -58,12 +58,13 @@ export const navigation: NavigationMenu[] = [
         icon: 'box',
         path: 'estoque-cozinha'
     },
+    {
+        text: 'Pesagem de prato',
+        icon: 'food',
+        path: 'pesagem-prato'
+    },
     // {
     //     text: 'Reposição Self Service',
-    //     icon: 'food',
-    // },
-    // {
-    //     text: 'Pesagem de prato',
     //     icon: 'food',
     // },
     // {

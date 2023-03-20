@@ -25,6 +25,7 @@ import {PrecoSelfServiceModule} from "./components/preco-self-service/preco-self
 import {PratosSelfServiceModule} from "./components/pratos-self-service/pratos-self-service.module";
 import {ReposicaoSelfServiceModule} from "./components/reposicao-self-service/reposicao-self-service.module";
 import {EstoqueCozinhaModule} from "./components/estoque-cozinha/estoque-cozinha.module";
+import {PesagemPratoModule} from "./components/presagem-prato/pesagem-prato.module";
 
 @NgModule({
     declarations: [
@@ -53,6 +54,7 @@ import {EstoqueCozinhaModule} from "./components/estoque-cozinha/estoque-cozinha
         PratosSelfServiceModule,
         ReposicaoSelfServiceModule,
         EstoqueCozinhaModule,
+        PesagemPratoModule,
 
         // precisa estar depois dos outros modulos de rotas senao nao redireciona corretamente para home caso a rota nao exista
         AppRoutingModule,

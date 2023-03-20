@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuardService} from "../../shared/services";
-import {PrecoSelfServiceComponent} from "./preco-self-service.component";
+import {PesagemPratoComponent} from "./pesagem-prato.component";
 
 const routes: Routes = [
     {
-        path: 'preco-self-service',
-        component: PrecoSelfServiceComponent,
+        path: 'pesagem-prato',
+        component: PesagemPratoComponent,
         canActivate: [AuthGuardService]
     },
 ];
@@ -16,5 +16,5 @@ const routes: Routes = [
     providers: [AuthGuardService],
     exports: [RouterModule]
 })
-export class PrecoSelfServiceRoute {
+export class PesagemPratoRoute {
 }

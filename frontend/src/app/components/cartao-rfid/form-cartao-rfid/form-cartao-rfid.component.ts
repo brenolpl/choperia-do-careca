@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Location} from "@angular/common";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../../../shared/services/api.service";
 import {RfidService} from "../../../shared/services/rfid.service";
-import {first} from "rxjs";
+import {first, Subscription} from "rxjs";
 import notify from "devextreme/ui/notify";
 
 @Component({
@@ -11,8 +11,9 @@ import notify from "devextreme/ui/notify";
     templateUrl: './form-cartao-rfid.component.html',
     styleUrls: ['../../../shared/components/abstract-form/abstract-form.component.scss']
 })
-export class FormCartaoRfidComponent implements OnInit {
+export class FormCartaoRfidComponent implements OnInit, OnDestroy {
     codigosRfid: any[] = [];
+    rfidSubscription!: Subscription;
 
     protected getRota(): string {
         return "cartao-rfid";
@@ -27,9 +28,8 @@ export class FormCartaoRfidComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.rfidService.rfid.subscribe(rfid => {
+        this.rfidSubscription = this.rfidService.rfid.subscribe(rfid => {
             let processado = this.codigosRfid.find(c => c.codigo == rfid);
-            console.log(this.codigosRfid);
             if(!processado && rfid.length > 4) this.codigosRfid.push({codigo: rfid});
         })
     }
@@ -48,5 +48,9 @@ export class FormCartaoRfidComponent implements OnInit {
 
     back() {
         this.router.navigate(['../'], {relativeTo: this.route});
+    }
+
+    ngOnDestroy() {
+        this.rfidSubscription.unsubscribe();
     }
 }

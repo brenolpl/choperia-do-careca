@@ -17,8 +17,7 @@ export class AppComponent  {
     constructor(
         private authService: AuthService,
         private screen: ScreenService,
-        public appInfo: AppInfoService,
-        public rfidService: RfidService
+        public appInfo: AppInfoService
     ) {
         loadMessages(ptMessages);
 

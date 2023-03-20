@@ -66,11 +66,11 @@ export class InserirChopeEstoqueComponent implements OnInit, OnDestroy {
                 this.chopesSelecionados.push({
                     id: chope.id,
                     nome: chope.nome,
-                    quantidadeEstoque: 1,
+                    quantidadeEstoque: 100,
                     codigoBarras: chope.codigoBarras
                 })
             } else {
-                chopeSelecionado.quantidadeEstoque ++;
+                chopeSelecionado.quantidadeEstoque = chopeSelecionado.quantidadeEstoque + 100;
             }
         }
 

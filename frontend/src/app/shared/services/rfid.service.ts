@@ -38,9 +38,8 @@ export class RfidService {
                     while (true) {
                         let {value, done} = await this.reader.read();
                         let byteArray = new Uint8Array(value);
-                        console.log(byteArray);
                         if(byteArray.length > 1) {
-                            if(byteArray.length == 31) {
+                            if(byteArray.length == 31 || byteArray.length == 32) {
                                 const hexa = this.toString(byteArray);
                                 this.updateRfid(hexa.slice(-24));
                             }

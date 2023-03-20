@@ -26,6 +26,10 @@
         <dx-data-grid [dataSource]="chopesSelecionados" keyExpr="id">
             <dxi-column dataField="nome"></dxi-column>
             <dxi-column dataField="quantidadeEstoque" caption="Quantidade"></dxi-column>
+            <dxi-column type="buttons" caption="Ações">
+                <dxi-button icon="plus" hint="Diminuir" [onClick]="adicionar"></dxi-button>
+                <dxi-button icon="minus" hint="Diminuir" [onClick]="diminuir"></dxi-button>
+            </dxi-column>
         </dx-data-grid>
     </div>
 </div>

@@ -28,7 +28,7 @@ export abstract class AbstractListComponent implements OnInit {
         const entidade = evt.row.data;
         confirm('Tem certeza que deseja excluir? Não será possível desfazer a alteração.', 'Confirmar exclusão').then((confirmExcluir) => {
             if (confirmExcluir) {
-                this.apiService.delete(this.getRota(), entidade['id']).subscribe(
+                this.apiService.delete(this.getRota(), entidade['id'] !== undefined ? entidade['id'] : entidade['codigo']).subscribe(
                     () => {
                         notify('Excluido com sucesso', 'success', 2000);
                         this.listarEntidades();

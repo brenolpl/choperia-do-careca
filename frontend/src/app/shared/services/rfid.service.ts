@@ -39,7 +39,7 @@ export class RfidService {
                         if(byteArray.length > 1) {
                             if(byteArray.length == 31 || byteArray.length == 32) {
                                 const hexa = this.toString(byteArray);
-                                this.updateRfid(hexa.slice(-24));
+                                this.updateRfid(hexa.slice(-24, -4));
                             }
                         }
                         break;

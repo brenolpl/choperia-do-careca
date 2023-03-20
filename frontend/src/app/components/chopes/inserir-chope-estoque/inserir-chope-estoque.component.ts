@@ -66,7 +66,7 @@ export class InserirChopeEstoqueComponent implements OnInit, OnDestroy {
                 this.chopesSelecionados.push({
                     id: chope.id,
                     nome: chope.nome,
-                    quantidadeEstoque: 100,
+                    quantidadeEstoque: 100 ,
                     codigoBarras: chope.codigoBarras
                 })
             } else {
@@ -88,4 +88,15 @@ export class InserirChopeEstoqueComponent implements OnInit, OnDestroy {
      ngOnDestroy() {
         this.rfidSubscription.unsubscribe();
      }
+
+    adicionar = ($event: any) => {
+        $event.row.data.quantidadeEstoque = $event.row.data.quantidadeEstoque + 100;
+    }
+
+    diminuir = ($event: any) => {
+        if($event.row.data.quantidadeEstoque > 0) $event.row.data.quantidadeEstoque = $event.row.data.quantidadeEstoque - 100;
+        else {
+            this.chopesSelecionados = this.chopesSelecionados.filter(c => c.id !== $event.row.data.id);
+        }
+    }
 }

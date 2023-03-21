@@ -25,9 +25,7 @@ export class FormChopeComponent extends AbstractFormComponent implements OnInit,
     override ngOnInit() {
         super.ngOnInit();
         this.rfidSubscription = this.rfidService.rfid.subscribe(rfid => {
-            this.entidade.cartaoRFID = {
-                'codigo': rfid
-            };
+            this.entidade.cartaoRFID = rfid;
         })
     }
 

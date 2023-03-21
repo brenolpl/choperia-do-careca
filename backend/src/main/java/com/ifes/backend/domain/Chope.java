@@ -33,9 +33,8 @@ public class Chope implements Serializable {
     @Column(name = "preco_venda", nullable = false)
     private BigDecimal precoVenda;
 
-    @JoinColumn(name = "cartao_rfid", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
-    private CartaoRFID cartaoRFID;
+    @Column(name = "cartao_rfid", nullable = false)
+    private String cartaoRFID;
 
     public Chope() {
         this.quantidadeEstoque = 0D;
@@ -81,11 +80,11 @@ public class Chope implements Serializable {
         this.precoVenda = precoVenda;
     }
 
-    public CartaoRFID getCartaoRFID() {
+    public String getCartaoRFID() {
         return cartaoRFID;
     }
 
-    public void setCartaoRFID(CartaoRFID cartaoRFID) {
+    public void setCartaoRFID(String cartaoRFID) {
         this.cartaoRFID = cartaoRFID;
     }
 }

@@ -10,7 +10,7 @@ import {Subscription} from "rxjs";
 interface Chope {
     id: number,
     nome: string,
-    codigoBarras: string,
+    codigoRFID: string,
     quantidadeEstoque: number
 }
 
@@ -61,13 +61,13 @@ export class InserirChopeEstoqueComponent implements OnInit, OnDestroy {
         const chope: Chope = await this.getChopeByRfid(this.codigoRFID) as Chope;
 
         if(chope){
-            const chopeSelecionado = this.chopesSelecionados.find(p => p.codigoBarras == chope.codigoBarras);
+            const chopeSelecionado = this.chopesSelecionados.find(p => p.codigoRFID == chope.codigoRFID);
             if(!chopeSelecionado){
                 this.chopesSelecionados.push({
                     id: chope.id,
                     nome: chope.nome,
-                    quantidadeEstoque: 100 ,
-                    codigoBarras: chope.codigoBarras
+                    quantidadeEstoque: 100,
+                    codigoRFID: chope.codigoRFID
                 })
             } else {
                 chopeSelecionado.quantidadeEstoque = chopeSelecionado.quantidadeEstoque + 100;

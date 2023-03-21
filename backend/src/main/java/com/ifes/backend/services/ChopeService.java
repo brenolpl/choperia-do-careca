@@ -19,7 +19,7 @@ public class ChopeService {
 
 
     public Chope getChopeByCodigoRFID(String codigo) {
-        Optional<Chope> chopeOptional = chopeRepository.findChopeByCartaoRFID(new CartaoRFID(codigo));
+        Optional<Chope> chopeOptional = chopeRepository.findChopeByCartaoRFID(codigo);
         if(chopeOptional.isPresent()){
             return chopeOptional.get();
         } else {

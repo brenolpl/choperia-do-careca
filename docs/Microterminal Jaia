@@ -1,0 +1,7 @@
+Configurar o "ip do servidor" com o IP da sua máquina, pois ela será o servidor do sistema.
+Configurar o "ip do microterminal" com o mesmo range da sua rede e no fim colocar um número alto, que não esteja sendo usado.
+
+Para salvar alterações, mude para "SIM" usando a tecla X, na tela de salvar.
+Selecione o primeiro tipo de terminal que aparecer.
+Tecle enter.
+Feito isso tudo deve funcionar normalmente. Se o servidor estiver rodando, aparecerá as informações já. Se não, irá aparecer "Aguardando servidor".

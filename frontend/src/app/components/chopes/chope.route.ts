@@ -4,6 +4,7 @@ import {ChopeComponent} from "./chope.component";
 import {AuthGuardService} from "../../shared/services";
 import {InserirChopeEstoqueComponent} from "./inserir-chope-estoque/inserir-chope-estoque.component";
 import {FormChopeComponent} from "./form-chope/form-chope.component";
+import {ConsumirChopeComponent} from "./consumir-chope/consumir-chope.component";
 
 const routes: Routes = [
     {
@@ -20,6 +21,11 @@ const routes: Routes = [
         path: 'chopes/inserir-estoque',
         component: InserirChopeEstoqueComponent,
         canActivate: [ AuthGuardService ]
+    },
+    {
+        path: 'chopes/consumir-chope',
+        component: ConsumirChopeComponent,
+        canActivate: [AuthGuardService]
     },
     {
         path: 'chopes/:id',

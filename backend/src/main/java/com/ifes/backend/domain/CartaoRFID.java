@@ -1,5 +1,9 @@
 package com.ifes.backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,11 +17,8 @@ import java.util.List;
 public class CartaoRFID implements Serializable {
 
     @Id
-    @Column(name = "codigo")
+    @Column(name = "codigo", length = 10)
     private String codigo;
-
-    @OneToMany(mappedBy = "cartaoRFID")
-    private List<AssociacaoClienteCartaoRFID> associacoes;
 
     public CartaoRFID(String codigo) {
         this.codigo = codigo;
@@ -31,13 +32,5 @@ public class CartaoRFID implements Serializable {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
-    }
-
-    public List<AssociacaoClienteCartaoRFID> getAssociacoes() {
-        return associacoes;
-    }
-
-    public void setAssociacoes(List<AssociacaoClienteCartaoRFID> associacoes) {
-        this.associacoes = associacoes;
     }
 }

@@ -39,11 +39,6 @@ export const navigation: NavigationMenu[] = [
         path: 'reposicao-self-service'
     },
     {
-        text: 'Fechamento de Conta',
-        icon: 'cart',
-        path: 'fechamento-conta'
-    },
-    {
         text: 'Estoque de chope',
         icon: 'coffee',
         path: 'chopes'
@@ -63,6 +58,11 @@ export const navigation: NavigationMenu[] = [
         icon: 'food',
         path: 'pesagem-prato'
     },
+    {
+        text: 'Associar cliente ao cartão',
+        icon: 'attach',
+        path: 'associacao-cliente-cartao'
+    }
     // {
     //     text: 'Reposição Self Service',
     //     icon: 'food',

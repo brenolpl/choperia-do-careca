@@ -1,5 +1,5 @@
 <div class="content-block dx-card responsive-paddings">
-    <h2>Chopes</h2>
+    <h2>Associações Correntes</h2>
 
 
     <div class="actions-table">
@@ -12,26 +12,28 @@
                 <dx-button stylingMode="outlined" type="success" icon="plus" hint="Adicionar produto"
                            (onClick)="onClickNovo()">
                 </dx-button>
-                <dx-button stylingMode="outlined" type="success" icon="detailslayout" hint="Adicionar Estoque"
-                           (onClick)="navigateInserirEstoque()">
+                <dx-button stylingMode="outlined" type="success" icon="cart" hint="Fechar Contas"
+                           (onClick)="onFecharContasClick()">
                 </dx-button>
-                <dx-button stylingMode="outlined" type="success" icon="coffee" hint="Consumir chope"
-                           (onClick)="navigateConsumirChope()">
+                <dx-button stylingMode="outlined" type="success" icon="inactivefolder" hint="Histórico"
+                           (onClick)="onHistoricoClick()">
                 </dx-button>
+
             </div>
         </div>
 
         <dx-data-grid [dataSource]="entidades" keyExpr="id">
 
-            <dxi-column dataField="nome"></dxi-column>
-            <dxi-column dataField="precoCompra" format="R$ #.##0,##"></dxi-column>
-            <dxi-column dataField="quantidadeEstoque" caption="Qtd Estoque (L)"></dxi-column>
-            <dxi-column dataField="precoVenda" format="R$ #.##0,##" caption="Preço Venda"></dxi-column>
+            <dxi-column dataField="cartaoRFID.codigo" caption="Cartão"></dxi-column>
+            <dxi-column dataField="cliente.nome" caption="Cliente"></dxi-column>
+            <dxi-column dataField="cliente.cpf" caption="CPF"></dxi-column>
+            <dxi-column dataField="dataEntrada" caption="Entrou"></dxi-column>
+            <dxi-column dataField="dataSaida" caption="Saiu"></dxi-column>
 
             <dxi-column type="buttons" caption="Ações">
-                <dxi-button icon="edit" hint="Editar" [onClick]="editar"></dxi-button>
                 <dxi-button icon="trash" hint="Excluir" [onClick]="excluir"></dxi-button>
             </dxi-column>
         </dx-data-grid>
     </div>
+
 </div>

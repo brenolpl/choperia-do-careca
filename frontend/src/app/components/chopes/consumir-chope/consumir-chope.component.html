@@ -1,0 +1,49 @@
+<dx-toolbar [classList]="'toolbar'">
+    <dxi-item location="before">
+        <dx-button [classList]="'botoes-toolbar'" icon="back" (onClick)="back()"></dx-button>
+    </dxi-item>
+
+    <dxi-item location="before">
+        <div [classList]="'label-toolbar'">
+            Inserir Chopes no Estoque
+        </div>
+    </dxi-item>
+
+    <dxi-item location="after">
+        <dx-button [classList]="'botoes-toolbar'" icon="save" type="success" text="Salvar"
+                   (onClick)="onSalvar($event)"></dx-button>
+    </dxi-item>
+
+    <dxi-item location="after">
+        <dx-button [classList]="'botoes-toolbar'" icon="close" type="danger" text="Cancelar"
+                   (onClick)="cancelar()"></dx-button>
+    </dxi-item>
+</dx-toolbar>
+
+<div class="content-block dx-card responsive-paddings">
+    <h2>Consumo de chopes</h2>
+
+    <h6>Aproxime seu cartão</h6>
+    <dx-text-box label="Cartão" [(value)]="codigoRFID" (onEnterKey)="vincularCartao()"
+                 [maxLength]="10"></dx-text-box>
+
+    <ng-container *ngIf="associacao">
+
+        <span><p>Olá {{associacao.cliente.nome}}, mude abaixo a quantidade dos chopes que deseja consumir e clique em salvar!</p></span>
+        <span><p style="color: red">Para cancelar a operação, clique no botão CANCELAR</p></span>
+
+        <div class="actions-table">
+
+            <dx-data-grid [dataSource]="entidades" keyExpr="id">
+
+                <dxi-column dataField="nome" [allowEditing]="true"></dxi-column>
+                <dxi-column dataField="precoVenda" format="R$ #.##0,##" caption="Preço"></dxi-column>
+                <dxi-column dataField="quantidade" caption="Quantidade"></dxi-column>
+                <dxi-column type="buttons" caption="Ações">
+                    <dxi-button icon="plus" hint="Diminuir" [onClick]="adicionar"></dxi-button>
+                    <dxi-button icon="minus" hint="Diminuir" [onClick]="diminuir"></dxi-button>
+                </dxi-column>
+            </dx-data-grid>
+        </div>
+    </ng-container>
+</div>

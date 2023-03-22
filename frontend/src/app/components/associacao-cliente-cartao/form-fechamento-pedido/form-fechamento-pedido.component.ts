@@ -2,10 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {Location} from "@angular/common";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../../../shared/services/api.service";
+import notify from "devextreme/ui/notify";
+import {first} from "rxjs";
 
 interface Cliente {
     nome: string,
-    cartaoVinculado: string,
+    cpf: string
 }
 
 interface ItemConsumido {
@@ -27,6 +29,7 @@ export class FormFechamentoPedidoComponent implements OnInit {
     totalPagar: number = 0;
     recebido: number = 0;
     troco: number = 0;
+    private associacoes: any[] = [];
 
 
     constructor(
@@ -38,47 +41,49 @@ export class FormFechamentoPedidoComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.clientes = [
-            {cartaoVinculado: '123123', nome: 'João Vitor'},
-            {cartaoVinculado: '456456', nome: 'Gusthavo Com H'}
-        ]
-
-        this.itensConsumidos = [
-            {nome: 'Chope 1', preco: 15, quantidade: 2, total: 30},
-            {nome: 'Chope 4', preco: 10, quantidade: 3, total: 30},
-            {nome: 'Self Service', preco: 20, quantidade: 1, total: 20},
-            {nome: 'Self Service', preco: 25, quantidade: 1, total: 25},
-        ]
-
-        this.calcularTotalAPagar();
+        this.associacoes = [];
+        this.clientes = [];
+        this.itensConsumidos = [];
+        this.totalPagar = 0;
+        this.recebido = 0;
+        this.troco = 0;
     }
 
 
-    getClienteByCartao(cartao: string): Cliente {
-        console.log(cartao);
-        return {
-            nome: 'João Vitor',
-            cartaoVinculado: '123123'
-        }
+    getAssociacaoClienteCartao(cartao: string) {
+        return this.apiService.get('associacao-cliente-cartao-rfid/getByCartaoRfid/' + cartao).toPromise();
     }
 
-    enterCartaoCliente() {
-        const cliente: Cliente = this.getClienteByCartao(this.cartaoCliente);
+    async enterCartaoCliente(){
+        const associacao: any = await this.getAssociacaoClienteCartao(this.cartaoCliente);
 
-        const clienteFind = this.clientes.find(c => c.cartaoVinculado == cliente.cartaoVinculado);
-        if (!clienteFind) {
-            this.clientes.push(cliente);
+        let associacaoJaProcessada = this.associacoes.find(f => f.id == associacao?.id);
+        if(associacaoJaProcessada) {
+            notify('Este cartão já foi lido!', 'error', 2000);
+            this.cartaoCliente = '';
+            return;
+        } else if(!associacao) {
+            notify('Este cartão não está vinculado a nenhum cliente!', 'error', 2000);
+            this.cartaoCliente = '';
+            return;
         }
+
+        this.associacoes.push(associacao);
+        this.clientes.push({
+            nome: associacao.cliente.nome,
+            cpf: associacao.cliente.cpf
+        });
+
+        let chopesConsumidos = associacao.itensConsumidos.filter((i: any) => i.chope !== null);
+        if(chopesConsumidos?.length > 0) this.processarChopesConsumidos(chopesConsumidos);
+
+        let itensConsumidos = associacao.itensConsumidos.filter((i: any) => i.chope === null);
+        if(itensConsumidos?.length > 0) this.processarItensConsumidos(itensConsumidos);
 
         this.cartaoCliente = "";
-    }
 
-    calcularTotalAPagar() {
-        let total = 0;
-        this.itensConsumidos.forEach(item => {
-            total += item.total;
-        })
-        this.totalPagar = total;
+        this.totalPagar = 0;
+        this.itensConsumidos.forEach(i => this.totalPagar += i.total);
     }
 
     changeValorRecebido() {
@@ -90,8 +95,23 @@ export class FormFechamentoPedidoComponent implements OnInit {
     }
 
     confirmarPagamento(button: any) {
+        if(this.associacoes.length < 0) {
+            notify('É necessário consultar pelo menos um cartão!', 'warning', 2000);
+            return;
+        }
 
-        // confirmar no backend
+        this.apiService.post('associacao-cliente-cartao-rfid/fechar-pedido', this.associacoes).pipe(first()).subscribe(
+            _ => {
+                notify('Transação realizada com sucesso!', 'success', 2000);
+                this.ngOnInit();
+            },
+            _ => {
+                notify('Erro ao realizar trasação.', 'error', 2000);
+                this.ngOnInit();
+            }
+
+        )
+
 
 
 
@@ -184,8 +204,8 @@ export class FormFechamentoPedidoComponent implements OnInit {
 
             colunaNome.innerText = item.nome;
             colunaPreco.innerText = this.numberToReal(item.preco);
-            colunaQuantidade.innerText = String(item.quantidade);
-            colunaTotal.innerText = this.numberToReal(item.total);
+            // colunaQuantidade.innerText = String(item.quantidade);
+            // colunaTotal.innerText = this.numberToReal(item.total);
 
             tr.append(colunaNome, colunaPreco, colunaQuantidade, colunaTotal);
             tbody.append(tr);
@@ -196,5 +216,49 @@ export class FormFechamentoPedidoComponent implements OnInit {
 
     public back() {
         this.location.back();
+    }
+
+    onInitialized(e: any) {
+        setTimeout(function () {
+            e.component.focus();
+        }, 0);
+    }
+
+    private processarChopesConsumidos(chopesConsumidos: any[]) {
+        let chope = chopesConsumidos[0].chope;
+        let chopesIguais = chopesConsumidos.filter(c => c.chope.id == chope.id);
+        let itemJaListado = this.itensConsumidos.find(i => i.nome === chope.nome);
+        if(itemJaListado) {
+            let index = this.itensConsumidos.indexOf(itemJaListado);
+            itemJaListado.total += (chopesIguais.length * chope.precoVenda);
+            itemJaListado.quantidade += chopesIguais.length;
+            this.itensConsumidos[index] = itemJaListado;
+        }else {
+            this.itensConsumidos.push({
+                nome: chope.nome,
+                preco: chope.precoVenda,
+                total: chope.precoVenda * chopesIguais.length,
+                quantidade: chopesIguais.length
+            });
+        }
+
+        chopesConsumidos = chopesConsumidos.filter(c => c.chope.id !== chope.id);
+
+        if(chopesConsumidos?.length > 0) this.processarChopesConsumidos(chopesConsumidos);
+    }
+
+    private processarItensConsumidos(itensConsumidos: any[]) {
+        let item = itensConsumidos[0];
+        let itensIguais = itensConsumidos.filter(i => i.nome == item.nome);
+
+        this.itensConsumidos.push({
+            nome: item.nome,
+            preco: item.preco,
+            total: item.preco * itensIguais.length,
+            quantidade: itensIguais.length
+        })
+
+        itensConsumidos = itensConsumidos.filter(i => i.nome !== item.nome);
+        if(itensConsumidos?.length > 0) this.processarItensConsumidos(itensConsumidos);
     }
 }

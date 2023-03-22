@@ -5,7 +5,7 @@
 
     <dxi-item location="before">
         <div [classList]="'label-toolbar'">
-            Fechamento de pedido
+            Associações Correntes
         </div>
     </dxi-item>
 
@@ -17,12 +17,16 @@
 </dx-toolbar>
 
 <div class="content-block dx-card responsive-paddings">
+    <h2>Fechamento de pedido</h2>
+
+
     <div class="row">
         <div class="col-lg-6">
-            <dx-text-box [(value)]="cartaoCliente" (onEnterKey)="enterCartaoCliente()" label="Cartão cliente"></dx-text-box>
+            <dx-text-box [(value)]="cartaoCliente" (onEnterKey)="enterCartaoCliente()" label="Cartão cliente" (onInitialized)="onInitialized($event)"></dx-text-box>
 
             <dx-data-grid [dataSource]="clientes">
                 <dxi-column dataField="nome"></dxi-column>
+                <dxi-column dataField="cpf"></dxi-column>
             </dx-data-grid>
         </div>
 

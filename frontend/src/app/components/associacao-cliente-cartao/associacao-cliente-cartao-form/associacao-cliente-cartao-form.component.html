@@ -1,0 +1,53 @@
+<dx-toolbar [classList]="'toolbar'">
+    <dxi-item location="before">
+        <dx-button [classList]="'botoes-toolbar'" icon="back" (onClick)="back()"></dx-button>
+    </dxi-item>
+
+    <dxi-item location="before">
+        <div [classList]="'label-toolbar'">
+            Associar Cartão ao Cliente
+        </div>
+    </dxi-item>
+
+    <dxi-item location="after">
+        <dx-button [classList]="'botoes-toolbar'" icon="save" type="success" text="Salvar"
+                   (onClick)="onSalvar($event)"></dx-button>
+    </dxi-item>
+
+</dx-toolbar>
+
+<div class="content-block dx-card responsive-paddings">
+    <ng-container>
+
+
+        <div class="m-3">
+            <dx-text-box label="Pesquisar Cliente por CPF"
+                         [(value)]="cpfCliente"
+                         (onEnterKey)="pesquisarCliente()"
+                         (onInitialized)="onInitialized($event)"
+                         [maxLength]="11"
+                         [mask]="'000.000.000-00'"
+                         [maskInvalidMessage]="'CPF Inválido'"
+            >
+            </dx-text-box>
+        </div>
+        <div class="m-3">
+            <dx-text-box label="Nome" [(value)]="nomeCliente" [disabled]="true"></dx-text-box>
+        </div>
+        <div class="m-3">
+            <dx-text-box label="Telefone" [(value)]="telefoneCliente" [disabled]="true"></dx-text-box>
+        </div>
+
+        <div class="m-3">
+            <dx-text-box label="Cartão"
+                         [maxLength]="10"
+                         [mask]="'0000000000'"
+                         [maskInvalidMessage]="'Cartão inválido'"
+                         [(value)]="cartaoCliente"
+                         (onEnterKey)="pesquisarCartao($event)">
+            </dx-text-box>
+        </div>
+
+
+    </ng-container>
+</div>

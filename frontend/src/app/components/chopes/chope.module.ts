@@ -6,19 +6,21 @@ import {
     DxButtonModule,
     DxDataGridModule,
     DxFormModule,
-    DxNumberBoxModule,
+    DxNumberBoxModule, DxProgressBarModule,
     DxTextBoxModule,
     DxToolbarModule
 } from "devextreme-angular";
 import {FormChopeComponent} from "./form-chope/form-chope.component";
 import {InserirChopeEstoqueComponent} from "./inserir-chope-estoque/inserir-chope-estoque.component";
+import { ConsumirChopeComponent } from './consumir-chope/consumir-chope.component';
 
 
 @NgModule({
     declarations: [
         ChopeComponent,
         FormChopeComponent,
-        InserirChopeEstoqueComponent
+        InserirChopeEstoqueComponent,
+        ConsumirChopeComponent
     ],
     imports: [
         CommonModule,
@@ -28,7 +30,8 @@ import {InserirChopeEstoqueComponent} from "./inserir-chope-estoque/inserir-chop
         DxDataGridModule,
         DxToolbarModule,
         DxFormModule,
-        DxNumberBoxModule
+        DxNumberBoxModule,
+        DxProgressBarModule
     ],
     exports: []
 })

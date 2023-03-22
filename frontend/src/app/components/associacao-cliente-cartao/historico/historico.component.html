@@ -1,0 +1,29 @@
+<dx-toolbar [classList]="'toolbar'">
+    <dxi-item location="before">
+        <dx-button [classList]="'botoes-toolbar'" icon="back" (onClick)="back()"></dx-button>
+    </dxi-item>
+
+    <dxi-item location="before">
+        <div [classList]="'label-toolbar'">
+            Associações Correntes
+        </div>
+    </dxi-item>
+
+</dx-toolbar>
+
+<div class="content-block dx-card responsive-paddings">
+    <h2>Histórico de Associações</h2>
+
+
+    <div class="actions-table">
+
+        <dx-data-grid [dataSource]="entidades" keyExpr="id">
+            <dxi-column dataField="cartaoRFID.codigo" caption="Cartão"></dxi-column>
+            <dxi-column dataField="cliente.nome" caption="Cliente"></dxi-column>
+            <dxi-column dataField="cliente.cpf" caption="CPF"></dxi-column>
+            <dxi-column dataField="dataEntrada" caption="Entrou"></dxi-column>
+            <dxi-column dataField="dataSaida" caption="Saiu"></dxi-column>
+        </dx-data-grid>
+    </div>
+
+</div>

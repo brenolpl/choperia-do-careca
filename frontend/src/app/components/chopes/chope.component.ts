@@ -14,4 +14,8 @@ export class ChopeComponent extends AbstractListComponent {
     navigateInserirEstoque(){
         this.router.navigate(['inserir-estoque'], {relativeTo: this.route});
     }
+
+    navigateConsumirChope() {
+        this.router.navigate(['consumir-chope'], {relativeTo: this.route});
+    }
 }

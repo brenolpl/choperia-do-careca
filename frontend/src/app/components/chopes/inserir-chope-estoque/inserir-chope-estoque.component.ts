@@ -37,7 +37,7 @@ export class InserirChopeEstoqueComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.rfidSubscription = this.rfidService.rfid.subscribe(rfid => {
-            this.codigoRFID = rfid
+            this.codigoRFID = rfid.trim();
             this.adicionarProduto();
         });
     }
@@ -58,7 +58,7 @@ export class InserirChopeEstoqueComponent implements OnInit, OnDestroy {
 
     adicionarProduto = async () => {
 
-        const chope: Chope = await this.getChopeByRfid(this.codigoRFID) as Chope;
+        const chope: Chope = await this.getChopeByRfid(this.codigoRFID.trim()) as Chope;
 
         if(chope){
             const chopeSelecionado = this.chopesSelecionados.find(p => p.codigoRFID == chope.codigoRFID);

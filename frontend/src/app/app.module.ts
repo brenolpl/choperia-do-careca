@@ -18,7 +18,6 @@ import {FuncionariosModule} from "./components/funcionarios/funcionarios.module"
 import {ClientesModule} from "./components/clientes/clientes.module";
 import {HttpClientModule} from "@angular/common/http";
 import {HomeModule} from "./components/home/home.module";
-import {FechamentoPedidoModule} from "./components/fechamento-pedido/fechamento-pedido.module";
 import {ChopeModule} from "./components/chopes/chope.module";
 import {CartaoRfidModule} from "./components/cartao-rfid/cartao-rfid.module";
 import {PrecoSelfServiceModule} from "./components/preco-self-service/preco-self-service.module";
@@ -26,6 +25,7 @@ import {PratosSelfServiceModule} from "./components/pratos-self-service/pratos-s
 import {ReposicaoSelfServiceModule} from "./components/reposicao-self-service/reposicao-self-service.module";
 import {EstoqueCozinhaModule} from "./components/estoque-cozinha/estoque-cozinha.module";
 import {PesagemPratoModule} from "./components/presagem-prato/pesagem-prato.module";
+import {AssociacaoClienteCartaoModule} from "./components/associacao-cliente-cartao/associacao-cliente-cartao.module";
 
 @NgModule({
     declarations: [
@@ -47,7 +47,6 @@ import {PesagemPratoModule} from "./components/presagem-prato/pesagem-prato.modu
         FuncionariosModule,
         ClientesModule,
         HomeModule,
-        FechamentoPedidoModule,
         ChopeModule,
         CartaoRfidModule,
         PrecoSelfServiceModule,
@@ -55,6 +54,7 @@ import {PesagemPratoModule} from "./components/presagem-prato/pesagem-prato.modu
         ReposicaoSelfServiceModule,
         EstoqueCozinhaModule,
         PesagemPratoModule,
+        AssociacaoClienteCartaoModule,
 
         // precisa estar depois dos outros modulos de rotas senao nao redireciona corretamente para home caso a rota nao exista
         AppRoutingModule,

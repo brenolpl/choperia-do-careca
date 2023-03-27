@@ -12,6 +12,7 @@ import {
 } from "devextreme-angular";
 import {DxiItemModule, DxoFormItemModule} from "devextreme-angular/ui/nested";
 import {ClientesComponent} from "./clientes.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import {ClientesComponent} from "./clientes.component";
         DxTextBoxModule,
         DxDataGridModule,
         DxLoadPanelModule,
+        ReactiveFormsModule,
     ]
 })
 export class ClientesModule {

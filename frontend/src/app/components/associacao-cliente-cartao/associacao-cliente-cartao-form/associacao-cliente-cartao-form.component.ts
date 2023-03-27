@@ -60,10 +60,12 @@ export class AssociacaoClienteCartaoFormComponent implements OnInit {
     pesquisarCliente = async () => {
         let cliente: any = await this.apiService.get('clientes/porCpf/' + this.cpfCliente).toPromise().catch(
             error => {
-                let result = confirm("<i>" + error?.error?.message + " Deseja cadastrá-lo agora?</i>", "Cliente inexistente");
-                result.then((dialogResult) => {
-                    if (dialogResult) this.router.navigate(['clientes/novo']);
-                });
+                if((error?.error?.message as string).includes('cadastrado')) {
+                    let result = confirm("<i>" + error?.error?.message + " Deseja cadastrá-lo agora?</i>", "Cliente inexistente");
+                    result.then((dialogResult) => {
+                        if (dialogResult) this.router.navigate(['clientes/novo']);
+                    });
+                } else notify(error?.error?.message, 'error', 2000);
             }
         );
         if (cliente) {

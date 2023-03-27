@@ -59,7 +59,7 @@ export const navigation: NavigationMenu[] = [
         path: 'pesagem-prato'
     },
     {
-        text: 'Associar cliente ao cartão',
+        text: 'Associações de Cartão',
         icon: 'attach',
         path: 'associacao-cliente-cartao'
     }

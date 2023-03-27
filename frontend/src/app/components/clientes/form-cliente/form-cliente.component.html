@@ -37,7 +37,9 @@
           <dxi-validation-rule type="required"></dxi-validation-rule>
       </dxi-item>
 
-      <dxi-item  [dataField]="'telefone'"></dxi-item>
+      <dxi-item  [dataField]="'telefone'" [editorOptions]="{mask:  '(00) 00000-0000'}">
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
 
       <dxi-item  [dataField]="'email'" [text]="'E-mail'" [editorOptions]="{ stylingMode: 'filled', mode: 'email' }"></dxi-item>
 

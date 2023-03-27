@@ -41,7 +41,6 @@
         <div class="m-3">
             <dx-text-box label="Cartão"
                          [maxLength]="10"
-                         [mask]="'0000000000'"
                          [maskInvalidMessage]="'Cartão inválido'"
                          [(value)]="cartaoCliente"
                          (onEnterKey)="pesquisarCartao($event)">

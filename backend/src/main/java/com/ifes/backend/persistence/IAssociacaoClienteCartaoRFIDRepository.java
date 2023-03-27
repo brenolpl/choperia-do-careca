@@ -15,4 +15,6 @@ public interface IAssociacaoClienteCartaoRFIDRepository extends JpaRepository<As
     AssociacaoClienteCartaoRFID findFirstByCartaoRFIDAndDataSaidaEquals(CartaoRFID cartaoRFID, LocalDateTime dataSaida);
 
     Optional<AssociacaoClienteCartaoRFID> findFirstByClienteAndDataSaidaEquals(Cliente cliente, LocalDateTime dataSaida);
+
+    Optional<AssociacaoClienteCartaoRFID> findFirstByCartaoRFIDCodigoAndDataSaidaEquals(String codigo, LocalDateTime dataSaida);
 }

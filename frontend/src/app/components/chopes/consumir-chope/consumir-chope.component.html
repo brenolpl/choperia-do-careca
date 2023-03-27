@@ -25,6 +25,7 @@
 
     <h6>Aproxime seu cartão</h6>
     <dx-text-box label="Cartão" [(value)]="codigoRFID" (onEnterKey)="vincularCartao()"
+                 (onInitialized)="onInitialized($event)"
                  [maxLength]="10"></dx-text-box>
 
     <ng-container *ngIf="associacao">

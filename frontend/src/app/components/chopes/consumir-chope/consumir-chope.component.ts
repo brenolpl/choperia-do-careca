@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {AbstractListComponent} from "../../../shared/components/abstract-list/abstract-list.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../../../shared/services/api.service";
@@ -14,8 +14,10 @@ import {first} from "rxjs";
   styleUrls: ['./consumir-chope.component.scss']
 })
 export class ConsumirChopeComponent extends AbstractListComponent implements OnInit{
+    vincular: any;
     codigoRFID: string = '';
     associacao: any;
+
     constructor(router: Router, route: ActivatedRoute, apiService: ApiService, private location: Location) {
         super(router, route, apiService);
     }
@@ -78,7 +80,11 @@ export class ConsumirChopeComponent extends AbstractListComponent implements OnI
             _ => {
                 notify('Transação realizada com sucesso!', 'success', 2000);
                 setTimeout(
-                    () => this.ngOnInit(),
+                    () => {
+                        this.ngOnInit();
+                        this.onInitialized(this.vincular);
+                    },
+
                     2000
                 )
             }
@@ -92,6 +98,7 @@ export class ConsumirChopeComponent extends AbstractListComponent implements OnI
 
     cancelar() {
         this.ngOnInit();
+        this.onInitialized(this.vincular);
     }
 
     private validarQuantidades(): boolean {
@@ -100,5 +107,12 @@ export class ConsumirChopeComponent extends AbstractListComponent implements OnI
         if(chope) return true;
 
         return false;
+    }
+
+    onInitialized(e: any) {
+        this.vincular = e;
+        setTimeout(function () {
+            e.component.focus();
+        }, 0);
     }
 }

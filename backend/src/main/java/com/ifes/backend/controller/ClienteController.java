@@ -1,7 +1,9 @@
 package com.ifes.backend.controller;
 
 import com.ifes.backend.domain.AssociacaoClienteCartaoRFID;
+import com.ifes.backend.domain.CartaoRFID;
 import com.ifes.backend.domain.Cliente;
+import com.ifes.backend.domain.ItemConsumido;
 import com.ifes.backend.persistence.IAssociacaoClienteCartaoRFIDRepository;
 import com.ifes.backend.persistence.IClienteRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @RestController
@@ -23,8 +26,19 @@ public class ClienteController extends BaseController<Cliente, IClienteRepositor
 
     @GetMapping("{codigoRFID}/totalConta")
     public Double getTotalContaCliente(@PathVariable String codigoRFID){
-        if(codigoRFID.equals("33")) throw new RuntimeException("Cliente não encontrado!");
-        return 15.5;
+        Optional<AssociacaoClienteCartaoRFID> associacao = associacaoClienteCartaoRFIDRepository.findFirstByCartaoRFIDCodigoAndDataSaidaEquals(codigoRFID, null);
+        if(!associacao.isPresent()) throw new RuntimeException("Cartao nao encontrado");
+        else {
+            BigDecimal total = BigDecimal.ZERO;
+            for (ItemConsumido item : associacao.get().getItensConsumidos()) {
+                if(item.getPreco() == null) {
+                    total = total.add(item.getChope().getPrecoVenda());
+                } else {
+                    total = total.add(item.getPreco());
+                }
+            }
+            return total.doubleValue();
+        }
     }
 
     @GetMapping("porCpf/{cpf}")

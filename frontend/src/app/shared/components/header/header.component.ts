@@ -9,6 +9,7 @@ import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { Router } from '@angular/router';
 import {RfidService} from "../../services/rfid.service";
 import notify from "devextreme/ui/notify";
+import {BalancaService} from "../../services/balanca-service";
 @Component({
   selector: 'app-header',
   templateUrl: 'header.component.html',
@@ -50,10 +51,20 @@ export class HeaderComponent implements OnInit {
               notify('Leitor já inicializado!', 'warning', 2000);
           }
       }
-  }
+  },
+      {
+          text: 'Conectar Balança Toledo',
+          icon: 'link',
+          onClick: () => {
+              if(!this.balancaService.isInitialized) this.balancaService.initReader();
+              else {
+                  notify('Balança já conectada!', 'warning', 2000);
+              }
+          }
+      }
   ];
 
-  constructor(private authService: AuthService, private router: Router, private rfidService: RfidService) { }
+  constructor(private authService: AuthService, private router: Router, private rfidService: RfidService, private balancaService: BalancaService) { }
 
   ngOnInit() {
     this.authService.getUser().then((e) => this.user = e.data);

@@ -29,6 +29,7 @@ export class FormFechamentoPedidoComponent implements OnInit {
     totalPagar: number = 0;
     recebido: number = 0;
     troco: number = 0;
+    precoSelfService: any = 0;
     private associacoes: any[] = [];
 
 
@@ -47,6 +48,7 @@ export class FormFechamentoPedidoComponent implements OnInit {
         this.totalPagar = 0;
         this.recebido = 0;
         this.troco = 0;
+        this.getPrecoSelfService();
     }
 
 
@@ -223,6 +225,15 @@ export class FormFechamentoPedidoComponent implements OnInit {
             e.component.focus();
         }, 0);
     }
+    private getPrecoSelfService() {
+        this.apiService.get('self-service').pipe(first()).subscribe(
+            (response: any) => {
+                this.precoSelfService = response['preco'];
+            }, error => {
+                notify(error?.error?.message, 'error', 2000);
+            }
+        );
+    }
 
     private processarChopesConsumidos(chopesConsumidos: any[]) {
         let chope = chopesConsumidos[0].chope;
@@ -251,9 +262,11 @@ export class FormFechamentoPedidoComponent implements OnInit {
         let item = itensConsumidos[0];
         let itensIguais = itensConsumidos.filter(i => i.nome == item.nome);
 
+        let precoItem = item.nome == 'Self-Service' ? this.precoSelfService : item.preco;
+
         this.itensConsumidos.push({
             nome: item.nome,
-            preco: item.preco,
+            preco: precoItem,
             total: item.preco * itensIguais.length,
             quantidade: itensIguais.length
         })

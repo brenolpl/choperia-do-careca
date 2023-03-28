@@ -20,7 +20,8 @@ import {
         DxLoadPanelModule,
         DxToolbarModule,
         DxButtonModule,
-        DxNumberBoxModule
+        DxNumberBoxModule,
+        DxTextBoxModule
     ]
 })
 export class PesagemPratoModule { }

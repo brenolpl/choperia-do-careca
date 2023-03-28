@@ -1,8 +1,3 @@
-<dx-load-panel
-    [hideOnOutsideClick]="false"
-    [(visible)]="isLoadPanelVisible">
-</dx-load-panel>
-
 <dx-toolbar [classList]="'toolbar'">
     <dxi-item location="before">
         <div [classList]="'label-toolbar'">
@@ -21,11 +16,10 @@
         <div class="row">
 
             <div class="col-md-6">
-                <label>Cartão do cliente</label>
-                <dx-number-box [(value)]="cartaoCliente"></dx-number-box>
+                <dx-text-box [(value)]="cartaoCliente" (onEnterKey)="enterCartaoCliente()" label="Cartão cliente" (onInitialized)="onInitialized($event)"></dx-text-box>
 
                 <label>Nome do cliente</label>
-                <dx-number-box [readOnly]="true" [(value)]="nomeCliente"></dx-number-box>
+                <dx-text-box [readOnly]="true" [(value)]="nomeCliente"></dx-text-box>
             </div>
 
 
@@ -38,7 +32,7 @@
                     </div>
                     <div class="col-md-6">
                         <label>Peso do prato:</label>
-                        <dx-number-box [readOnly]="true" format="#.##0,## Kg" [(value)]="pesoPrato"></dx-number-box>
+                        <dx-number-box [readOnly]="true" format="#0.### kg" [(value)]="pesoPrato"></dx-number-box>
                     </div>
                 </div>
 

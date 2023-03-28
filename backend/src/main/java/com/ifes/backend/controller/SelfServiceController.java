@@ -28,12 +28,7 @@ public class SelfServiceController {
     }
 
     @PatchMapping("{id}")
-    public void alterarPrecoSelfService(@RequestBody SelfService selfService){
-        List<SelfService> selfServices = this.selfServiceRepository.findAll();
-
-        SelfService selfServiceDB = selfServices.get(0);
-        selfServiceDB.setPreco(selfService.getPreco());
-
-        this.selfServiceRepository.save(selfServiceDB);
+    public SelfService alterarPrecoSelfService(@RequestBody SelfService selfService){
+        return this.selfServiceRepository.save(selfService);
     }
 }

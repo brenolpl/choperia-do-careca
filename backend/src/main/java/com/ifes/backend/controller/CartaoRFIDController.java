@@ -44,8 +44,8 @@ public class CartaoRFIDController extends BaseController<CartaoRFID, ICartaoRFID
     public CartaoRFID getCartaoNaoAssociado(@PathVariable String id) {
         Optional<CartaoRFID> cartaoRFID = repository.findById(id);
         if(cartaoRFID.isPresent()) {
-            AssociacaoClienteCartaoRFID associacao = associacaoRepository.findFirstByCartaoRFIDAndDataSaidaEquals(cartaoRFID.get(), null);
-            if(associacao != null) throw new RuntimeException("Cartão já associado a outro cliente (" + associacao.getCliente().getNome() + ")");
+            Optional<AssociacaoClienteCartaoRFID> associacao = associacaoRepository.findFirstByCartaoRFIDAndDataSaidaEquals(cartaoRFID.get(), null);
+            if(associacao.isPresent()) throw new RuntimeException("Cartão já associado a outro cliente (" + associacao.get().getCliente().getNome() + ")");
         }
         return cartaoRFID.get();
     }

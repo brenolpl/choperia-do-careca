@@ -128,6 +128,8 @@ export class FormFechamentoContaComponent implements OnInit {
 
         const divPrincipal = this.createDivPrincipal();
 
+        divPrincipal.appendChild(this.createCabecalhoCupom());
+
         divPrincipal.appendChild(this.createTableItensConsumidos());
 
         divPrincipal.appendChild(this.getDivTotalConsumido());
@@ -148,6 +150,18 @@ export class FormFechamentoContaComponent implements OnInit {
     private createDivPrincipal(): HTMLElement {
         let div = document.createElement('div');
         div.style.maxWidth = '8cm';
+        return div;
+    }
+
+    private createCabecalhoCupom():HTMLElement {
+        const div = document.createElement('div');
+
+        div.innerHTML = `
+           <small>${new Date().toLocaleString()}</small>
+           <h3 style="text-align: center">Choperia do Careca</h3>
+           <hr>
+        `;
+
         return div;
     }
 
@@ -182,8 +196,8 @@ export class FormFechamentoContaComponent implements OnInit {
             <hr>
             <table style="width: 100%">
                 <tr>
-                    <td>Total pago:</td>
-                    <td>${this.numberToReal(this.totalPagar)}</td>
+                    <td colspan="3">Total pago:</td>
+                    <td style="text-align: right">${this.numberToReal(this.totalPagar)}</td>
                 </tr>
             </table>
         `;

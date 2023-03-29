@@ -5,12 +5,35 @@ import {ApiService} from "../../../shared/services/api.service";
 import notify from "devextreme/ui/notify";
 import {first} from "rxjs";
 
+interface Chope {
+    id: number,
+    cartaoRFID: string,
+    nome: string,
+    precoCompra: number,
+    precoVenda: number,
+    quantidadeEstoque: number
+}
+
 interface Cliente {
     nome: string,
     cpf: string
 }
 
 interface ItemConsumido {
+    id: string,
+    nome: string,
+    preco: number,
+    chope: Chope
+}
+
+interface ConsultaCliente {
+    cliente: Cliente,
+    itensConsumidos: ItemConsumido[],
+    id: string,
+    dataEntrada: string
+}
+
+interface TabelaItemConsumido {
     nome: string,
     preco: number,
     quantidade: number,
@@ -24,7 +47,7 @@ interface ItemConsumido {
 })
 export class FormFechamentoContaComponent implements OnInit {
     clientes: Cliente[] = [];
-    itensConsumidos: ItemConsumido[] = [];
+    itensConsumidos: TabelaItemConsumido[] = [];
     cartaoCliente: string = "";
     totalPagar: number = 0;
     recebido: number = 0;
@@ -56,31 +79,28 @@ export class FormFechamentoContaComponent implements OnInit {
         return this.apiService.get('associacao-cliente-cartao-rfid/getByCartaoRfid/' + cartao).toPromise();
     }
 
-    async enterCartaoCliente(){
-        const associacao: any = await this.getAssociacaoClienteCartao(this.cartaoCliente);
+    async enterCartaoCliente() {
+        const associacao: ConsultaCliente = await this.getAssociacaoClienteCartao(this.cartaoCliente) as ConsultaCliente;
 
-        let associacaoJaProcessada = this.associacoes.find(f => f.id == associacao?.id);
-        if(associacaoJaProcessada) {
+        const associacaoJaProcessada = this.associacoes.find(f => f.id == associacao?.id);
+        if (associacaoJaProcessada) {
             notify('Este cartão já foi lido!', 'error', 2000);
             this.cartaoCliente = '';
             return;
-        } else if(!associacao) {
+        } else if (!associacao) {
             notify('Este cartão não está vinculado a nenhum cliente!', 'error', 2000);
             this.cartaoCliente = '';
             return;
         }
 
         this.associacoes.push(associacao);
-        this.clientes.push({
-            nome: associacao.cliente.nome,
-            cpf: associacao.cliente.cpf
-        });
+        this.clientes.push(associacao.cliente);
 
-        let chopesConsumidos = associacao.itensConsumidos.filter((i: any) => i.chope !== null);
-        if(chopesConsumidos?.length > 0) this.processarChopesConsumidos(chopesConsumidos);
+        const chopesConsumidos = associacao.itensConsumidos.filter((i: any) => i.chope !== null);
+        if (chopesConsumidos?.length > 0) this.processarChopesConsumidos(chopesConsumidos);
 
-        let itensConsumidos = associacao.itensConsumidos.filter((i: any) => i.chope === null);
-        if(itensConsumidos?.length > 0) this.processarItensConsumidos(itensConsumidos);
+        const itensConsumidos = associacao.itensConsumidos.filter((i: any) => i.chope === null);
+        if (itensConsumidos?.length > 0) this.processarItensConsumidos(itensConsumidos);
 
         this.cartaoCliente = "";
 
@@ -97,24 +117,21 @@ export class FormFechamentoContaComponent implements OnInit {
     }
 
     confirmarPagamento(button: any) {
-        if(this.associacoes.length < 0) {
+        if (this.associacoes.length < 0) {
             notify('É necessário consultar pelo menos um cartão!', 'warning', 2000);
             return;
         }
 
-        this.apiService.post('associacao-cliente-cartao-rfid/fechar-pedido', this.associacoes).pipe(first()).subscribe(
-            _ => {
-                notify('Transação realizada com sucesso!', 'success', 2000);
-                this.ngOnInit();
-            },
-            _ => {
-                notify('Erro ao realizar trasação.', 'error', 2000);
-                this.ngOnInit();
-            }
-
-        )
-
-
+        // this.apiService.post('associacao-cliente-cartao-rfid/fechar-pedido', this.associacoes).pipe(first()).subscribe(
+        //     _ => {
+        //         notify('Transação realizada com sucesso!', 'success', 2000);
+        //         this.ngOnInit();
+        //     },
+        //     _ => {
+        //         notify('Erro ao realizar trasação.', 'error', 2000);
+        //         this.ngOnInit();
+        //     }
+        // )
 
 
         this.imprimirComprovante();
@@ -153,7 +170,7 @@ export class FormFechamentoContaComponent implements OnInit {
         return div;
     }
 
-    private createCabecalhoCupom():HTMLElement {
+    private createCabecalhoCupom(): HTMLElement {
         const div = document.createElement('div');
 
         div.innerHTML = `
@@ -180,6 +197,7 @@ export class FormFechamentoContaComponent implements OnInit {
         colunaPreco.innerText = 'Preço';
         colunaQuantidade.innerText = 'Qtd';
         colunaTotal.innerText = 'Total';
+        colunaTotal.style.textAlign = 'right';
 
         linha.append(colunaNome, colunaPreco, colunaQuantidade, colunaTotal);
         head.append(linha);
@@ -205,8 +223,8 @@ export class FormFechamentoContaComponent implements OnInit {
         return div;
     }
 
-    numberToReal(number: number){
-        return number.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    numberToReal(number: number) {
+        return number.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});
     }
 
     private createLinhasTabelaItensConsumidos(): HTMLElement {
@@ -220,8 +238,9 @@ export class FormFechamentoContaComponent implements OnInit {
 
             colunaNome.innerText = item.nome;
             colunaPreco.innerText = this.numberToReal(item.preco);
-            // colunaQuantidade.innerText = String(item.quantidade);
-            // colunaTotal.innerText = this.numberToReal(item.total);
+            colunaQuantidade.innerText = String(item.quantidade);
+            colunaTotal.innerText = this.numberToReal(item.total);
+            colunaTotal.style.textAlign = 'right';
 
             tr.append(colunaNome, colunaPreco, colunaQuantidade, colunaTotal);
             tbody.append(tr);
@@ -239,6 +258,7 @@ export class FormFechamentoContaComponent implements OnInit {
             e.component.focus();
         }, 0);
     }
+
     private getPrecoSelfService() {
         this.apiService.get('self-service').pipe(first()).subscribe(
             (response: any) => {
@@ -249,16 +269,17 @@ export class FormFechamentoContaComponent implements OnInit {
         );
     }
 
-    private processarChopesConsumidos(chopesConsumidos: any[]) {
-        let chope = chopesConsumidos[0].chope;
-        let chopesIguais = chopesConsumidos.filter(c => c.chope.id == chope.id);
-        let itemJaListado = this.itensConsumidos.find(i => i.nome === chope.nome);
-        if(itemJaListado) {
-            let index = this.itensConsumidos.indexOf(itemJaListado);
+    private processarChopesConsumidos(chopesConsumidos: ItemConsumido[]) {
+        console.log(chopesConsumidos)
+        const chope = chopesConsumidos[0].chope;
+        const chopesIguais = chopesConsumidos.filter(c => c.chope.id == chope.id);
+        const itemJaListado: TabelaItemConsumido | undefined = this.itensConsumidos.find(i => i.nome === chope.nome);
+        if (itemJaListado) {
+            const index = this.itensConsumidos.indexOf(itemJaListado);
             itemJaListado.total += (chopesIguais.length * chope.precoVenda);
             itemJaListado.quantidade += chopesIguais.length;
             this.itensConsumidos[index] = itemJaListado;
-        }else {
+        } else {
             this.itensConsumidos.push({
                 nome: chope.nome,
                 preco: chope.precoVenda,
@@ -269,14 +290,14 @@ export class FormFechamentoContaComponent implements OnInit {
 
         chopesConsumidos = chopesConsumidos.filter(c => c.chope.id !== chope.id);
 
-        if(chopesConsumidos?.length > 0) this.processarChopesConsumidos(chopesConsumidos);
+        if (chopesConsumidos?.length > 0) this.processarChopesConsumidos(chopesConsumidos);
     }
 
-    private processarItensConsumidos(itensConsumidos: any[]) {
-        let item = itensConsumidos[0];
-        let itensIguais = itensConsumidos.filter(i => i.nome == item.nome);
+    private processarItensConsumidos(itensConsumidos: ItemConsumido[]) {
+        const item = itensConsumidos[0];
+        const itensIguais = itensConsumidos.filter(i => i.nome == item.nome);
 
-        let precoItem = item.nome == 'Self-Service' ? this.precoSelfService : item.preco;
+        const precoItem = item.nome == 'Self-Service' ? this.precoSelfService : item.preco;
 
         this.itensConsumidos.push({
             nome: item.nome,
@@ -286,6 +307,6 @@ export class FormFechamentoContaComponent implements OnInit {
         })
 
         itensConsumidos = itensConsumidos.filter(i => i.nome !== item.nome);
-        if(itensConsumidos?.length > 0) this.processarItensConsumidos(itensConsumidos);
+        if (itensConsumidos?.length > 0) this.processarItensConsumidos(itensConsumidos);
     }
 }

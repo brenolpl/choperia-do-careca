@@ -11,7 +11,7 @@ import {AbstractListComponent} from "../../shared/components/abstract-list/abstr
 })
 export class FechamentoContaComponent extends AbstractListComponent {
     protected getRota(): string {
-        return 'fechamento-conta';
+        return 'associacao-cliente-cartao-rfid/fechamento-contas';
     }
 
 }

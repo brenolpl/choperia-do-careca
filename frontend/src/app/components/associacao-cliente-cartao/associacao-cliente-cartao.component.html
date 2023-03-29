@@ -26,9 +26,8 @@
 
             <dxi-column dataField="cartaoRFID.codigo" caption="Cartão"></dxi-column>
             <dxi-column dataField="cliente.nome" caption="Cliente"></dxi-column>
-            <dxi-column dataField="cliente.cpf" caption="CPF"></dxi-column>
-            <dxi-column dataField="dataEntrada" caption="Entrou"></dxi-column>
-            <dxi-column dataField="dataSaida" caption="Saiu"></dxi-column>
+            <dxi-column dataField="cliente.cpf" caption="CPF" [calculateCellValue]="showCpfFormated"></dxi-column>
+            <dxi-column dataField="dataEntrada" caption="Entrou" dataType="datetime"></dxi-column>
 
             <dxi-column type="buttons" caption="Ações">
                 <dxi-button icon="trash" hint="Excluir" [onClick]="excluir"></dxi-button>

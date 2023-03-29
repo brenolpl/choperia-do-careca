@@ -24,6 +24,7 @@
             <dx-text-box label="Pesquisar Cliente por CPF"
                          [(value)]="cpfCliente"
                          (onEnterKey)="pesquisarCliente()"
+                         (onBlur)="pesquisarCliente()"
                          (onInitialized)="onInitialized($event)"
                          [maxLength]="11"
                          [mask]="'000.000.000-00'"

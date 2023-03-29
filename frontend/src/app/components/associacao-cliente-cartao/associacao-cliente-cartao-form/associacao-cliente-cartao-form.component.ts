@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../../../shared/services/api.service";
-import {first, Observable, tap} from "rxjs";
+import {first} from "rxjs";
 import notify from "devextreme/ui/notify";
 import {Location} from "@angular/common";
 import {confirm} from 'devextreme/ui/dialog';
@@ -58,9 +58,10 @@ export class AssociacaoClienteCartaoFormComponent implements OnInit {
     }
 
     pesquisarCliente = async () => {
+        if (this.cpfCliente.length < 11) return;
         let cliente: any = await this.apiService.get('clientes/porCpf/' + this.cpfCliente).toPromise().catch(
             error => {
-                if((error?.error?.message as string).includes('cadastrado')) {
+                if ((error?.error?.message as string).includes('cadastrado')) {
                     let result = confirm("<i>" + error?.error?.message + " Deseja cadastrá-lo agora?</i>", "Cliente inexistente");
                     result.then((dialogResult) => {
                         if (dialogResult) this.router.navigate(['clientes/novo']);

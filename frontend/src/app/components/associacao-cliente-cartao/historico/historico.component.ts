@@ -31,4 +31,8 @@ export class HistoricoComponent extends AbstractListComponent{
     back() {
         this.location.back();
     }
+
+    showCpfFormated(evt: any){
+        return evt.cliente.cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
+    }
 }

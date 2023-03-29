@@ -1,0 +1,60 @@
+<dx-toolbar [classList]="'toolbar'">
+    <dxi-item location="before">
+        <dx-button [classList]="'botoes-toolbar'" icon="back" (onClick)="back()"></dx-button>
+    </dxi-item>
+
+    <dxi-item location="before">
+        <div [classList]="'label-toolbar'">
+            Fechamento de Conta
+        </div>
+    </dxi-item>
+
+    <dxi-item location="after">
+        <dx-button [classList]="'botoes-toolbar'" icon="save" type="success" text="Confirmar pagamento"
+                   (onClick)="onSalvar($event)"></dx-button>
+    </dxi-item>
+
+</dx-toolbar>
+
+<div class="content-block dx-card responsive-paddings">
+
+    <div class="row">
+        <div class="col-lg-6">
+            <dx-text-box [(value)]="cartaoCliente" (onEnterKey)="enterCartaoCliente()" label="Cartão cliente" (onInitialized)="onInitialized($event)"></dx-text-box>
+
+            <dx-data-grid [dataSource]="clientes">
+                <dxi-column dataField="nome"></dxi-column>
+                <dxi-column dataField="cpf"></dxi-column>
+            </dx-data-grid>
+        </div>
+
+
+        <div class="col-lg-6">
+            <h6>Itens Consumidos:</h6>
+            <hr class="mb-0">
+
+            <dx-data-grid [dataSource]="itensConsumidos">
+                <dxi-column dataField="nome"></dxi-column>
+                <dxi-column dataField="preco" format="R$ #.##0,##"></dxi-column>
+                <dxi-column dataField="quantidade"></dxi-column>
+                <dxi-column dataField="total" format="R$ #.##0,##"></dxi-column>
+            </dx-data-grid>
+        </div>
+
+        <div class="mt-5 col-lg-6"></div>
+        <div class="mt-5 col-lg-6">
+            <div class="row">
+                <div class="col-lg-4">
+                    <dx-number-box format="R$ #.##0,##" [readOnly]="true" [(value)]="totalPagar" label="Total a pagar"></dx-number-box>
+                </div>
+                <div class="col-lg-4">
+                    <dx-number-box format="R$ #.##0,##" [(value)]="recebido" (onChange)="changeValorRecebido()" label="Valor recebido"></dx-number-box>
+                </div>
+                <div class="col-lg-4">
+                    <dx-number-box format="R$ #.##0,##" [readOnly]="true" [(value)]="troco" label="Troco"></dx-number-box>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

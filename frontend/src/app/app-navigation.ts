@@ -62,6 +62,11 @@ export const navigation: NavigationMenu[] = [
         text: 'Associações de Cartão',
         icon: 'attach',
         path: 'associacao-cliente-cartao'
+    },
+    {
+        text: 'Fechamento de Conta',
+        icon: 'cart',
+        path: 'fechamento-conta'
     }
     // {
     //     text: 'Relatórios',

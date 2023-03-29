@@ -7,7 +7,7 @@ import {Location} from "@angular/common";
 @Component({
   selector: 'app-historico',
   templateUrl: './historico.component.html',
-  styleUrls: ['./historico.component.scss']
+    styleUrls: ['../../../shared/components/abstract-form/abstract-form.component.scss']
 })
 export class HistoricoComponent extends AbstractListComponent{
 

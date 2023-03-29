@@ -5,18 +5,14 @@
 
     <dxi-item location="before">
         <div [classList]="'label-toolbar'">
-            Associações Correntes
+            Histórico de Associações
         </div>
     </dxi-item>
 
 </dx-toolbar>
 
 <div class="content-block dx-card responsive-paddings">
-    <h2>Histórico de Associações</h2>
-
-
     <div class="actions-table">
-
         <dx-data-grid [dataSource]="entidades" keyExpr="id">
             <dxi-column dataField="cartaoRFID.codigo" caption="Cartão"></dxi-column>
             <dxi-column dataField="cliente.nome" caption="Cliente"></dxi-column>

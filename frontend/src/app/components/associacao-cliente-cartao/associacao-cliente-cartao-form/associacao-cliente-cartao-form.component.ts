@@ -9,7 +9,7 @@ import {confirm} from 'devextreme/ui/dialog';
 @Component({
     selector: 'app-associacao-cliente-cartao-form',
     templateUrl: './associacao-cliente-cartao-form.component.html',
-    styleUrls: ['./associacao-cliente-cartao-form.component.scss']
+    styleUrls: ['../../../shared/components/abstract-form/abstract-form.component.scss']
 })
 export class AssociacaoClienteCartaoFormComponent implements OnInit {
     cliente: any = {};

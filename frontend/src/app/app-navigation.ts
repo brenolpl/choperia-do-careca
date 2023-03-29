@@ -64,18 +64,6 @@ export const navigation: NavigationMenu[] = [
         path: 'associacao-cliente-cartao'
     }
     // {
-    //     text: 'Reposição Self Service',
-    //     icon: 'food',
-    // },
-    // {
-    //     text: 'Vincular cartão',
-    //     icon: 'card',
-    // },
-    // {
-    //     text: 'Saída',
-    //     icon: 'runner',
-    // },
-    // {
     //     text: 'Relatórios',
     //     icon: 'textdocument',
     // },

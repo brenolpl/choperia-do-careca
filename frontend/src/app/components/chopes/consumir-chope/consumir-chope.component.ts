@@ -1,19 +1,20 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractListComponent} from "../../../shared/components/abstract-list/abstract-list.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../../../shared/services/api.service";
 import {Location} from "@angular/common";
 import notify from "devextreme/ui/notify";
-import {DxTextBoxComponent} from "devextreme-angular";
 import {first} from "rxjs";
 
 
 @Component({
-  selector: 'app-consumir-chope',
-  templateUrl: './consumir-chope.component.html',
-  styleUrls: ['./consumir-chope.component.scss']
+    selector: 'app-consumir-chope',
+    templateUrl: './consumir-chope.component.html',
+    styleUrls: [
+        '../../../shared/components/abstract-form/abstract-form.component.scss'
+    ]
 })
-export class ConsumirChopeComponent extends AbstractListComponent implements OnInit{
+export class ConsumirChopeComponent extends AbstractListComponent implements OnInit {
     vincular: any;
     codigoRFID: string = '';
     associacao: any;
@@ -36,7 +37,7 @@ export class ConsumirChopeComponent extends AbstractListComponent implements OnI
         this.apiService.get(this.getRota()).subscribe(
             response => {
                 this.entidades = (response as any[]).map(r => {
-                    if(r.quantidadeEstoque > 0) r.emEstoque = true;
+                    if (r.quantidadeEstoque > 0) r.emEstoque = true;
                     else r.emEstoque = false;
 
                     r.quantidade = 0;
@@ -51,15 +52,15 @@ export class ConsumirChopeComponent extends AbstractListComponent implements OnI
     }
 
     adicionar = ($event: any) => {
-        if($event.row.data.emEstoque) $event.row.data.quantidade = $event.row.data.quantidade + 1;
+        if ($event.row.data.emEstoque) $event.row.data.quantidade = $event.row.data.quantidade + 1;
     }
 
     diminuir = ($event: any) => {
-        if($event.row.data.quantidade > 0) $event.row.data.quantidade = $event.row.data.quantidade - 1;
+        if ($event.row.data.quantidade > 0) $event.row.data.quantidade = $event.row.data.quantidade - 1;
     }
 
     onSalvar($event: any) {
-        if(!this.validarQuantidades()) {
+        if (!this.validarQuantidades()) {
             notify('Selecione pelo menos um chope!', 'error', 2000);
             return;
         }
@@ -93,7 +94,7 @@ export class ConsumirChopeComponent extends AbstractListComponent implements OnI
 
     vincularCartao = async () => {
         this.associacao = await this.apiService.get('associacao-cliente-cartao-rfid/getByCartaoRfid/' + this.codigoRFID).toPromise();
-        if(!this.associacao) this.codigoRFID = '';
+        if (!this.associacao) this.codigoRFID = '';
     }
 
     cancelar() {
@@ -104,7 +105,7 @@ export class ConsumirChopeComponent extends AbstractListComponent implements OnI
     private validarQuantidades(): boolean {
         let chope = this.entidades.find((e: any) => e.quantidade > 0);
 
-        if(chope) return true;
+        if (chope) return true;
 
         return false;
     }

@@ -5,7 +5,7 @@
 
     <dxi-item location="before">
         <div [classList]="'label-toolbar'">
-            Associações Correntes
+            Fechamento de Pedido
         </div>
     </dxi-item>
 
@@ -17,8 +17,6 @@
 </dx-toolbar>
 
 <div class="content-block dx-card responsive-paddings">
-    <h2>Fechamento de pedido</h2>
-
 
     <div class="row">
         <div class="col-lg-6">
@@ -32,7 +30,8 @@
 
 
         <div class="col-lg-6">
-            <h5>Itens Consumidos:</h5>
+            <h6>Itens Consumidos:</h6>
+            <hr class="mb-0">
 
             <dx-data-grid [dataSource]="itensConsumidos">
                 <dxi-column dataField="nome"></dxi-column>

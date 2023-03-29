@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {AbstractListComponent} from "../../shared/components/abstract-list/abstract-list.component";
 
 @Component({
-  selector: 'app-associacao-cliente-cartao',
-  templateUrl: './associacao-cliente-cartao.component.html',
-  styleUrls: ['./associacao-cliente-cartao.component.scss']
+    selector: 'app-associacao-cliente-cartao',
+    templateUrl: './associacao-cliente-cartao.component.html',
+    styleUrls: ['../../shared/components/abstract-list/abstract-list.component.css']
 })
-export class AssociacaoClienteCartaoComponent extends AbstractListComponent{
+export class AssociacaoClienteCartaoComponent extends AbstractListComponent {
 
     protected getRota(): string {
         return "associacao-cliente-cartao-rfid";

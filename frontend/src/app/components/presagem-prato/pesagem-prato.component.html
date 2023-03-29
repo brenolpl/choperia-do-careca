@@ -17,7 +17,7 @@
 
             <div class="col-md-6">
                 <label>Cartão do cliente</label>
-                <dx-text-box [(value)]="cartaoCliente" (onEnterKey)="enterCartaoCliente()" (onInitialized)="onInitialized($event)"></dx-text-box>
+                <dx-text-box [(value)]="cartaoCliente" [maxLength]="10" (onEnterKey)="enterCartaoCliente()" (onInitialized)="onInitialized($event)"></dx-text-box>
 
                 <label>Nome do cliente</label>
                 <dx-text-box [readOnly]="true" [(value)]="nomeCliente"></dx-text-box>

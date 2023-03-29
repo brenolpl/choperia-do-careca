@@ -20,7 +20,7 @@
 
     <div class="row">
         <div class="col-lg-6">
-            <dx-text-box [(value)]="cartaoCliente" (onEnterKey)="enterCartaoCliente()" label="Cartão cliente" (onInitialized)="onInitialized($event)"></dx-text-box>
+            <dx-text-box [(value)]="cartaoCliente" [maxLength]="10" (onEnterKey)="enterCartaoCliente()" label="Cartão cliente" (onInitialized)="onInitialized($event)"></dx-text-box>
 
             <dx-data-grid [dataSource]="clientes">
                 <dxi-column dataField="nome"></dxi-column>

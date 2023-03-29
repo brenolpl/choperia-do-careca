@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AbstractFormComponent} from "../../shared/components/abstract-form/abstract-form.component";
 import notify from "devextreme/ui/notify";
 import {ApiService} from "../../shared/services/api.service";
 import {BalancaService} from "../../shared/services/balanca-service";
@@ -9,7 +8,7 @@ import {first, Subscription} from "rxjs";
     templateUrl: './pesagem-prato.component.html',
     styleUrls: ['../../shared/components/abstract-form/abstract-form.component.scss']
 })
-export class PesagemPratoComponent implements OnDestroy, OnInit{
+export class PesagemPratoComponent implements OnDestroy, OnInit {
     precoSelfService: any = 0;
     cartaoCliente: any = '';
     nomeCliente: any = '';
@@ -63,8 +62,8 @@ export class PesagemPratoComponent implements OnDestroy, OnInit{
         )
     }
 
-    showAdicionarCartaoCliente(){
-        if(this.cartaoCliente != "" && this.nomeCliente != "" && this.totalPagar > 0) return true;
+    showAdicionarCartaoCliente() {
+        if (this.cartaoCliente != "" && this.nomeCliente != "" && this.totalPagar > 0) return true;
         return false;
     }
 
@@ -74,7 +73,7 @@ export class PesagemPratoComponent implements OnDestroy, OnInit{
     }
 
     private calcularTotal() {
-       this.totalPagar = parseFloat((this.pesoPrato * this.precoSelfService).toFixed(2));
+        this.totalPagar = parseFloat((this.pesoPrato * this.precoSelfService).toFixed(2));
     }
 
     enterCartaoCliente() {
@@ -82,6 +81,7 @@ export class PesagemPratoComponent implements OnDestroy, OnInit{
             (next: any) => {
                 this.associacao = next;
                 this.nomeCliente = next.cliente.nome;
+                this.calcularTotal();
             },
             error => notify(error?.error?.message, 'error', 2000)
         );

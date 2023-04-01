@@ -33,9 +33,9 @@ export class AuthService {
     logIn(email: string, password: string) {
         return this.apiService.post('usuarios/login', {login: email, biometria: password}).pipe(delay(1000)).pipe(
             map((data: any) => {
-                console.log(data);
                 if(data){
                     localStorage.setItem('email', email);
+                    localStorage.setItem('tipoUsuario', data.tipoUsuario.id);
 
                     this._user = {email: email};
                 } else {

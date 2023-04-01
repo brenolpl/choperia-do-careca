@@ -23,7 +23,7 @@ public class Usuario implements Serializable {
     @Column(name = "login", nullable = false, unique = true)
     private String login;
 
-    @Column(name = "biometria", nullable = false, unique = true)
+    @Column(name = "biometria", nullable = false)
     private String biometria;
 
     @JoinColumn(name = "tipo_usuario", nullable = false)

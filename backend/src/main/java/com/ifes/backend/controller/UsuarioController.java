@@ -24,13 +24,13 @@ public class UsuarioController extends BaseController<Usuario, IUsuarioRepositor
     }
 
     @PostMapping("login")
-    public boolean login(@RequestBody Usuario usuario) {
+    public Usuario login(@RequestBody Usuario usuario) {
         Usuario user = repository.findByLoginAndBiometria(usuario.getLogin(), usuario.getBiometria());
         if(user != null) {
-            return true;
+            return user;
         }
 
-        return false;
+        throw new RuntimeException("Usuario ou senha inválidos!");
     }
 
     @GetMapping("tipos")

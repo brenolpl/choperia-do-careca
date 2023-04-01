@@ -120,9 +120,13 @@ export const navigation: NavigationMenu[] = [
             TipoUsuarioEnum.Administrador,
             TipoUsuarioEnum.Fiscal_Entrada
         ]
-    }
-    // {
-    //     text: 'Relatórios',
-    //     icon: 'textdocument',
-    // },
+    },
+    {
+        text: 'Relatórios',
+        icon: 'textdocument',
+        path: 'relatorios',
+        permissoes: [
+            TipoUsuarioEnum.Administrador
+        ]
+    },
 ];

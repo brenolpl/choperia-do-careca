@@ -28,6 +28,7 @@ import {PesagemPratoModule} from "./components/presagem-prato/pesagem-prato.modu
 import {AssociacaoClienteCartaoModule} from "./components/associacao-cliente-cartao/associacao-cliente-cartao.module";
 import {FechamentoContaModule} from "./components/fechamento-conta/fechamento-conta.module";
 import {VerificarSaidaModule} from "./components/verificar-saida/verificar-saida.module";
+import {RelatoriosModule} from "./components/relatorios/relatorios.module";
 
 @NgModule({
     declarations: [
@@ -59,6 +60,7 @@ import {VerificarSaidaModule} from "./components/verificar-saida/verificar-saida
         AssociacaoClienteCartaoModule,
         FechamentoContaModule,
         VerificarSaidaModule,
+        RelatoriosModule,
 
         // precisa estar depois dos outros modulos de rotas senao nao redireciona corretamente para home caso a rota nao exista
         AppRoutingModule,

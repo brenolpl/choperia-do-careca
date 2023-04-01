@@ -27,6 +27,7 @@ import {EstoqueCozinhaModule} from "./components/estoque-cozinha/estoque-cozinha
 import {PesagemPratoModule} from "./components/presagem-prato/pesagem-prato.module";
 import {AssociacaoClienteCartaoModule} from "./components/associacao-cliente-cartao/associacao-cliente-cartao.module";
 import {FechamentoContaModule} from "./components/fechamento-conta/fechamento-conta.module";
+import {VerificarSaidaModule} from "./components/verificar-saida/verificar-saida.module";
 
 @NgModule({
     declarations: [
@@ -57,6 +58,7 @@ import {FechamentoContaModule} from "./components/fechamento-conta/fechamento-co
         PesagemPratoModule,
         AssociacaoClienteCartaoModule,
         FechamentoContaModule,
+        VerificarSaidaModule,
 
         // precisa estar depois dos outros modulos de rotas senao nao redireciona corretamente para home caso a rota nao exista
         AppRoutingModule,

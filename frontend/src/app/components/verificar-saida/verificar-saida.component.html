@@ -1,0 +1,30 @@
+<dx-toolbar [classList]="'toolbar'">
+    <dxi-item location="before">
+        <div [classList]="'label-toolbar'">
+            Verificar saída
+        </div>
+    </dxi-item>
+</dx-toolbar>
+
+<div class="content-block dx-card responsive-paddings">
+    <ng-container>
+        <div class="row">
+
+            <div class="col-md-6">
+                <label>Cartão do cliente</label>
+                <dx-text-box [(value)]="cartaoCliente" [maxLength]="10" (onEnterKey)="enterCartaoCliente()"
+                             (onInitialized)="onInitialized($event)"></dx-text-box>
+
+                <div *ngIf="nomeCliente">
+                    <label>Nome do cliente</label>
+                    <dx-text-box [readOnly]="true" [(value)]="nomeCliente"></dx-text-box>
+                </div>
+
+                <label>Status do cliente</label>
+                <dx-text-box [readOnly]="true" [(value)]="statusCliente"></dx-text-box>
+            </div>
+        </div>
+
+    </ng-container>
+</div>
+

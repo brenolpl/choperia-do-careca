@@ -67,6 +67,11 @@ export const navigation: NavigationMenu[] = [
         text: 'Fechamento de Conta',
         icon: 'cart',
         path: 'fechamento-conta'
+    },
+    {
+        text: 'Verificar Saída',
+        icon: 'runner',
+        path: 'verificar-saida'
     }
     // {
     //     text: 'Relatórios',

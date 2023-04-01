@@ -122,16 +122,16 @@ export class FormFechamentoContaComponent implements OnInit {
             return;
         }
 
-        // this.apiService.post('associacao-cliente-cartao-rfid/fechar-pedido', this.associacoes).pipe(first()).subscribe(
-        //     _ => {
-        //         notify('Transação realizada com sucesso!', 'success', 2000);
-        //         this.ngOnInit();
-        //     },
-        //     _ => {
-        //         notify('Erro ao realizar trasação.', 'error', 2000);
-        //         this.ngOnInit();
-        //     }
-        // )
+        this.apiService.post('associacao-cliente-cartao-rfid/fechar-pedido', this.associacoes).pipe(first()).subscribe(
+            _ => {
+                notify('Transação realizada com sucesso!', 'success', 2000);
+                this.ngOnInit();
+            },
+            _ => {
+                notify('Erro ao realizar trasação.', 'error', 2000);
+                this.ngOnInit();
+            }
+        )
 
 
         this.imprimirComprovante();

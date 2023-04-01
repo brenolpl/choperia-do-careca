@@ -12,6 +12,8 @@ import java.util.Optional;
 public interface IAssociacaoClienteCartaoRFIDRepository extends JpaRepository<AssociacaoClienteCartaoRFID, Integer> {
     List<AssociacaoClienteCartaoRFID> findAssociacaoClienteCartaoRFIDSByDataSaidaEquals(LocalDateTime dataSaida);
 
+    List<AssociacaoClienteCartaoRFID> findAssociacaoClienteCartaoRFIDSByDataSaidaNotNull();
+
     Optional<AssociacaoClienteCartaoRFID> findFirstByCartaoRFIDAndDataSaidaEquals(CartaoRFID cartaoRFID, LocalDateTime dataSaida);
 
     Optional<AssociacaoClienteCartaoRFID> findFirstByClienteAndDataSaidaEquals(Cliente cliente, LocalDateTime dataSaida);

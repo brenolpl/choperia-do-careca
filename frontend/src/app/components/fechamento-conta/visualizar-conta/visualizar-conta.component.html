@@ -1,0 +1,45 @@
+<dx-toolbar [classList]="'toolbar'">
+    <dxi-item location="before">
+        <dx-button [classList]="'botoes-toolbar'" icon="back" (onClick)="back()"></dx-button>
+    </dxi-item>
+
+    <dxi-item location="before">
+        <div [classList]="'label-toolbar'">
+            Visualizar Conta
+        </div>
+    </dxi-item>
+
+    <dxi-item location="after">
+        <dx-button [classList]="'botoes-toolbar'" icon="save" type="success" text="Imprimir comprovante"
+                   (onClick)="onSalvar()"></dx-button>
+    </dxi-item>
+
+</dx-toolbar>
+
+<div class="content-block dx-card responsive-paddings">
+
+    <div class="row">
+        <div class="col-lg-6">
+            <h6>Cliente:</h6>
+            <hr class="mb-0">
+
+            <dx-data-grid [dataSource]="clientes">
+                <dxi-column dataField="nome"></dxi-column>
+                <dxi-column dataField="cpf"></dxi-column>
+            </dx-data-grid>
+
+
+            <h6 class="mt-5">Itens Consumidos:</h6>
+            <hr class="mb-0">
+
+            <dx-data-grid [dataSource]="itensConsumidos">
+                <dxi-column dataField="nome"></dxi-column>
+                <dxi-column dataField="preco" format="R$ #.##0,##"></dxi-column>
+                <dxi-column dataField="quantidade"></dxi-column>
+                <dxi-column dataField="total" format="R$ #.##0,##"></dxi-column>
+            </dx-data-grid>
+        </div>
+
+    </div>
+</div>
+

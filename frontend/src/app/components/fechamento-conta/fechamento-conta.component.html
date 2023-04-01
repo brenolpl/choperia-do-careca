@@ -17,9 +17,18 @@
 
         <dx-data-grid [dataSource]="entidades" keyExpr="id">
 
+            <dxi-column dataField="cartaoRFID.codigo" caption="Cartão"></dxi-column>
+            <dxi-column dataField="cliente.nome" caption="Cliente"></dxi-column>
+            <dxi-column dataField="cliente.cpf" [calculateCellValue]="showCpfFormated" caption="CPF"></dxi-column>
+            <dxi-column dataField="dataEntrada" dataType="datetime" caption="Entrou"></dxi-column>
+            <dxi-column dataField="dataSaida" dataType="datetime" caption="Saiu"></dxi-column>
+
             <dxi-column type="buttons" caption="Ações">
-                <dxi-button icon="edit" hint="Editar" [onClick]="editar"></dxi-button>
+                <dxi-button icon="bi bi-eye-fill" hint="Visualizar" [onClick]="editar">
+                </dxi-button>
             </dxi-column>
         </dx-data-grid>
     </div>
 </div>
+
+

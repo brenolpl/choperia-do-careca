@@ -13,12 +13,14 @@ import {DxiItemModule, DxoFormItemModule} from "devextreme-angular/ui/nested";
 import {FechamentoContaComponent} from "./fechamento-conta.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {FormFechamentoContaComponent} from "./form-fechamento-conta/form-fechamento-conta.component";
+import {VisualizarContaComponent} from "./visualizar-conta/visualizar-conta.component";
 
 
 @NgModule({
     declarations: [
         FechamentoContaComponent,
-        FormFechamentoContaComponent
+        FormFechamentoContaComponent,
+        VisualizarContaComponent
     ],
     imports: [
         FechamentoContaRoute,

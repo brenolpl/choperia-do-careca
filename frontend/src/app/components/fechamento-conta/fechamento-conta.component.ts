@@ -11,7 +11,10 @@ import {AbstractListComponent} from "../../shared/components/abstract-list/abstr
 })
 export class FechamentoContaComponent extends AbstractListComponent {
     protected getRota(): string {
-        return 'associacao-cliente-cartao-rfid/fechamento-contas';
+        return 'associacao-cliente-cartao-rfid/contasPagas';
     }
 
+    showCpfFormated(evt: any){
+        return evt.cliente.cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
+    }
 }

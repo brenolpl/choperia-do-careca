@@ -21,7 +21,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/associacao-cliente-cartao-rfid")
@@ -39,6 +38,11 @@ public class AssociacaoClienteCartaoRFIDController extends BaseController<Associ
     @GetMapping("associacoesCorrentes")
     public List<AssociacaoClienteCartaoRFID> associacoesCorrentes() {
         return repository.findAssociacaoClienteCartaoRFIDSByDataSaidaEquals(null);
+    }
+
+    @GetMapping("contasPagas")
+    public List<AssociacaoClienteCartaoRFID> contasPagas() {
+        return repository.findAssociacaoClienteCartaoRFIDSByDataSaidaNotNull();
     }
 
     @Override

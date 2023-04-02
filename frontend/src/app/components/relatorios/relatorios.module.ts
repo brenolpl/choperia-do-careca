@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RelatoriosRoute} from "./relatorios.route";
 import {RelatoriosComponent} from "./relatorios.component";
-import {DxButtonModule, DxDataGridModule, DxToolbarModule} from "devextreme-angular";
+import {DxButtonModule, DxDataGridModule, DxDateBoxModule, DxToolbarModule} from "devextreme-angular";
 import {RelatorioSaldoProdutosEstoque} from "./relatorio-saldo-produtos-estoque/relatorio-saldo-produtos-estoque";
 import {
     RelatorioProdutosEstoqueMaiorZero
@@ -22,7 +22,8 @@ import {RelatorioChopesMaisConsumidos} from "./relatorio-chopes-mais-consumidos/
         RelatoriosRoute,
         DxButtonModule,
         DxDataGridModule,
-        DxToolbarModule
+        DxToolbarModule,
+        DxDateBoxModule
     ],
     exports: []
 })

@@ -18,6 +18,12 @@ export class ApiService {
         return this.http.get(`${this.API}/${url}`);
     }
 
+    filter(url: string, params: any) {
+        return this.http.get(`${this.API}/${url}`, {
+            params: params
+        });
+    }
+
     detail(url: string, id: string) {
         return this.http.get(`${this.API}/${url}/${id}`).pipe(take(1));
     }

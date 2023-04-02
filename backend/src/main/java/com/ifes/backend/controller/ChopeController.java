@@ -8,13 +8,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
 @RequestMapping("api/chopes")
-public class ChopeController extends BaseController<Chope, IChopeRepository, Integer>{
+public class ChopeController extends BaseController<Chope, IChopeRepository, Integer> {
 
     private ChopeService chopeService;
 
@@ -24,12 +26,17 @@ public class ChopeController extends BaseController<Chope, IChopeRepository, Int
     }
 
     @GetMapping("codigo-rfid/{codigo}")
-    public Chope getProdutoByCodigoBarras(@PathVariable String codigo){
+    public Chope getProdutoByCodigoBarras(@PathVariable String codigo) {
         return this.chopeService.getChopeByCodigoRFID(codigo);
     }
 
     @PostMapping("adicionar-estoque")
-    public void adicionarEstoque(@RequestBody List<Chope> chopes){
+    public void adicionarEstoque(@RequestBody List<Chope> chopes) {
         this.chopeService.adicionarEstoque(chopes);
+    }
+
+    @GetMapping("mais-consumidos")
+    public List<Chope> chopesMaisConsumidos(@RequestParam("dataDe") LocalDateTime dataDe, @RequestParam LocalDateTime dataAte) {
+        return this.chopeService.getChopesMaisConsumidos(dataDe, dataAte);
     }
 }

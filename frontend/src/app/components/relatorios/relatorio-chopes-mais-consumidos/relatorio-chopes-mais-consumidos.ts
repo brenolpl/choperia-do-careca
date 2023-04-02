@@ -1,6 +1,7 @@
 import {Component, ViewChild} from "@angular/core";
 import {ApiService} from "../../../shared/services/api.service";
 import {Location} from "@angular/common";
+import notify from "devextreme/ui/notify";
 
 
 @Component({
@@ -17,27 +18,42 @@ export class RelatorioChopesMaisConsumidos {
 
     produtos: any[] = [];
     chopes: any[] = [];
+    dataDe: any;
+    dataAte: any;
+    showTabela = false;
 
     constructor(private apiService: ApiService,
                 private location: Location) {
-        this.listarProdutos();
-        this.listarChopes();
     }
 
-    listarProdutos() {
-        this.apiService.get('produtos').subscribe(
-            response => {
-                this.produtos = response as any[];
-            }
-        )
-    }
 
     listarChopes(){
-        this.apiService.get('chopes').subscribe(
+        if(!this.dataDe || !this.dataAte){
+            notify('Data de e Data Até são obrigatórios', 'error');
+            return;
+        }
+        if(this.dataDe.getTime() > this.dataAte.getTime()){
+            notify('Data de não pode ser maior que data até', 'error');
+            return;
+        }
+
+        this.dataAte.setHours(23, 59, 59, 999);
+
+        const params = {
+            dataDe: this.dataDe.toLocaleString(),
+            dataAte: this.dataAte.toLocaleString()
+        };
+
+        this.apiService.filter('chopes/mais-consumidos', params).subscribe(
             response => {
+                this.showTabela = true;
                 this.chopes = response as any[];
             }
         )
+    }
+
+    filtrarRelatorio(){
+        this.listarChopes();
     }
 
 

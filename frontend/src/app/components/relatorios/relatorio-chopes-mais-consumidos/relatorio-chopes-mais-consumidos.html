@@ -16,25 +16,39 @@
 
 </dx-toolbar>
 
-<div #relatorioTemplate>
-    <div class="content-block dx-card responsive-paddings">
+<div class="content-block dx-card responsive-paddings">
+    <h2>Filtrar chopes mais consumidos em um período</h2>
 
-        <h2>Produtos em estoque</h2>
-
-        <dx-data-grid [classList]="'table-exibir-impressao'" [dataSource]="produtos" keyExpr="id">
-
-            <dxi-column dataField="nome"></dxi-column>
-            <dxi-column dataField="precoCompra" format="R$ #.##0,##"></dxi-column>
-            <dxi-column dataField="codigoBarras"></dxi-column>
-            <dxi-column dataField="quantidadeEstoque"></dxi-column>
-        </dx-data-grid>
+    <div class="row mt-4 p-3">
+        <div class="col-sm-8 col-md-6">
+            <div class="row">
+                <dx-date-box [(value)]="dataDe" [label]="'De'" class="col-lg-6"></dx-date-box>
+                <dx-date-box [(value)]="dataAte" [label]="'Até'" class="col-lg-6"></dx-date-box>
+            </div>
+        </div>
+        <div class="col-4">
+            <dx-button stylingMode="outlined" type="success" icon="find" hint="Adicionar produto"
+                       (onClick)="filtrarRelatorio()">
+            </dx-button>
+        </div>
     </div>
+</div>
 
-    <div class="content-block dx-card responsive-paddings">
+<div #relatorioTemplate>
 
-        <h2>Chopes em estoque</h2>
+    <div class="content-block dx-card responsive-paddings" *ngIf="showTabela">
+        <h2>Chopes mais consumidos</h2>
 
-        <dx-data-grid [classList]="'table-exibir-impressao'" [dataSource]="chopes" keyExpr="id">
+        <p>
+            De: {{dataDe?.toLocaleDateString()}}
+        </p>
+
+        <p>
+            Até: {{dataAte?.toLocaleDateString()}}
+        </p>
+
+
+        <dx-data-grid [classList]="'table-exibir-impressao mt-4'" [dataSource]="chopes" keyExpr="id">
 
             <dxi-column dataField="nome"></dxi-column>
             <dxi-column dataField="precoCompra" format="R$ #.##0,##"></dxi-column>

@@ -1,8 +1,6 @@
 package com.ifes.backend.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,6 +38,15 @@ public class ItemConsumido implements Serializable {
     @Column(name = "preco")
     private BigDecimal preco;
 
+    public ItemConsumido(Chope chope, Integer id, String nome, BigDecimal preco) {
+        this.id = id;
+        this.chope = chope;
+        this.nome = nome;
+        this.preco = preco;
+    }
+
+    public ItemConsumido() {
+    }
 
     public Integer getId() {
         return id;

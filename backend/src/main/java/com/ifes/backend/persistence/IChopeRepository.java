@@ -1,6 +1,5 @@
 package com.ifes.backend.persistence;
 
-import com.ifes.backend.domain.CartaoRFID;
 import com.ifes.backend.domain.Chope;
 import org.springframework.data.jpa.repository.JpaRepository;
 

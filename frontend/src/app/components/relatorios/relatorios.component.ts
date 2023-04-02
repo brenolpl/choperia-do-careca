@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, ComponentFactoryResolver, Injector} from '@angular/core';
+import {RelatorioSaldoProdutosEstoque} from "./relatorio-saldo-produtos-estoque/relatorio-saldo-produtos-estoque";
 
 @Component({
     selector: 'app-relatorios',
@@ -7,4 +8,11 @@ import {Component} from '@angular/core';
 })
 export class RelatoriosComponent {
 
+    constructor() {
+    }
+
+
+    open() {
+
+    }
 }

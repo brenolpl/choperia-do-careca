@@ -22,3 +22,7 @@ h5, h2 {
     color: rgb(1, 72, 1) !important;
     background-color: rgb(225, 238, 225) !important;
 }
+
+::ng-deep .table-exibir-impressao{
+    height: fit-content !important;
+}

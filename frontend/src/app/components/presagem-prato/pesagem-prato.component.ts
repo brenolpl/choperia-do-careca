@@ -25,11 +25,11 @@ export class PesagemPratoComponent implements OnDestroy, OnInit {
     }
 
     ngOnInit(): void {
+        this.pesoPrato = 0;
         this.getPrecoSelfService();
         this.balancaSubscription = this.balancaService.pesoObservable.subscribe(peso => {
             this.pesoPrato = parseFloat(peso);
             this.calcularTotal();
-            this.pesoPrato = 0.8;
         })
     }
 

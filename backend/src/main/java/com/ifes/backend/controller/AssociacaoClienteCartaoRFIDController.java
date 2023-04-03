@@ -58,6 +58,13 @@ public class AssociacaoClienteCartaoRFIDController extends BaseController<Associ
         else throw new RuntimeException("Cartão não encontrado!");
     }
 
+    @GetMapping("getByAssociacao/{associacaoId}")
+    public AssociacaoClienteCartaoRFID getByAssociacao(@PathVariable Integer associacaoId) {
+        Optional<AssociacaoClienteCartaoRFID> associacao =  repository.findById(associacaoId);
+        if(associacao.isPresent()) return associacao.get();
+        else throw new RuntimeException("Cartão não encontrado!");
+    }
+
     @PostMapping("consumir-chopes")
     public void consumirChopes(@RequestBody ConsumirChopeDto consumirChopeDto) {
         Optional<AssociacaoClienteCartaoRFID> associacao = repository.findFirstByCartaoRFIDAndDataSaidaEquals(new CartaoRFID(consumirChopeDto.getCodigoRFID()), null);

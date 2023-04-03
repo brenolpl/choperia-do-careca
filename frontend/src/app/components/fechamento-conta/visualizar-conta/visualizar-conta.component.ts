@@ -68,7 +68,7 @@ export class VisualizarContaComponent implements OnInit{
     }
 
     getAssociacaoClienteCartao(cartao: string) {
-        return this.apiService.get('associacao-cliente-cartao-rfid/getByCartaoRfid/' + cartao).toPromise();
+        return this.apiService.get('associacao-cliente-cartao-rfid/getByAssociacao/' + cartao).toPromise();
     }
 
     async listarDadosCliente() {

@@ -23,4 +23,6 @@ public interface IAssociacaoClienteCartaoRFIDRepository extends JpaRepository<As
 
     @Query("SELECT a FROM AssociacaoClienteCartaoRFID a JOIN a.itensConsumidos i WHERE a.dataSaida BETWEEN :dataInicio AND :dataFim GROUP BY a.id ORDER BY SUM(i.preco) DESC")
     List<AssociacaoClienteCartaoRFID> findByDataSaidaBetweenOrderByValorTotalDesc(LocalDateTime dataInicio, LocalDateTime dataFim);
+
+    Optional<AssociacaoClienteCartaoRFID> findById(Integer id);
 }

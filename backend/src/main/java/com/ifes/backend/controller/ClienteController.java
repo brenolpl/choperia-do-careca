@@ -1,7 +1,6 @@
 package com.ifes.backend.controller;
 
 import com.ifes.backend.domain.AssociacaoClienteCartaoRFID;
-import com.ifes.backend.domain.CartaoRFID;
 import com.ifes.backend.domain.Cliente;
 import com.ifes.backend.domain.ItemConsumido;
 import com.ifes.backend.persistence.IAssociacaoClienteCartaoRFIDRepository;
@@ -9,9 +8,12 @@ import com.ifes.backend.persistence.IClienteRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -50,5 +52,10 @@ public class ClienteController extends BaseController<Cliente, IClienteRepositor
             else return cliente.get();
         }
         else throw new RuntimeException("Este cliente não está cadastrado!");
+    }
+
+    @GetMapping("compras-periodo")
+    public List<AssociacaoClienteCartaoRFID> getComprasClientes(@RequestParam("dataDe") LocalDateTime dataDe, @RequestParam LocalDateTime dataAte) {
+        return this.associacaoClienteCartaoRFIDRepository.findByDataSaidaBetweenOrderByValorTotalDesc(dataDe, dataAte);
     }
 }

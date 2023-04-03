@@ -21,7 +21,7 @@ export abstract class AbstractListComponent implements OnInit {
     }
 
     public editar = (evt: any) => {
-        const codigo: string = evt.row.data['cartaoRFID']['codigo'].trim();
+        const codigo: string = evt.row.data['id'];
         this.router.navigate([codigo], {relativeTo: this.route});
     }
 

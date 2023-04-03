@@ -1,0 +1,60 @@
+<dx-toolbar [classList]="'toolbar'">
+    <dxi-item location="before">
+        <dx-button [classList]="'botoes-toolbar'" icon="back" (onClick)="back()"></dx-button>
+    </dxi-item>
+
+    <dxi-item location="before">
+        <div [classList]="'label-toolbar'">
+            <!--            Produto-->
+        </div>
+    </dxi-item>
+
+    <dxi-item location="after">
+        <dx-button [classList]="'botoes-toolbar'" icon="save" type="success" text="Imprimir"
+                   (click)="open()"></dx-button>
+    </dxi-item>
+
+</dx-toolbar>
+
+<div class="content-block dx-card responsive-paddings">
+    <h2>Filtrar compras dos clientes por período</h2>
+
+    <div class="row mt-4 p-3">
+        <div class="col-sm-8 col-md-6">
+            <div class="row">
+                <dx-date-box [(value)]="dataDe" [label]="'De'" class="col-lg-6"></dx-date-box>
+                <dx-date-box [(value)]="dataAte" [label]="'Até'" class="col-lg-6"></dx-date-box>
+            </div>
+        </div>
+        <div class="col-4">
+            <dx-button stylingMode="outlined" type="success" icon="find" hint="Adicionar produto"
+                       (onClick)="filtrarRelatorio()">
+            </dx-button>
+        </div>
+    </div>
+</div>
+
+<div #relatorioTemplate>
+
+    <div class="content-block dx-card responsive-paddings" *ngIf="showTabela">
+        <h2>Compras dos clientes</h2>
+
+        <p>
+            De: {{dataDe?.toLocaleDateString()}}
+        </p>
+
+        <p>
+            Até: {{dataAte?.toLocaleDateString()}}
+        </p>
+
+
+        <dx-data-grid [classList]="'table-exibir-impressao mt-4'" [dataSource]="chopes" keyExpr="id">
+
+            <dxi-column dataField="cliente.nome"></dxi-column>
+            <dxi-column dataField="cliente.cpf" [calculateCellValue]="showCpfFormated"></dxi-column>
+            <dxi-column dataField="totalContaCliente" format="R$ #.##0,##"></dxi-column>
+            <dxi-column dataField="dataSaida" caption="Data" dataType="datetime"></dxi-column>
+
+        </dx-data-grid>
+    </div>
+</div>

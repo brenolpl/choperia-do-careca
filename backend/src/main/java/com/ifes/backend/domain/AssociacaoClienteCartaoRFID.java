@@ -1,7 +1,6 @@
 package com.ifes.backend.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -15,7 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -47,6 +48,9 @@ public class AssociacaoClienteCartaoRFID implements Serializable {
     @JsonManagedReference
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "associacaoClienteCartaoRFID")
     private Set<ItemConsumido> itensConsumidos;
+
+    @Transient
+    private BigDecimal totalContaCliente;
 
     public Integer getId() {
         return id;
@@ -94,5 +98,19 @@ public class AssociacaoClienteCartaoRFID implements Serializable {
 
     public void setItensConsumidos(Set<ItemConsumido> itensConsumidos) {
         this.itensConsumidos = itensConsumidos;
+    }
+
+    public BigDecimal getTotalContaCliente(){
+        BigDecimal total = BigDecimal.ZERO;
+        if(this.getItensConsumidos() == null) return BigDecimal.ZERO;
+        for (ItemConsumido item : this.getItensConsumidos()) {
+            if(item.getPreco() == null) {
+                total = total.add(item.getChope().getPrecoVenda());
+            } else {
+                total = total.add(item.getPreco());
+            }
+        }
+
+        return total;
     }
 }

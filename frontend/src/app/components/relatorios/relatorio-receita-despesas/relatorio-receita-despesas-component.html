@@ -1,0 +1,133 @@
+<dx-toolbar [classList]="'toolbar'">
+    <dxi-item location="before">
+        <dx-button [classList]="'botoes-toolbar'" icon="back" (onClick)="back()"></dx-button>
+    </dxi-item>
+
+    <dxi-item location="before">
+        <div [classList]="'label-toolbar'">
+            Despesa X Receita do período
+        </div>
+    </dxi-item>
+
+    <dxi-item location="after">
+        <dx-button [classList]="'botoes-toolbar'" icon="save" type="success" text="Imprimir"
+                   (click)="open()"></dx-button>
+    </dxi-item>
+
+</dx-toolbar>
+
+<div class="content-block dx-card responsive-paddings">
+    <h2>Filtrar período para avaliar</h2>
+
+    <div class="row mt-4 p-3">
+        <div class="col-sm-8 col-md-6">
+            <div class="row">
+                <dx-date-box [(value)]="dataDe" [label]="'De'" class="col-lg-6"></dx-date-box>
+                <dx-date-box [(value)]="dataAte" [label]="'Até'" class="col-lg-6"></dx-date-box>
+            </div>
+        </div>
+        <div class="col-4">
+            <dx-button stylingMode="outlined" type="success" icon="find" hint="Adicionar produto"
+                       (onClick)="filtrarRelatorio()">
+            </dx-button>
+        </div>
+    </div>
+</div>
+
+<div #relatorioTemplate>
+
+    <div class="content-block dx-card responsive-paddings" *ngIf="showTabela">
+        <h2>Produtos comprados no período</h2>
+
+        <p>
+            De: {{dataDe?.toLocaleDateString()}}
+        </p>
+
+        <p>
+            Até: {{dataAte?.toLocaleDateString()}}
+        </p>
+
+        <dx-data-grid [classList]="'table-exibir-impressao mt-4'" [dataSource]="produtos" keyExpr="id">
+            <dxi-column dataField="nome"></dxi-column>
+            <dxi-column dataField="precoCompra" format="R$ #.##0,##"></dxi-column>
+            <dxi-column dataField="quantidade"></dxi-column>
+            <dxi-column dataField="total" format="R$ #.##0,##"></dxi-column>
+        </dx-data-grid>
+    </div>
+
+    <div class="content-block dx-card responsive-paddings" *ngIf="showTabela">
+        <h2>Chopes comprados no período</h2>
+
+        <p>
+            De: {{dataDe?.toLocaleDateString()}}
+        </p>
+
+        <p>
+            Até: {{dataAte?.toLocaleDateString()}}
+        </p>
+
+        <dx-data-grid [classList]="'table-exibir-impressao mt-4'" [dataSource]="chopes" keyExpr="id">
+            <dxi-column dataField="chope.nome"></dxi-column>
+            <dxi-column dataField="precoCompra" caption="Preço (100L)" format="R$ #.##0,##"></dxi-column>
+            <dxi-column dataField="quantidade" caption="Qtd(L)"></dxi-column>
+            <dxi-column dataField="dataEntrada" dataType="datetime"></dxi-column>
+            <dxi-column dataField="precoTotal" format="R$ #.##0,##"></dxi-column>
+        </dx-data-grid>
+    </div>
+
+
+    <div class="content-block dx-card responsive-paddings" *ngIf="showTabela">
+        <h2>Compras dos clientes no período</h2>
+
+        <p>
+            De: {{dataDe?.toLocaleDateString()}}
+        </p>
+
+        <p>
+            Até: {{dataAte?.toLocaleDateString()}}
+        </p>
+
+        <dx-data-grid [classList]="'table-exibir-impressao mt-4'" [dataSource]="produtosConsumidosClientes" keyExpr="id">
+            <dxi-column dataField="cliente.nome"></dxi-column>
+            <dxi-column dataField="dataSaida" dataType="datetime"></dxi-column>
+            <dxi-column dataField="totalContaCliente" format="R$ #.##0,##"></dxi-column>
+        </dx-data-grid>
+    </div>
+
+
+    <div class="content-block dx-card responsive-paddings" *ngIf="showTabela">
+        <h2>Total de produtos consumidos no período</h2>
+
+        <p>
+            De: {{dataDe?.toLocaleDateString()}}
+        </p>
+
+        <p>
+            Até: {{dataAte?.toLocaleDateString()}}
+        </p>
+
+        <dx-data-grid [classList]="'table-exibir-impressao mt-4'" [dataSource]="produtosConsumidos" keyExpr="id">
+            <dxi-column dataField="nome"></dxi-column>
+            <dxi-column dataField="quantidade"></dxi-column>
+            <dxi-column dataField="preco" caption="Total vendido" format="R$ #.##0,##"></dxi-column>
+        </dx-data-grid>
+    </div>
+
+    <div class="content-block dx-card responsive-paddings" *ngIf="showTabela">
+        <h2>Comparativo de produtos</h2>
+
+        <p>
+            De: {{dataDe?.toLocaleDateString()}}
+        </p>
+
+        <p>
+            Até: {{dataAte?.toLocaleDateString()}}
+        </p>
+
+        <dx-data-grid [classList]="'table-exibir-impressao mt-4'" [dataSource]="comparativoProdutos" keyExpr="id">
+            <dxi-column [cellTemplate]="formatStringNome" dataField="nome"></dxi-column>
+            <dxi-column [cellTemplate]="formatTotalComprado" dataField="totalComprado" caption="Total comprado" format="R$ #.##0,##"></dxi-column>
+            <dxi-column [cellTemplate]="formatTotalVendido" dataField="totalVendido" caption="Total vendido" format="R$ #.##0,##"></dxi-column>
+        </dx-data-grid>
+    </div>
+</div>

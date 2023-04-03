@@ -5,7 +5,9 @@ import com.ifes.backend.domain.Chope;
 import com.ifes.backend.domain.Chope_;
 import com.ifes.backend.domain.ItemConsumido;
 import com.ifes.backend.domain.ItemConsumido_;
+import com.ifes.backend.domain.LogCompraChope;
 import com.ifes.backend.persistence.IChopeRepository;
+import com.ifes.backend.persistence.ILogCompraChopeRepository;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -14,6 +16,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -22,12 +25,14 @@ import java.util.Optional;
 public class ChopeService {
 
     IChopeRepository chopeRepository;
+    ILogCompraChopeRepository logCompraChopeRepository;
 
     private EntityManager entityManager;
 
-    public ChopeService(IChopeRepository chopeRepository, EntityManager entityManager) {
+    public ChopeService(IChopeRepository chopeRepository, EntityManager entityManager, ILogCompraChopeRepository logCompraChopeRepository) {
         this.chopeRepository = chopeRepository;
         this.entityManager = entityManager;
+        this.logCompraChopeRepository = logCompraChopeRepository;
     }
 
 
@@ -47,7 +52,15 @@ public class ChopeService {
                 Chope chope = chopeOptional.get();
                 Double totalEstoque = chope.getQuantidadeEstoque() + chopeSalvar.getQuantidadeEstoque();
                 chope.setQuantidadeEstoque(totalEstoque);
-                chopeRepository.save(chope);
+                chope = chopeRepository.save(chope);
+                // salvar log
+                LogCompraChope logCompraChope = new LogCompraChope();
+                logCompraChope.setChope(chope);
+                logCompraChope.setQuantidade(chopeSalvar.getQuantidadeEstoque());
+                logCompraChope.setDataEntrada(LocalDateTime.now());
+                logCompraChope.setPrecoCompra(chope.getPrecoCompra());
+                logCompraChope.setPrecoTotal(chope.getPrecoCompra().multiply(new BigDecimal(chopeSalvar.getQuantidadeEstoque() / 100)));
+                logCompraChopeRepository.save(logCompraChope);
             }
         }
     }
@@ -73,35 +86,8 @@ public class ChopeService {
             List<Chope> chopes = typedQuery.getResultList();
             return chopes;
         }
-//    public List<ItemConsumido> getChopesMaisConsumidos(LocalDateTime dataDe, LocalDateTime dataAte) {
-//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-//        CriteriaQuery<ItemConsumido> query = cb.createQuery(ItemConsumido.class);
-//
-//        Root<AssociacaoClienteCartaoRFID> rootAssociacao = query.from(AssociacaoClienteCartaoRFID.class);
-//        Join<AssociacaoClienteCartaoRFID, ItemConsumido> joinItemConsumido = rootAssociacao.join(AssociacaoClienteCartaoRFID_.itensConsumidos);
-//
-//        query.multiselect(
-//                        joinItemConsumido.get(ItemConsumido_.chope),
-//                        joinItemConsumido.get(ItemConsumido_.id),
-//                        joinItemConsumido.get(ItemConsumido_.nome),
-//                        joinItemConsumido.get(ItemConsumido_.preco)
-//            ).where(cb.and(
-//                    cb.between(rootAssociacao.get(AssociacaoClienteCartaoRFID_.dataSaida), dataDe, dataAte),
-//                    cb.isNotNull(joinItemConsumido.get(ItemConsumido_.chope))
-//            ))
-//            .groupBy(
-//                    joinItemConsumido.get(ItemConsumido_.chope).get(Chope_.id),
-//                    joinItemConsumido.get(ItemConsumido_.id),
-//                    joinItemConsumido.get(ItemConsumido_.nome),
-//                    joinItemConsumido.get(ItemConsumido_.preco)
-//            ).orderBy(
-//                    cb.desc(cb.count(joinItemConsumido.get(ItemConsumido_.id)))
-//            );
-//
-//        TypedQuery<ItemConsumido> typedQuery = entityManager.createQuery(query);
-//
-//        List<ItemConsumido> chopes = typedQuery.getResultList();
-//
-//        return chopes;
-//    }
+
+    public List<LogCompraChope> getChopesCompradosPeriodo(LocalDateTime dataDe, LocalDateTime dataAte) {
+        return logCompraChopeRepository.findLogCompraChopeByDataEntradaBetween(dataDe, dataAte);
+    }
 }

@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -60,5 +62,10 @@ public class ProdutoController extends BaseController<Produto, IProdutoRepositor
     @PostMapping("remover-estoque")
     public void removerEstoque(@RequestBody List<ProdutoRemoverDto> produtos){
         this.produtoService.removerEstoque(produtos);
+    }
+
+    @GetMapping("periodo")
+    public List<Produto> getProdutosPeriodo(@RequestParam("dataDe") LocalDateTime dataDe, @RequestParam LocalDateTime dataAte) {
+        return this.produtoService.getProdutosPeriodo(dataDe, dataAte);
     }
 }

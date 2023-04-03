@@ -3,6 +3,7 @@ package com.ifes.backend.services;
 
 import com.ifes.backend.application.GerarCodigoBarras;
 import com.ifes.backend.domain.EstoqueProduto;
+import com.ifes.backend.domain.EstoqueProduto_;
 import com.ifes.backend.domain.Produto;
 import com.ifes.backend.dto.ProdutoCodigoDto;
 import com.ifes.backend.dto.ProdutoInserirDto;
@@ -11,6 +12,11 @@ import com.ifes.backend.persistence.IEstoqueProdutoRepository;
 import com.ifes.backend.persistence.IProdutoRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,6 +25,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,10 +36,12 @@ public class ProdutoService {
     private IProdutoRepository produtoRepository;
 
     private IEstoqueProdutoRepository estoqueProdutoRepository;
+    private EntityManager entityManager;
 
-    public ProdutoService(IProdutoRepository produtoRepository, IEstoqueProdutoRepository estoqueProdutoRepository) {
+    public ProdutoService(IProdutoRepository produtoRepository, IEstoqueProdutoRepository estoqueProdutoRepository, EntityManager entityManager) {
         this.produtoRepository = produtoRepository;
         this.estoqueProdutoRepository = estoqueProdutoRepository;
+        this.entityManager = entityManager;
     }
 
     public Produto cadastrarProduto(Produto produto) {
@@ -121,5 +130,36 @@ public class ProdutoService {
                 }
             }
         }
+    }
+
+    public List<Produto> getProdutosPeriodo(LocalDateTime dataInicial, LocalDateTime dataFinal) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<EstoqueProduto> cq = cb.createQuery(EstoqueProduto.class);
+        Root<EstoqueProduto> root = cq.from(EstoqueProduto.class);
+
+        cq.select(root)
+                .where(cb.between(root.get(EstoqueProduto_.dataEntrada), dataInicial, dataFinal));
+
+        TypedQuery<EstoqueProduto> query = entityManager.createQuery(cq);
+
+        List<EstoqueProduto> estoqueProdutos = query.getResultList();
+
+        List<Produto> produtos = new ArrayList<>();
+
+        for(EstoqueProduto estoqueProduto : estoqueProdutos){
+            Optional<Produto> produtoOptional = produtos.stream().filter(p -> p.getId().equals(estoqueProduto.getProduto().getId())).findAny();
+            Produto produto = new Produto();
+            if(produtoOptional.isEmpty()){
+                produto.setId(estoqueProduto.getProduto().getId());
+                produto.setNome(estoqueProduto.getProduto().getNome());
+                produto.setEstoqueProdutos(new HashSet<>());
+                produtos.add(produto);
+            } else {
+                produto = produtoOptional.get();
+            }
+            produto.getEstoqueProdutos().add(estoqueProduto);
+        }
+
+        return produtos;
     }
 }

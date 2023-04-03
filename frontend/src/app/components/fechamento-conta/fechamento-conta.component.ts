@@ -17,4 +17,9 @@ export class FechamentoContaComponent extends AbstractListComponent {
     showCpfFormated(evt: any){
         return evt.cliente.cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
     }
+
+    public override editar = (evt: any) => {
+        const codigo: string = evt.row.data['cartaoRFID']['codigo'].trim();
+        this.router.navigate([codigo], {relativeTo: this.route});
+    }
 }

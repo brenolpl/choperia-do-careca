@@ -8,6 +8,8 @@ import {
     RelatorioProdutosEstoqueMaiorZero
 } from "./relatorio-produtos-estoque-maior-zero/relatorio-produtos-estoque-maior-zero";
 import {RelatorioChopesMaisConsumidos} from "./relatorio-chopes-mais-consumidos/relatorio-chopes-mais-consumidos";
+import {ComprasClientes} from "./compras-clientes/compras-clientes";
+import {RelatorioReceitaDespesasComponent} from "./relatorio-receita-despesas/relatorio-receita-despesas-component";
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import {RelatorioChopesMaisConsumidos} from "./relatorio-chopes-mais-consumidos/
         RelatoriosComponent,
         RelatorioSaldoProdutosEstoque,
         RelatorioProdutosEstoqueMaiorZero,
-        RelatorioChopesMaisConsumidos
+        RelatorioChopesMaisConsumidos,
+        ComprasClientes,
+        RelatorioReceitaDespesasComponent
     ],
     imports: [
         CommonModule,

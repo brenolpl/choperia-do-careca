@@ -1,6 +1,7 @@
 package com.ifes.backend.controller;
 
 import com.ifes.backend.domain.Chope;
+import com.ifes.backend.domain.LogCompraChope;
 import com.ifes.backend.persistence.IChopeRepository;
 import com.ifes.backend.services.ChopeService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,5 +39,10 @@ public class ChopeController extends BaseController<Chope, IChopeRepository, Int
     @GetMapping("mais-consumidos")
     public List<Chope> chopesMaisConsumidos(@RequestParam("dataDe") LocalDateTime dataDe, @RequestParam LocalDateTime dataAte) {
         return this.chopeService.getChopesMaisConsumidos(dataDe, dataAte);
+    }
+
+    @GetMapping("periodo")
+    public List<LogCompraChope> getProdutosPeriodo(@RequestParam("dataDe") LocalDateTime dataDe, @RequestParam LocalDateTime dataAte) {
+        return this.chopeService.getChopesCompradosPeriodo(dataDe, dataAte);
     }
 }

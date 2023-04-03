@@ -29,6 +29,7 @@ export class PesagemPratoComponent implements OnDestroy, OnInit {
         this.balancaSubscription = this.balancaService.pesoObservable.subscribe(peso => {
             this.pesoPrato = parseFloat(peso);
             this.calcularTotal();
+            this.pesoPrato = 0.8;
         })
     }
 

@@ -62,6 +62,8 @@ export class RelatorioReceitaDespesasComponent {
                                 total: estoqueProduto.precoCompra
                             })
                         }
+
+                        this.getComparativoProdutos();
                     })
                 });
             }
@@ -73,6 +75,7 @@ export class RelatorioReceitaDespesasComponent {
             response => {
                 this.showTabela = true;
                 this.chopes = response as any[];
+                this.getComparativoProdutos();
             }
         )
     }

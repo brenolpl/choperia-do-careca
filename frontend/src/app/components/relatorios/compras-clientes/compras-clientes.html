@@ -48,13 +48,10 @@
         </p>
 
 
-        <dx-data-grid [classList]="'table-exibir-impressao mt-4'" [dataSource]="chopes" keyExpr="id">
-
+        <dx-data-grid [classList]="'table-exibir-impressao mt-4'" [dataSource]="chopes" keyExpr="cliente.id">
             <dxi-column dataField="cliente.nome"></dxi-column>
             <dxi-column dataField="cliente.cpf" [calculateCellValue]="showCpfFormated"></dxi-column>
             <dxi-column dataField="totalContaCliente" format="R$ #.##0,##"></dxi-column>
-            <dxi-column dataField="dataSaida" caption="Data" dataType="datetime"></dxi-column>
-
         </dx-data-grid>
     </div>
 </div>

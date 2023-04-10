@@ -1,0 +1,15 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1" author="joao.natali">
+            <sql>
+                update itens_consumidos itens
+                set preco = (
+                    SELECT c.preco_venda FROM chope c
+                    WHERE itens.chope_id = c.id
+                ) where itens.chope_id is not null;
+            </sql>
+    </changeSet>
+
+</databaseChangeLog>

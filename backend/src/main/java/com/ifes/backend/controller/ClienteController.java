@@ -3,6 +3,7 @@ package com.ifes.backend.controller;
 import com.ifes.backend.domain.AssociacaoClienteCartaoRFID;
 import com.ifes.backend.domain.Cliente;
 import com.ifes.backend.domain.ItemConsumido;
+import com.ifes.backend.dto.CompraClienteDto;
 import com.ifes.backend.persistence.IAssociacaoClienteCartaoRFIDRepository;
 import com.ifes.backend.persistence.IClienteRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,7 +57,15 @@ public class ClienteController extends BaseController<Cliente, IClienteRepositor
     }
 
     @GetMapping("compras-periodo")
-    public List<AssociacaoClienteCartaoRFID> getComprasClientes(@RequestParam("dataDe") LocalDateTime dataDe, @RequestParam LocalDateTime dataAte) {
-        return this.associacaoClienteCartaoRFIDRepository.findByDataSaidaBetweenOrderByValorTotalDesc(dataDe, dataAte);
+    public List<CompraClienteDto> getComprasClientes(@RequestParam("dataDe") LocalDateTime dataDe, @RequestParam LocalDateTime dataAte) {
+        List<Object[]> objects = this.associacaoClienteCartaoRFIDRepository.findByDataSaidaBetweenOrderByValorTotalDesc(dataDe, dataAte);
+
+        List<CompraClienteDto> compraClienteDtos = new ArrayList<>();
+
+        for(Object[] object : objects){
+            compraClienteDtos.add(CompraClienteDto.convert(object));
+        }
+
+        return compraClienteDtos;
     }
 }

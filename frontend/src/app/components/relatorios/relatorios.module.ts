@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RelatoriosRoute} from "./relatorios.route";
 import {RelatoriosComponent} from "./relatorios.component";
-import {DxButtonModule, DxDataGridModule, DxDateBoxModule, DxToolbarModule} from "devextreme-angular";
+import {DxButtonModule, DxDataGridModule, DxDateBoxModule, DxTextAreaModule, DxToolbarModule} from "devextreme-angular";
 import {RelatorioSaldoProdutosEstoque} from "./relatorio-saldo-produtos-estoque/relatorio-saldo-produtos-estoque";
 import {
     RelatorioProdutosEstoqueMaiorZero
@@ -10,6 +10,8 @@ import {
 import {RelatorioChopesMaisConsumidos} from "./relatorio-chopes-mais-consumidos/relatorio-chopes-mais-consumidos";
 import {ComprasClientes} from "./compras-clientes/compras-clientes";
 import {RelatorioReceitaDespesasComponent} from "./relatorio-receita-despesas/relatorio-receita-despesas-component";
+import {RelatorioEnvioEmailComponent} from "./relatorio-envio-email/relatorio-envio-email-component";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import {RelatorioReceitaDespesasComponent} from "./relatorio-receita-despesas/re
         RelatorioProdutosEstoqueMaiorZero,
         RelatorioChopesMaisConsumidos,
         ComprasClientes,
-        RelatorioReceitaDespesasComponent
+        RelatorioReceitaDespesasComponent,
+        RelatorioEnvioEmailComponent
     ],
     imports: [
         CommonModule,
@@ -27,7 +30,9 @@ import {RelatorioReceitaDespesasComponent} from "./relatorio-receita-despesas/re
         DxButtonModule,
         DxDataGridModule,
         DxToolbarModule,
-        DxDateBoxModule
+        DxDateBoxModule,
+        DxTextAreaModule,
+        FormsModule
     ],
     exports: []
 })

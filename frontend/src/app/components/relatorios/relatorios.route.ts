@@ -9,6 +9,7 @@ import {
 import {RelatorioChopesMaisConsumidos} from "./relatorio-chopes-mais-consumidos/relatorio-chopes-mais-consumidos";
 import {ComprasClientes} from "./compras-clientes/compras-clientes";
 import {RelatorioReceitaDespesasComponent} from "./relatorio-receita-despesas/relatorio-receita-despesas-component";
+import {RelatorioEnvioEmailComponent} from "./relatorio-envio-email/relatorio-envio-email-component";
 
 const routes: Routes = [
     {
@@ -39,6 +40,11 @@ const routes: Routes = [
     {
         path: 'receita-despesa',
         component: RelatorioReceitaDespesasComponent,
+        canActivate: [AuthGuardService]
+    },
+    {
+        path: 'relatorio-envio-email',
+        component: RelatorioEnvioEmailComponent,
         canActivate: [AuthGuardService]
     },
 ];

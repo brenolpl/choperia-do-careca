@@ -46,10 +46,10 @@
             Até: {{dataAte?.toLocaleDateString()}}
         </p>
 
-        <dx-data-grid [classList]="'table-exibir-impressao mt-4'" [dataSource]="comparativoProdutos" keyExpr="id">
-            <dxi-column [cellTemplate]="formatStringNome" dataField="nome"></dxi-column>
-            <dxi-column [cellTemplate]="formatTotalComprado" dataField="totalComprado" caption="Total comprado" format="R$ #.##0,##"></dxi-column>
-            <dxi-column [cellTemplate]="formatTotalVendido" dataField="totalVendido" caption="Total vendido" format="R$ #.##0,##"></dxi-column>
+        <dx-data-grid [classList]="'table-exibir-impressao mt-4'" [dataSource]="receitasDespesas" keyExpr="data">
+            <dxi-column dataField="data" dataType="date"></dxi-column>
+            <dxi-column [cellTemplate]="formatTotalComprado" dataField="receita" caption="Receita" format="R$ #.##0,##"></dxi-column>
+            <dxi-column [cellTemplate]="formatTotalVendido" dataField="despesa" caption="Despesa" format="R$ #.##0,##"></dxi-column>
         </dx-data-grid>
     </div>
 </div>

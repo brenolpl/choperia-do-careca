@@ -1,58 +1,48 @@
 package com.ifes.backend.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class ReceitaDespesaDto {
-    private BigDecimal totalEntrada;
+    private BigDecimal receita;
 
-    private BigDecimal totalSaida;
+    private BigDecimal despesa;
 
-    private LocalDateTime data;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate data;
 
     public ReceitaDespesaDto() {
     }
 
-    public ReceitaDespesaDto(LocalDateTime data, BigDecimal totalEntrada, BigDecimal totalSaida) {
-        this.totalEntrada = totalEntrada;
-        this.totalSaida = totalSaida;
+    public ReceitaDespesaDto(LocalDate data, BigDecimal receita, BigDecimal despesa) {
+        this.receita = receita;
+        this.despesa = despesa;
         this.data = data;
     }
 
-    public ReceitaDespesaDto(String data, BigDecimal totalEntrada, BigDecimal totalSaida) {
-//        DateTimeFormatter DATEFORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//        LocalDate ld = LocalDate.parse(data, DATEFORMATTER);
-//        LocalDateTime ldt = LocalDateTime.of(ld, LocalDateTime.now().toLocalTime());
-
-        System.out.println("aqui");
-        this.totalEntrada = totalEntrada;
-        this.totalSaida = totalSaida;
-//        this.data = ldt;
+    public BigDecimal getReceita() {
+        return receita;
     }
 
-    public BigDecimal getTotalEntrada() {
-        return totalEntrada;
+    public void setReceita(BigDecimal receita) {
+        this.receita = receita;
     }
 
-    public void setTotalEntrada(BigDecimal totalEntrada) {
-        this.totalEntrada = totalEntrada;
+    public BigDecimal getDespesa() {
+        return despesa;
     }
 
-    public BigDecimal getTotalSaida() {
-        return totalSaida;
+    public void setDespesa(BigDecimal despesa) {
+        this.despesa = despesa;
     }
 
-    public void setTotalSaida(BigDecimal totalSaida) {
-        this.totalSaida = totalSaida;
-    }
-
-    public LocalDateTime getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(LocalDateTime data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 }

@@ -15,12 +15,7 @@ import notify from "devextreme/ui/notify";
 export class RelatorioReceitaDespesasComponent {
     @ViewChild('relatorioTemplate') relatorioTemplate!: any;
 
-
-    produtos: any[] = [];
-    chopes: any[] = [];
-    produtosConsumidosClientes: any[] = [];
-    produtosConsumidos: any[] = [];
-    comparativoProdutos: any[] = [];
+    receitasDespesas: any[] = [];
     dataDe: any;
     dataAte: any;
     showTabela = false;
@@ -54,7 +49,22 @@ export class RelatorioReceitaDespesasComponent {
     private getReceitasDespesasPeriodo(params: any){
         this.apiService.filter('associacao-cliente-cartao-rfid/receitas-despesas-periodo', params).subscribe(
             response => {
+                this.receitasDespesas = response as any[];
+                this.showTabela = true;
 
+                let totalReceita = 0;
+                let totalDespesa = 0;
+                this.receitasDespesas.forEach(receitaDespesa => {
+                    totalReceita += receitaDespesa.receita;
+                    totalDespesa += receitaDespesa.despesa;
+                })
+
+                this.receitasDespesas.push({
+                    id: 'total',
+                    data: 'Total Período',
+                    receita: `<span class="badge bg-success">${this.numberToReal(totalReceita)}</span>`,
+                    despesa: `<span class="badge bg-danger">${this.numberToReal(totalDespesa)}</span>`,
+                })
             }
         )
     }
@@ -67,17 +77,17 @@ export class RelatorioReceitaDespesasComponent {
 
     formatTotalComprado = (container: any, options: any) => {
         if(options.data.id != 'total'){
-            container.innerHTML = this.numberToReal(options.data.totalComprado);
+            container.innerHTML = this.numberToReal(options.data.receita);
         } else {
-            container.innerHTML = options.data.totalComprado;
+            container.innerHTML = options.data.receita;
         }
     }
 
     formatTotalVendido = (container: any, options: any) => {
         if(options.data.id != 'total'){
-            container.innerHTML = this.numberToReal(options.data.totalVendido);
+            container.innerHTML = this.numberToReal(options.data.despesa);
         } else {
-            container.innerHTML = options.data.totalVendido;
+            container.innerHTML = options.data.despesa;
         }
     }
 

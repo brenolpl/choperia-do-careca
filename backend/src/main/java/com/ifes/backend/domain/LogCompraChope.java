@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -36,6 +37,18 @@ public class LogCompraChope {
 
     @Column(name = "quantidade", nullable = false)
     private Double quantidade;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @Column(name = "data_entrada", nullable = false, updatable = false, insertable = false)
+    private LocalDate data;
+
+    public LogCompraChope() {
+    }
+
+    public LogCompraChope(LocalDateTime dataEntrada, BigDecimal precoTotal) {
+        this.dataEntrada = dataEntrada;
+        this.precoTotal = precoTotal;
+    }
 
     public Integer getId() {
         return id;
@@ -83,5 +96,13 @@ public class LogCompraChope {
 
     public void setPrecoTotal(BigDecimal precoTotal) {
         this.precoTotal = precoTotal;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 }

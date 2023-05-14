@@ -48,6 +48,10 @@ export class RelatorioEnvioEmailComponent {
         this.apiService.post('enviarEmail/send', params).subscribe(
             response => {
                 this.emailText = "";
+                notify('E-mail enviado com sucesso!', 'success', 2000);
+            },
+            error => {
+                notify(error?.error?.message, 'error', 2000);
             }
         );
     }

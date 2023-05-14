@@ -59,7 +59,7 @@ public class Gmailer {
         //returns an authorized Credential object.
         return credential;
     }
-    public void sendMail(String subject, String body, String[] to) throws GeneralSecurityException, IOException, MessagingException {
+    public void sendMail(String subject, String body, String[] to) throws IOException, MessagingException {
         Properties props = new Properties();
         Session session = Session.getDefaultInstance(props, null);
         MimeMessage email = new MimeMessage(session);

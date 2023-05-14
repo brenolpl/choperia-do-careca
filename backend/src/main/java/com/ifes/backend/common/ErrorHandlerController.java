@@ -7,28 +7,70 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.security.GeneralSecurityException;
+
+import static org.springframework.http.HttpStatus.*;
 
 @ControllerAdvice
 public class ErrorHandlerController {
+
+    public static final Logger LOGGER = LoggerFactory.getLogger(ErrorHandlerController.class);
     @ExceptionHandler({Exception.class, RuntimeException.class, Throwable.class})
     public ResponseEntity<ErrorResponse> handleExceptions(Exception e) {
-        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR; // 500
+        LOGGER.error(e.getMessage(), e);
+        return new ResponseEntity<>(
+                new ErrorResponse(
+                        INTERNAL_SERVER_ERROR,
+                        e.getMessage(),
+                        e.getCause().toString()
+                ),
+                INTERNAL_SERVER_ERROR
+        );
+    }
 
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
-        e.printStackTrace(printWriter);
-        e.printStackTrace();
-        String stackTrace = stringWriter.toString();
+    @ExceptionHandler({MessagingException.class})
+    public ResponseEntity<ErrorResponse> handleExceptions(MessagingException e) {
+        LOGGER.error(e.getMessage(), e);
 
         return new ResponseEntity<>(
                 new ErrorResponse(
-                        status,
-                        e.getMessage(),
-                        stackTrace // specifying the stack trace in case of 500s
+                        INTERNAL_SERVER_ERROR,
+                        "Falha ao criar o objeto de mensagem para enviar o e-mail!",
+                        e.getCause().toString()
                 ),
-                status
+                INTERNAL_SERVER_ERROR
+        );
+    }
+
+    @ExceptionHandler({GeneralSecurityException.class})
+    public ResponseEntity<ErrorResponse> handleExceptions(GeneralSecurityException e) {
+        LOGGER.error(e.getMessage(), e);
+
+        return new ResponseEntity<>(
+                new ErrorResponse(
+                        INTERNAL_SERVER_ERROR,
+                        "Falha ao obter o protocolo de transporte de envio de e-mail do Google.",
+                        e.getCause().toString()
+                ),
+                INTERNAL_SERVER_ERROR
+        );
+    }
+
+    @ExceptionHandler({IOException.class})
+    public ResponseEntity<ErrorResponse> handleExceptions(IOException e) {
+        LOGGER.error(e.getMessage(), e);
+
+        return new ResponseEntity<>(
+                new ErrorResponse(
+                        INTERNAL_SERVER_ERROR,
+                        "Falha ao ler arquivo do sistema.",
+                        e.getCause().toString()
+                ),
+                INTERNAL_SERVER_ERROR
         );
     }
 }

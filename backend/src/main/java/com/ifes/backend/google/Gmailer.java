@@ -13,7 +13,6 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.Message;
-import liquibase.pro.packaged.I;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Service;
 

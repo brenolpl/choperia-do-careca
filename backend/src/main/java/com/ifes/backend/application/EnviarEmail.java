@@ -1,25 +1,23 @@
 package com.ifes.backend.application;
 
-import com.ifes.backend.common.IMailMessage;
 import com.ifes.backend.dto.Email;
-import com.ifes.backend.google.Gmailer;
+import com.ifes.backend.services.GmailService;
 import com.ifes.backend.persistence.IAssociacaoClienteCartaoRFIDRepository;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class EnviarEmail {
 
     private Email email;
-    private Gmailer gmailer;
+    private GmailService gmailService;
     private IAssociacaoClienteCartaoRFIDRepository associacaoClienteCartaoRFIDRepository;
 
-    public EnviarEmail(Email email, Gmailer gmailer, IAssociacaoClienteCartaoRFIDRepository associacaoClienteCartaoRFIDRepository) {
+    public EnviarEmail(Email email, GmailService gmailService, IAssociacaoClienteCartaoRFIDRepository associacaoClienteCartaoRFIDRepository) {
         this.email = email;
-        this.gmailer = gmailer;
+        this.gmailService = gmailService;
         this.associacaoClienteCartaoRFIDRepository = associacaoClienteCartaoRFIDRepository;
     }
 
@@ -35,7 +33,7 @@ public class EnviarEmail {
         for (int i = 0; i < emails.length; i++) {
             emailString[i] = (String) emails[i];
         }
-        if(emailString.length > 0) this.gmailer.sendMail("Choperia do Careca: Novas promoções", email.getMensagem(), emailString);
+        if(emailString.length > 0) this.gmailService.sendMail("Choperia do Careca: Novas promoções", email.getMensagem(), emailString);
         else throw new RuntimeException("Não foi possível enviar o e-mail");
     }
 }

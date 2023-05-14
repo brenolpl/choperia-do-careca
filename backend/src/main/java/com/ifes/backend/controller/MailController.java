@@ -2,7 +2,7 @@ package com.ifes.backend.controller;
 
 import com.ifes.backend.application.EnviarEmail;
 import com.ifes.backend.dto.Email;
-import com.ifes.backend.google.Gmailer;
+import com.ifes.backend.services.GmailService;
 import com.ifes.backend.persistence.IAssociacaoClienteCartaoRFIDRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,15 +19,15 @@ import java.security.GeneralSecurityException;
 public class MailController {
 
     private IAssociacaoClienteCartaoRFIDRepository associacaoClienteCartaoRFIDRepository;
-    private Gmailer gmailer;
+    private GmailService gmailService;
 
-    public MailController(Gmailer gmailer, IAssociacaoClienteCartaoRFIDRepository associacaoClienteCartaoRFIDRepository) {
-        this.gmailer = gmailer;
+    public MailController(GmailService gmailService, IAssociacaoClienteCartaoRFIDRepository associacaoClienteCartaoRFIDRepository) {
+        this.gmailService = gmailService;
         this.associacaoClienteCartaoRFIDRepository = associacaoClienteCartaoRFIDRepository;
     }
 
     @PostMapping("send")
     public void send(@RequestBody Email email) throws MessagingException, GeneralSecurityException, IOException {
-        new EnviarEmail(email, gmailer, associacaoClienteCartaoRFIDRepository).execute();
+        new EnviarEmail(email, gmailService, associacaoClienteCartaoRFIDRepository).execute();
     }
 }

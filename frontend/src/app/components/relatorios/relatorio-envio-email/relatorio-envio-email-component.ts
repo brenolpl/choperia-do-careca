@@ -40,12 +40,12 @@ export class RelatorioEnvioEmailComponent {
         this.dataAte.setHours(23, 59, 59, 999);
 
         const params = {
-            dataDe: this.dataDe.toLocaleString(),
-            dataAte: this.dataAte.toLocaleString(),
+            dataDe: this.dataDe,
+            dataAte: this.dataAte,
             mensagem: this.emailText
         };
 
-        this.apiService.post('enviarEmail/notificarClientes', params).subscribe(
+        this.apiService.post('enviarEmail/send', params).subscribe(
             response => {
                 this.emailText = "";
             }

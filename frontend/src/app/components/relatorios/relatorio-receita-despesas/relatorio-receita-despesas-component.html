@@ -50,6 +50,7 @@
             <dxi-column dataField="data" dataType="date"></dxi-column>
             <dxi-column [cellTemplate]="formatTotalComprado" dataField="receita" caption="Receita" format="R$ #.##0,##"></dxi-column>
             <dxi-column [cellTemplate]="formatTotalVendido" dataField="despesa" caption="Despesa" format="R$ #.##0,##"></dxi-column>
+            <dxi-column [cellTemplate]="formatTotal" dataField="Total" caption="Total"></dxi-column>
         </dx-data-grid>
     </div>
 </div>

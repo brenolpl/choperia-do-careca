@@ -79,6 +79,7 @@ public class Produto implements Serializable {
     }
 
     public Long getQuantidadeEstoque(){
+        if(this.estoqueProdutos == null) return Long.valueOf(0);
         return this.estoqueProdutos.stream().filter(p -> p.getDataSaida() == null).count();
     }
 }

@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 
 @Table(name = "produto")
@@ -34,7 +35,7 @@ public class Produto implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "produto")
     @JsonManagedReference
-    private Set<EstoqueProduto> estoqueProdutos;
+    private Set<EstoqueProduto> estoqueProdutos = new HashSet<>();
 
     public Produto() {}
 

@@ -47,7 +47,7 @@ export class EstoqueCozinhaComponent {
             const produtoSelecionado = this.produtosSelecionados.find(p => p.codigoBarras == produto.codigoBarras);
             if(!produtoSelecionado){
                 if(produto.quantidadeEstoque < 1){
-                    notify('Não é possível remover pois não existe esse item no estoque', 'error');
+                    notify('Não há estoque do item informado.', 'error');
                     return;
                 } else {
                     this.produtosSelecionados.push({

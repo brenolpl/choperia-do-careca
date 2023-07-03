@@ -93,7 +93,7 @@ export class ConsumirChopeComponent extends AbstractListComponent implements OnI
     }
 
     vincularCartao = async () => {
-        this.associacao = await this.apiService.get('associacao-cliente-cartao-rfid/getByCartaoRfid/' + this.codigoRFID).toPromise();
+        this.associacao = await this.apiService.get('associacao-cliente-cartao-rfid/getByCartaoRfid/' + this.codigoRFID).toPromise().catch(err => notify('Cartão não encontrado ou não associado.', 'error', 2000));
         if (!this.associacao) this.codigoRFID = '';
     }
 

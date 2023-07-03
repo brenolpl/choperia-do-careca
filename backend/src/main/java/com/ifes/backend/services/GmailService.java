@@ -45,7 +45,7 @@ public class GmailService {
 
     private static Credential getCredentials(final NetHttpTransport httpTransport, GsonFactory jsonFactory) throws IOException {
         // Load client secrets.
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(jsonFactory, new InputStreamReader(GmailService.class.getResourceAsStream("/client_secret_506063736141-2876hp1l3t64h3b9esgavdchq758fd66.apps.googleusercontent.com.json")));
+        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(jsonFactory, new InputStreamReader(GmailService.class.getResourceAsStream("/client_secret_506063736141-rl0e3vqvg1nsh0f8cmj9n31hq01od776.apps.googleusercontent.com.json")));
 
         // Build flow and trigger user authorization request.
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(

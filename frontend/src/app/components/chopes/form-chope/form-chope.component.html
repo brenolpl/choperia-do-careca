@@ -26,9 +26,16 @@
         <dx-form #formulario [formData]="entidade" [labelLocation]="labelLocation">
 
             <dxi-item [dataField]="'cartaoRFID'" [editorOptions]="{ maxLength: 24 }" [text]="'Código RFID'">
+                <dxi-validation-rule type="required"></dxi-validation-rule>
+                <dxi-validation-rule
+                    type="stringLength"
+                    [min]="24"
+                    [max]="24"
+                    message="Código do barril deve possuir 24 caracteres."
+                ></dxi-validation-rule>
             </dxi-item>
 
-            <dxi-item [dataField]="'nome'"></dxi-item>
+            <dxi-item [dataField]="'nome'"><dxi-validation-rule type="required"></dxi-validation-rule></dxi-item>
 
             <dxi-item
                 [dataField]="'precoCompra'"

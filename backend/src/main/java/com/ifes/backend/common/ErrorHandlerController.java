@@ -23,7 +23,7 @@ public class ErrorHandlerController {
                 new ErrorResponse(
                         INTERNAL_SERVER_ERROR,
                         e.getMessage(),
-                        e.getCause().toString()
+                        "Erro Interno"
                 ),
                 INTERNAL_SERVER_ERROR
         );

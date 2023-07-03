@@ -26,7 +26,11 @@ export class FormChopeComponent extends AbstractFormComponent implements OnInit,
         super.ngOnInit();
         this.rfidSubscription = this.rfidService.rfid.subscribe(rfid => {
             this.entidade.cartaoRFID = rfid.trim();
-        })
+        });
+        if (!this.entidade?.id) {
+            this.entidade.precoCompra = 0;
+            this.entidade.precoVenda = 0;
+        }
     }
 
     protected getRota(): string {

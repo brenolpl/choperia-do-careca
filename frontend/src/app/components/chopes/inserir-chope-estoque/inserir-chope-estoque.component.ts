@@ -49,7 +49,7 @@ export class InserirChopeEstoqueComponent implements OnInit, OnDestroy {
     async getChopeByRfid(codigo: string){
         if(codigo) {
             return this.apiService.detail('chopes/codigo-rfid', codigo).toPromise().catch(error => {
-                notify(error?.error.message, 'error', 2000)
+                notify('Chope não encontrado', 'error', 2000)
             });
         }
 

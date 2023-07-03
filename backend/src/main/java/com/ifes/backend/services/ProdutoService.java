@@ -19,6 +19,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -45,6 +46,7 @@ public class ProdutoService {
     }
 
     public Produto cadastrarProduto(Produto produto) {
+        if (produto.getPrecoCompra() == null) produto.setPrecoCompra(BigDecimal.ZERO);
         produto = new GerarCodigoBarras(produto, produtoRepository).execute();
         return produtoRepository.save(produto);
     }

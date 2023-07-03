@@ -87,7 +87,7 @@ export class ImpressaoCodigoBarrasComponent {
             img.style.width = '3.2cm';
             img.style.height = '1.8cm';
             img.style.padding = '2px';
-            img.style.marginLeft = '0.15cm';
+            img.style.marginLeft = '0.07cm';
             img.style.marginTop = '0.1cm';
             div.appendChild(img);
             if(i % 3 == 0) {

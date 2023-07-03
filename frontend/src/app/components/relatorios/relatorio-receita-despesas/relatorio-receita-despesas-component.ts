@@ -25,7 +25,6 @@ export class RelatorioReceitaDespesasComponent {
     }
 
 
-
     filtrarRelatorio() {
         if (!this.dataDe || !this.dataAte) {
             notify('Data de e Data Até são obrigatórios', 'error');
@@ -46,7 +45,7 @@ export class RelatorioReceitaDespesasComponent {
         this.getReceitasDespesasPeriodo(params);
     }
 
-    private getReceitasDespesasPeriodo(params: any){
+    private getReceitasDespesasPeriodo(params: any) {
         this.apiService.filter('associacao-cliente-cartao-rfid/receitas-despesas-periodo', params).subscribe(
             response => {
                 this.receitasDespesas = response as any[];
@@ -57,6 +56,7 @@ export class RelatorioReceitaDespesasComponent {
                 this.receitasDespesas.forEach(receitaDespesa => {
                     totalReceita += receitaDespesa.receita;
                     totalDespesa += receitaDespesa.despesa;
+                    receitaDespesa.total = receitaDespesa.receita - receitaDespesa.despesa;
                 })
 
                 this.receitasDespesas.push({
@@ -64,9 +64,18 @@ export class RelatorioReceitaDespesasComponent {
                     data: 'Total Período',
                     receita: `<span class="badge bg-success">${this.numberToReal(totalReceita)}</span>`,
                     despesa: `<span class="badge bg-danger">${this.numberToReal(totalDespesa)}</span>`,
+                    total: this.getLabelTotal(totalReceita - totalDespesa),
                 })
             }
         )
+    }
+
+    getLabelTotal(total: number){
+        if(total < 0){
+            return `<span class="badge bg-danger">${this.numberToReal(total)}</span>`;
+        } else {
+            return `<span class="badge bg-success">${this.numberToReal(total)}</span>`;
+        }
     }
 
 
@@ -76,7 +85,7 @@ export class RelatorioReceitaDespesasComponent {
 
 
     formatTotalComprado = (container: any, options: any) => {
-        if(options.data.id != 'total'){
+        if (options.data.id != 'total') {
             container.innerHTML = this.numberToReal(options.data.receita);
         } else {
             container.innerHTML = options.data.receita;
@@ -84,24 +93,40 @@ export class RelatorioReceitaDespesasComponent {
     }
 
     formatTotalVendido = (container: any, options: any) => {
-        if(options.data.id != 'total'){
+        if (options.data.id != 'total') {
             container.innerHTML = this.numberToReal(options.data.despesa);
         } else {
             container.innerHTML = options.data.despesa;
         }
     }
 
-    formatStringNome =  (container: any, options: any) => {
-        if(options.data.id != 'total'){
+    formatTotal = (container: any, options: any) => {
+        if (options.data.id != 'total') {
+            container.innerHTML = this.numberToReal(options.data.total);
+        } else {
+            container.innerHTML = options.data.total;
+        }
+    }
+
+    // formatColunaTotal = (container: any, options: any) => {
+    //     if(options.data.id != 'total'){
+    //         container.innerHtml = this.numberToReal(options.data.receita - options.data.despesa);
+    //     } else {
+    //         container.innerHTML = options.data.total;
+    //     }
+    // }
+
+    formatStringNome = (container: any, options: any) => {
+        if (options.data.id != 'total') {
             container.innerHTML = options.data.nome;
         } else {
             container.innerHTML = `<strong>${options.data.nome}</strong>`;
         }
     }
 
-    numberToReal(numero: number){
-        console.log(numero.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-        return numero.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    numberToReal(numero: number) {
+        console.log(numero.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}));
+        return numero.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
     }
 
     open() {
